@@ -1,0 +1,8 @@
+main(0)
+|--Sys_Init(1)
+|--|--CLR_RAM(2)
+|--|--IO_Init(2)
+|--|--timer1_pwm_config(2)
+|--timer1_pwm1_output(1)
+|--delay_ms(1)
+|--timer1_fpwm1_output(1)

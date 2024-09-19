@@ -1,0 +1,1570 @@
+gplink-2.2.37 (Jan 22 2024)
+Listing File Generated: 2024-9-19  18:02:23
+ 
+ 
+Address  Value    Disassembly              Source
+-------  -----    -----------              ------
+                                           ;--------------------------------------------------------
+                                           ; external declarations
+                                           ;--------------------------------------------------------
+                                           	extern	_INDF0bits
+                                           	extern	_INDF1bits
+                                           	extern	_INDF2bits
+                                           	extern	_HIBYTEbits
+                                           	extern	_FSR0bits
+                                           	extern	_FSR1bits
+                                           	extern	_PCLbits
+                                           	extern	_PFLAGbits
+                                           	extern	_MCRbits
+                                           	extern	_INDF3bits
+                                           	extern	_INTEbits
+                                           	extern	_INTFbits
+                                           	extern	_DRVCRbits
+                                           	extern	_KBCRbits
+                                           	extern	_IOP0bits
+                                           	extern	_OEP0bits
+                                           	extern	_PUP0bits
+                                           	extern	_PDP0bits
+                                           	extern	_IOP1bits
+                                           	extern	_OEP1bits
+                                           	extern	_PUP1bits
+                                           	extern	_PDP1bits
+                                           	extern	_T0CRbits
+                                           	extern	_T0CNTbits
+                                           	extern	_T0LOADbits
+                                           	extern	_T0DATAbits
+                                           	extern	_T1CRbits
+                                           	extern	_T1CNTbits
+                                           	extern	_T1LOADbits
+                                           	extern	_T1DATAbits
+                                           	extern	_T2CRbits
+                                           	extern	_T2CNTbits
+                                           	extern	_T2LOADbits
+                                           	extern	_T2DATAbits
+                                           	extern	_T3CRbits
+                                           	extern	_T3CNTbits
+                                           	extern	_T3LOADbits
+                                           	extern	_PWM0DEbits
+                                           	extern	_PWM1DEbits
+                                           	extern	_PWM2DEbits
+                                           	extern	_PWMCR0bits
+                                           	extern	_PWMCR1bits
+                                           	extern	_OSCMbits
+                                           	extern	_LVDCRbits
+                                           	extern	_ADCR0bits
+                                           	extern	_ADCR1bits
+                                           	extern	_ADCR2bits
+                                           	extern	_ADRHbits
+                                           	extern	_ADRLbits
+                                           	extern	_ANSEL0bits
+                                           	extern	_ANSEL1bits
+                                           	extern	_OSCCALHbits
+                                           	extern	_OSCCALLbits
+                                           	extern	_INDF0
+                                           	extern	_INDF1
+                                           	extern	_INDF2
+                                           	extern	_HIBYTE
+                                           	extern	_FSR0
+                                           	extern	_FSR1
+                                           	extern	_PCL
+                                           	extern	_PFLAG
+                                           	extern	_MCR
+                                           	extern	_INDF3
+                                           	extern	_INTE
+                                           	extern	_INTF
+                                           	extern	_DRVCR
+                                           	extern	_KBCR
+                                           	extern	_IOP0
+                                           	extern	_OEP0
+                                           	extern	_PUP0
+                                           	extern	_PDP0
+                                           	extern	_IOP1
+                                           	extern	_OEP1
+                                           	extern	_PUP1
+                                           	extern	_PDP1
+                                           	extern	_T0CR
+                                           	extern	_T0CNT
+                                           	extern	_T0LOAD
+                                           	extern	_T0DATA
+                                           	extern	_T1CR
+                                           	extern	_T1CNT
+                                           	extern	_T1LOAD
+                                           	extern	_T1DATA
+                                           	extern	_T2CR
+                                           	extern	_T2CNT
+                                           	extern	_T2LOAD
+                                           	extern	_T2DATA
+                                           	extern	_T3CR
+                                           	extern	_T3CNT
+                                           	extern	_T3LOAD
+                                           	extern	_PWM0DE
+                                           	extern	_PWM1DE
+                                           	extern	_PWM2DE
+                                           	extern	_PWMCR0
+                                           	extern	_PWMCR1
+                                           	extern	_OSCM
+                                           	extern	_LVDCR
+                                           	extern	_ADCR0
+                                           	extern	_ADCR1
+                                           	extern	_ADCR2
+                                           	extern	_ADRH
+                                           	extern	_ADRL
+                                           	extern	_ANSEL0
+                                           	extern	_ANSEL1
+                                           	extern	_OSCCALH
+                                           	extern	_OSCCALL
+                                           ;--------------------------------------------------------
+                                           ; global declarations
+                                           ;--------------------------------------------------------
+                                           	global	_Sys_Init
+                                           	global	_IO_Init
+                                           	global	_CLR_RAM
+                                           	global	_delay_ms
+                                           	global	_timer1_pwm_config
+                                           	global	_timer1_pwm1_output
+                                           	global	_timer1_fpwm1_output
+                                           	global	_timer1_pwm_open
+                                           	global	_timer1_pwm_close
+                                           	global	_set_pwm_duty
+                                           	global	_main
+                                           	global	_int_isr
+                                           	global	_abuf
+                                           	global	_statusbuf
+                                           	global	_flag1
+                                           	global	_charge_buf
+                                           	global	_battery_refer_vol_buf
+                                           
+                                           	global STK06
+                                           	global STK05
+                                           	global STK04
+                                           	global STK03
+                                           	global STK02
+                                           	global STK01
+                                           	global STK00
+                                           
+                                           sharebank udata_ovr 0x0000
+                                           STK06	res 1
+                                           STK05	res 1
+                                           STK04	res 1
+                                           STK03	res 1
+                                           STK02	res 1
+                                           STK01	res 1
+                                           STK00	res 1
+                                           
+                                           ;--------------------------------------------------------
+                                           ; global definitions
+                                           ;--------------------------------------------------------
+                                           UD_MC32P7311_0	udata
+                                           _abuf	res	1
+                                           
+                                           UD_MC32P7311_1	udata
+                                           _statusbuf	res	1
+                                           
+                                           UD_MC32P7311_2	udata
+                                           _flag1	res	1
+                                           
+                                           ;--------------------------------------------------------
+                                           ; absolute symbol definitions
+                                           ;--------------------------------------------------------
+                                           ;--------------------------------------------------------
+                                           ; compiler-defined variables
+                                           ;--------------------------------------------------------
+                                           UDL_MC32P7311_0	udata
+                                           r0x1003	res	1
+                                           r0x1002	res	1
+                                           r0x1001	res	1
+                                           r0x1000	res	1
+                                           r0x1004	res	1
+                                           r0x1005	res	1
+                                           r0x1006	res	1
+                                           r0x1007	res	1
+                                           r0x1008	res	1
+                                           r0x1009	res	1
+                                           r0x100A	res	1
+                                           r0x100B	res	1
+                                           r0x100C	res	1
+                                           r0x100D	res	1
+                                           ;--------------------------------------------------------
+                                           ; initialized data
+                                           ;--------------------------------------------------------
+                                           
+                                           ID_MC32P7311_0	code
+                                           _charge_buf
+000001   002b     dw      0x2b             	dw 0x2b
+000002   0000     nop                      	dw 0x00
+                                           
+                                           
+                                           ID_MC32P7311_1	code
+                                           _battery_refer_vol_buf
+000003   0000     nop                      	dw 0x00
+                                           
+                                           
+                                           ;@Allocation info for local variables in function 'delay_ms'
+                                           ;@delay_ms Sys_Init                  Allocated to registers ;size:2
+                                           ;@delay_ms CLR_RAM                   Allocated to registers ;size:2
+                                           ;@delay_ms IO_Init                   Allocated to registers ;size:2
+                                           ;@delay_ms delay_ms                  Allocated to registers ;size:2
+                                           ;@delay_ms INDF0bits                 Allocated to registers ;size:1
+                                           ;@delay_ms INDF1bits                 Allocated to registers ;size:1
+                                           ;@delay_ms INDF2bits                 Allocated to registers ;size:1
+                                           ;@delay_ms HIBYTEbits                Allocated to registers ;size:1
+                                           ;@delay_ms FSR0bits                  Allocated to registers ;size:1
+                                           ;@delay_ms FSR1bits                  Allocated to registers ;size:1
+                                           ;@delay_ms PCLbits                   Allocated to registers ;size:1
+                                           ;@delay_ms PFLAGbits                 Allocated to registers ;size:1
+                                           ;@delay_ms MCRbits                   Allocated to registers ;size:1
+                                           ;@delay_ms INDF3bits                 Allocated to registers ;size:1
+                                           ;@delay_ms INTEbits                  Allocated to registers ;size:1
+                                           ;@delay_ms INTFbits                  Allocated to registers ;size:1
+                                           ;@delay_ms DRVCRbits                 Allocated to registers ;size:1
+                                           ;@delay_ms KBCRbits                  Allocated to registers ;size:1
+                                           ;@delay_ms IOP0bits                  Allocated to registers ;size:1
+                                           ;@delay_ms OEP0bits                  Allocated to registers ;size:1
+                                           ;@delay_ms PUP0bits                  Allocated to registers ;size:1
+                                           ;@delay_ms PDP0bits                  Allocated to registers ;size:1
+                                           ;@delay_ms IOP1bits                  Allocated to registers ;size:1
+                                           ;@delay_ms OEP1bits                  Allocated to registers ;size:1
+                                           ;@delay_ms PUP1bits                  Allocated to registers ;size:1
+                                           ;@delay_ms PDP1bits                  Allocated to registers ;size:1
+                                           ;@delay_ms T0CRbits                  Allocated to registers ;size:1
+                                           ;@delay_ms T0CNTbits                 Allocated to registers ;size:1
+                                           ;@delay_ms T0LOADbits                Allocated to registers ;size:1
+                                           ;@delay_ms T0DATAbits                Allocated to registers ;size:1
+                                           ;@delay_ms T1CRbits                  Allocated to registers ;size:1
+                                           ;@delay_ms T1CNTbits                 Allocated to registers ;size:1
+                                           ;@delay_ms T1LOADbits                Allocated to registers ;size:1
+                                           ;@delay_ms T1DATAbits                Allocated to registers ;size:1
+                                           ;@delay_ms T2CRbits                  Allocated to registers ;size:1
+                                           ;@delay_ms T2CNTbits                 Allocated to registers ;size:1
+                                           ;@delay_ms T2LOADbits                Allocated to registers ;size:1
+                                           ;@delay_ms T2DATAbits                Allocated to registers ;size:1
+                                           ;@delay_ms T3CRbits                  Allocated to registers ;size:1
+                                           ;@delay_ms T3CNTbits                 Allocated to registers ;size:1
+                                           ;@delay_ms T3LOADbits                Allocated to registers ;size:1
+                                           ;@delay_ms PWM0DEbits                Allocated to registers ;size:1
+                                           ;@delay_ms PWM1DEbits                Allocated to registers ;size:1
+                                           ;@delay_ms PWM2DEbits                Allocated to registers ;size:1
+                                           ;@delay_ms PWMCR0bits                Allocated to registers ;size:1
+                                           ;@delay_ms PWMCR1bits                Allocated to registers ;size:1
+                                           ;@delay_ms OSCMbits                  Allocated to registers ;size:1
+                                           ;@delay_ms LVDCRbits                 Allocated to registers ;size:1
+                                           ;@delay_ms ADCR0bits                 Allocated to registers ;size:1
+                                           ;@delay_ms ADCR1bits                 Allocated to registers ;size:1
+                                           ;@delay_ms ADCR2bits                 Allocated to registers ;size:1
+                                           ;@delay_ms ADRHbits                  Allocated to registers ;size:1
+                                           ;@delay_ms ADRLbits                  Allocated to registers ;size:1
+                                           ;@delay_ms ANSEL0bits                Allocated to registers ;size:1
+                                           ;@delay_ms ANSEL1bits                Allocated to registers ;size:1
+                                           ;@delay_ms OSCCALHbits               Allocated to registers ;size:1
+                                           ;@delay_ms OSCCALLbits               Allocated to registers ;size:1
+                                           ;@delay_ms abuf                      Allocated to registers ;size:1
+                                           ;@delay_ms statusbuf                 Allocated to registers ;size:1
+                                           ;@delay_ms flag1                     Allocated to registers ;size:1
+                                           ;@delay_ms xms                       Allocated to registers ;size:4
+                                           ;@delay_ms i                         Allocated to registers r0x1004 r0x1005 r0x1006 r0x1007 ;size:4
+                                           ;@delay_ms INDF0                     Allocated to registers ;size:1
+                                           ;@delay_ms INDF1                     Allocated to registers ;size:1
+                                           ;@delay_ms INDF2                     Allocated to registers ;size:1
+                                           ;@delay_ms HIBYTE                    Allocated to registers ;size:1
+                                           ;@delay_ms FSR0                      Allocated to registers ;size:1
+                                           ;@delay_ms FSR1                      Allocated to registers ;size:1
+                                           ;@delay_ms PCL                       Allocated to registers ;size:1
+                                           ;@delay_ms PFLAG                     Allocated to registers ;size:1
+                                           ;@delay_ms MCR                       Allocated to registers ;size:1
+                                           ;@delay_ms INDF3                     Allocated to registers ;size:1
+                                           ;@delay_ms INTE                      Allocated to registers ;size:1
+                                           ;@delay_ms INTF                      Allocated to registers ;size:1
+                                           ;@delay_ms DRVCR                     Allocated to registers ;size:1
+                                           ;@delay_ms KBCR                      Allocated to registers ;size:1
+                                           ;@delay_ms IOP0                      Allocated to registers ;size:1
+                                           ;@delay_ms OEP0                      Allocated to registers ;size:1
+                                           ;@delay_ms PUP0                      Allocated to registers ;size:1
+                                           ;@delay_ms PDP0                      Allocated to registers ;size:1
+                                           ;@delay_ms IOP1                      Allocated to registers ;size:1
+                                           ;@delay_ms OEP1                      Allocated to registers ;size:1
+                                           ;@delay_ms PUP1                      Allocated to registers ;size:1
+                                           ;@delay_ms PDP1                      Allocated to registers ;size:1
+                                           ;@delay_ms T0CR                      Allocated to registers ;size:1
+                                           ;@delay_ms T0CNT                     Allocated to registers ;size:1
+                                           ;@delay_ms T0LOAD                    Allocated to registers ;size:1
+                                           ;@delay_ms T0DATA                    Allocated to registers ;size:1
+                                           ;@delay_ms T1CR                      Allocated to registers ;size:1
+                                           ;@delay_ms T1CNT                     Allocated to registers ;size:1
+                                           ;@delay_ms T1LOAD                    Allocated to registers ;size:1
+                                           ;@delay_ms T1DATA                    Allocated to registers ;size:1
+                                           ;@delay_ms T2CR                      Allocated to registers ;size:1
+                                           ;@delay_ms T2CNT                     Allocated to registers ;size:1
+                                           ;@delay_ms T2LOAD                    Allocated to registers ;size:1
+                                           ;@delay_ms T2DATA                    Allocated to registers ;size:1
+                                           ;@delay_ms T3CR                      Allocated to registers ;size:1
+                                           ;@delay_ms T3CNT                     Allocated to registers ;size:1
+                                           ;@delay_ms T3LOAD                    Allocated to registers ;size:1
+                                           ;@delay_ms PWM0DE                    Allocated to registers ;size:1
+                                           ;@delay_ms PWM1DE                    Allocated to registers ;size:1
+                                           ;@delay_ms PWM2DE                    Allocated to registers ;size:1
+                                           ;@delay_ms PWMCR0                    Allocated to registers ;size:1
+                                           ;@delay_ms PWMCR1                    Allocated to registers ;size:1
+                                           ;@delay_ms OSCM                      Allocated to registers ;size:1
+                                           ;@delay_ms LVDCR                     Allocated to registers ;size:1
+                                           ;@delay_ms ADCR0                     Allocated to registers ;size:1
+                                           ;@delay_ms ADCR1                     Allocated to registers ;size:1
+                                           ;@delay_ms ADCR2                     Allocated to registers ;size:1
+                                           ;@delay_ms ADRH                      Allocated to registers ;size:1
+                                           ;@delay_ms ADRL                      Allocated to registers ;size:1
+                                           ;@delay_ms ANSEL0                    Allocated to registers ;size:1
+                                           ;@delay_ms ANSEL1                    Allocated to registers ;size:1
+                                           ;@delay_ms OSCCALH                   Allocated to registers ;size:1
+                                           ;@delay_ms OSCCALL                   Allocated to registers ;size:1
+                                           ;@end Allocation info for local variables in function 'delay_ms';
+                                           ;@Allocation info for local variables in function 'CLR_RAM'
+                                           ;@end Allocation info for local variables in function 'CLR_RAM';
+                                           ;@Allocation info for local variables in function 'IO_Init'
+                                           ;@end Allocation info for local variables in function 'IO_Init';
+                                           ;@Allocation info for local variables in function 'timer1_pwm_config'
+                                           ;@end Allocation info for local variables in function 'timer1_pwm_config';
+                                           ;@Allocation info for local variables in function 'timer1_pwm1_output'
+                                           ;@end Allocation info for local variables in function 'timer1_pwm1_output';
+                                           ;@Allocation info for local variables in function 'timer1_fpwm1_output'
+                                           ;@end Allocation info for local variables in function 'timer1_fpwm1_output';
+                                           ;@Allocation info for local variables in function 'timer1_pwm_open'
+                                           ;@end Allocation info for local variables in function 'timer1_pwm_open';
+                                           ;@Allocation info for local variables in function 'timer1_pwm_close'
+                                           ;@end Allocation info for local variables in function 'timer1_pwm_close';
+                                           ;@Allocation info for local variables in function 'Sys_Init'
+                                           ;@end Allocation info for local variables in function 'Sys_Init';
+                                           ;@Allocation info for local variables in function 'set_pwm_duty'
+                                           ;@set_pwm_duty duty                      Allocated to registers ;size:1
+                                           ;@set_pwm_duty pwm_chx                   Allocated to registers ;size:1
+                                           ;@end Allocation info for local variables in function 'set_pwm_duty';
+                                           ;@Allocation info for local variables in function 'main'
+                                           ;@end Allocation info for local variables in function 'main';
+                                           ;@Allocation info for local variables in function 'int_isr'
+                                           ;@end Allocation info for local variables in function 'int_isr';
+                                           
+                                           ;--------------------------------------------------------
+                                           ; overlayable items in internal ram 
+                                           ;--------------------------------------------------------
+                                           ;	udata_ovr
+                                           ;--------------------------------------------------------
+                                           ; reset vector 
+                                           ;--------------------------------------------------------
+                                           STARTUP	code 0x0000
+000000   a02a     goto    0x2a             	goto	_main
+                                           ;--------------------------------------------------------
+                                           ; interrupt and initialization code
+                                           ;--------------------------------------------------------
+                                           c_interrupt	code	0x8
+                                           __sdcc_interrupt
+                                           ;***
+                                           ;  pBlock Stats: dbName = I
+                                           ;***
+                                           ;entry:  _int_isr	;Function start
+                                           ; 0 exit points
+                                           ;2 compiler assigned registers:
+                                           ;   r0x100C
+                                           ;   r0x100D
+                                           ;; Starting pCode block
+                                           _int_isr	;Function start
+                                           ; 0 exit points
+                                           ;	.line	158; "MC32P7311.c"	__endasm;
+                                           	;
+000008   5615     movra   0x15             	movra	_abuf;
+000009   4587     swapar  0x187            	swapar	_PFLAG;
+00000a   5616     movra   0x16             	movra	_statusbuf;
+                                           	
+                                           ;	.line	176; "MC32P7311.c"	if (T3IF & T3IE)
+00000b   7613     clrr    0x13             	CLRR	r0x100C
+00000c   ff8b     jbclr   0x18b, 0x7       	JBCLR	_INTFbits,7
+00000d   6613     incr    0x13             	INCR	r0x100C
+00000e   7614     clrr    0x14             	CLRR	r0x100D
+00000f   ff8a     jbclr   0x18a, 0x7       	JBCLR	_INTEbits,7
+000010   6614     incr    0x14             	INCR	r0x100D
+000011   5814     movar   0x14             	MOVAR	r0x100D
+000012   7a13     andra   0x13             	ANDRA	r0x100C
+000013   3c00     movai   0                	MOVAI	0x00
+000014   5c13     orar    0x13             	ORAR	r0x100C
+000015   f587     jbclr   0x187, 0x2       	JBCLR	PFLAG,2
+000016   a018     goto    0x18             	GOTO	_00162_DS_
+                                           ;	.line	178; "MC32P7311.c"	T3IF = 0;
+000017   df8b     bclr    0x18b, 0x7       	BCLR	_INTFbits,7
+                                           _00162_DS_
+                                           ;	.line	186; "MC32P7311.c"	if (ADIF & ADIE)
+000018   7613     clrr    0x13             	CLRR	r0x100C
+000019   fd8b     jbclr   0x18b, 0x6       	JBCLR	_INTFbits,6
+00001a   6613     incr    0x13             	INCR	r0x100C
+00001b   7614     clrr    0x14             	CLRR	r0x100D
+00001c   fd8a     jbclr   0x18a, 0x6       	JBCLR	_INTEbits,6
+00001d   6614     incr    0x14             	INCR	r0x100D
+00001e   5814     movar   0x14             	MOVAR	r0x100D
+00001f   7a13     andra   0x13             	ANDRA	r0x100C
+000020   3c00     movai   0                	MOVAI	0x00
+000021   5c13     orar    0x13             	ORAR	r0x100C
+000022   f587     jbclr   0x187, 0x2       	JBCLR	PFLAG,2
+000023   a025     goto    0x25             	GOTO	_00164_DS_
+                                           ;	.line	188; "MC32P7311.c"	ADIF = 0;
+000024   dd8b     bclr    0x18b, 0x6       	BCLR	_INTFbits,6
+                                           _00164_DS_
+                                           ;	.line	205; "MC32P7311.c"	__endasm;
+                                           	;
+000025   4416     swapar  0x16             	swapar	_statusbuf;
+000026   5787     movra   0x187            	movra	_PFLAG;
+000027   4615     swapr   0x15             	swapr	_abuf;
+000028   4415     swapar  0x15             	swapar	_abuf;
+                                           	
+                                           END_OF_INTERRUPT
+                                           ;	.line	206; "MC32P7311.c"	}
+000029   000d     retie                    	RETIE	
+                                           
+                                           ;--------------------------------------------------------
+                                           ; code
+                                           ;--------------------------------------------------------
+                                           code_MC32P7311	code
+                                           ;***
+                                           ;  pBlock Stats: dbName = M
+                                           ;***
+                                           ;entry:  _main	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;functions called:
+                                           ;   _Sys_Init
+                                           ;   _timer1_pwm1_output
+                                           ;   _delay_ms
+                                           ;   _timer1_fpwm1_output
+                                           ;   _delay_ms
+                                           ;   _Sys_Init
+                                           ;   _timer1_pwm1_output
+                                           ;   _delay_ms
+                                           ;   _timer1_fpwm1_output
+                                           ;   _delay_ms
+                                           ;3 compiler assigned registers:
+                                           ;   STK02
+                                           ;   STK01
+                                           ;   STK00
+                                           ;; Starting pCode block
+                                           _main	;Function start
+                                           ; 2 exit points
+                                           ;	.line	137; "MC32P7311.c"	Sys_Init();
+00002a   8040     call    0x40             	CALL	_Sys_Init
+                                           _00156_DS_
+                                           ;	.line	145; "MC32P7311.c"	timer1_pwm1_output();
+00002b   804b     call    0x4b             	CALL	_timer1_pwm1_output
+                                           ;	.line	146; "MC32P7311.c"	delay_ms(500);
+00002c   3cf4     movai   0xf4             	MOVAI	0xf4
+00002d   5604     movra   0x4              	MOVRA	STK02
+00002e   3c01     movai   0x1              	MOVAI	0x01
+00002f   5605     movra   0x5              	MOVRA	STK01
+000030   3c00     movai   0                	MOVAI	0x00
+000031   5606     movra   0x6              	MOVRA	STK00
+000032   3c00     movai   0                	MOVAI	0x00
+000033   8071     call    0x71             	CALL	_delay_ms
+                                           ;	.line	147; "MC32P7311.c"	timer1_fpwm1_output();
+000034   8048     call    0x48             	CALL	_timer1_fpwm1_output
+                                           ;	.line	148; "MC32P7311.c"	delay_ms(500);
+000035   3cf4     movai   0xf4             	MOVAI	0xf4
+000036   5604     movra   0x4              	MOVRA	STK02
+000037   3c01     movai   0x1              	MOVAI	0x01
+000038   5605     movra   0x5              	MOVRA	STK01
+000039   3c00     movai   0                	MOVAI	0x00
+00003a   5606     movra   0x6              	MOVRA	STK00
+00003b   3c00     movai   0                	MOVAI	0x00
+00003c   8071     call    0x71             	CALL	_delay_ms
+00003d   a02b     goto    0x2b             	GOTO	_00156_DS_
+                                           ;	.line	150; "MC32P7311.c"	}
+00003e   000c     return                   	RETURN	
+                                           ; exit point of _main
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _set_pwm_duty	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _set_pwm_duty	;Function start
+                                           ; 2 exit points
+                                           ;	.line	133; "MC32P7311.c"	}
+00003f   000c     return                   	RETURN	
+                                           ; exit point of _set_pwm_duty
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _Sys_Init	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;functions called:
+                                           ;   _CLR_RAM
+                                           ;   _IO_Init
+                                           ;   _timer1_pwm_config
+                                           ;   _CLR_RAM
+                                           ;   _IO_Init
+                                           ;   _timer1_pwm_config
+                                           ;; Starting pCode block
+                                           _Sys_Init	;Function start
+                                           ; 2 exit points
+                                           ;	.line	118; "MC32P7311.c"	GIE = 0;
+000040   df88     bclr    0x188, 0x7       	BCLR	_MCRbits,7
+                                           ;	.line	119; "MC32P7311.c"	CLR_RAM();
+000041   8065     call    0x65             	CALL	_CLR_RAM
+                                           ;	.line	120; "MC32P7311.c"	IO_Init();
+000042   8056     call    0x56             	CALL	_IO_Init
+                                           ;	.line	122; "MC32P7311.c"	timer1_pwm_config();
+000043   804e     call    0x4e             	CALL	_timer1_pwm_config
+                                           ;	.line	123; "MC32P7311.c"	GIE = 1;
+000044   cf88     bset    0x188, 0x7       	BSET	_MCRbits,7
+                                           ;	.line	124; "MC32P7311.c"	}
+000045   000c     return                   	RETURN	
+                                           ; exit point of _Sys_Init
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer1_pwm_close	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer1_pwm_close	;Function start
+                                           ; 2 exit points
+                                           ;	.line	108; "MC32P7311.c"	}
+000046   000c     return                   	RETURN	
+                                           ; exit point of _timer1_pwm_close
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer1_pwm_open	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer1_pwm_open	;Function start
+                                           ; 2 exit points
+                                           ;	.line	103; "MC32P7311.c"	}
+000047   000c     return                   	RETURN	
+                                           ; exit point of _timer1_pwm_open
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer1_fpwm1_output	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer1_fpwm1_output	;Function start
+                                           ; 2 exit points
+                                           ;	.line	96; "MC32P7311.c"	FPWMEN = 1;
+000048   cfac     bset    0x1ac, 0x7       	BSET	_PWMCR0bits,7
+                                           ;	.line	97; "MC32P7311.c"	PWM1OE = 0;
+000049   dd9c     bclr    0x19c, 0x6       	BCLR	_T1CRbits,6
+                                           ;	.line	98; "MC32P7311.c"	}
+00004a   000c     return                   	RETURN	
+                                           ; exit point of _timer1_fpwm1_output
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer1_pwm1_output	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer1_pwm1_output	;Function start
+                                           ; 2 exit points
+                                           ;	.line	90; "MC32P7311.c"	FPWMEN = 0;
+00004b   dfac     bclr    0x1ac, 0x7       	BCLR	_PWMCR0bits,7
+                                           ;	.line	91; "MC32P7311.c"	PWM1OE = 1;
+00004c   cd9c     bset    0x19c, 0x6       	BSET	_T1CRbits,6
+                                           ;	.line	92; "MC32P7311.c"	}
+00004d   000c     return                   	RETURN	
+                                           ; exit point of _timer1_pwm1_output
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer1_pwm_config	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer1_pwm_config	;Function start
+                                           ; 2 exit points
+                                           ;	.line	74; "MC32P7311.c"	T1CR |= 0x01 << 2; // 4分频
+00004e   c59c     bset    0x19c, 0x2       	BSET	_T1CR,2
+                                           ;	.line	76; "MC32P7311.c"	T1LOAD = 100 - 1;
+00004f   3c63     movai   0x63             	MOVAI	0x63
+000050   579e     movra   0x19e            	MOVRA	_T1LOAD
+                                           ;	.line	78; "MC32P7311.c"	T1DATA = 50; // 占空比 == T1DATA / T1LOAD
+000051   3c32     movai   0x32             	MOVAI	0x32
+000052   579f     movra   0x19f            	MOVRA	_T1DATA
+                                           ;	.line	82; "MC32P7311.c"	PWMCR1 |= 0x01 << 4; // TIMER计数时钟为高频32MHz
+000053   c9ad     bset    0x1ad, 0x4       	BSET	_PWMCR1,4
+                                           ;	.line	85; "MC32P7311.c"	TC1EN = 1; // 启动定时器
+000054   cf9c     bset    0x19c, 0x7       	BSET	_T1CRbits,7
+                                           ;	.line	86; "MC32P7311.c"	}
+000055   000c     return                   	RETURN	
+                                           ; exit point of _timer1_pwm_config
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _IO_Init	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _IO_Init	;Function start
+                                           ; 2 exit points
+                                           ;	.line	51; "MC32P7311.c"	IOP0 = 0x00;   // io口数据位
+000056   7790     clrr    0x190            	CLRR	_IOP0
+                                           ;	.line	52; "MC32P7311.c"	OEP0 = 0xFF;   // io口方向 1:out  0:in   P00、1输出为开漏
+000057   3cff     movai   0xff             	MOVAI	0xff
+000058   5791     movra   0x191            	MOVRA	_OEP0
+                                           ;	.line	53; "MC32P7311.c"	PUP0 = 0x00;   // io口上拉电阻   1:enable  0:disable
+000059   7792     clrr    0x192            	CLRR	_PUP0
+                                           ;	.line	54; "MC32P7311.c"	PDP0 = 0x00;   // io口下拉电阻   1:enable  0:disable
+00005a   7793     clrr    0x193            	CLRR	_PDP0
+                                           ;	.line	55; "MC32P7311.c"	ANSEL0 = 0x00; // io类型选择  1:模拟输入  0:通用io
+00005b   77b6     clrr    0x1b6            	CLRR	_ANSEL0
+                                           ;	.line	57; "MC32P7311.c"	IOP1 = 0x00;   // io口数据位
+00005c   7794     clrr    0x194            	CLRR	_IOP1
+                                           ;	.line	58; "MC32P7311.c"	OEP1 = 0xFF;   // io口方向 1:out  0:in   P13输出为开漏
+00005d   3cff     movai   0xff             	MOVAI	0xff
+00005e   5795     movra   0x195            	MOVRA	_OEP1
+                                           ;	.line	59; "MC32P7311.c"	PUP1 = 0x00;   // io口上拉电阻   1:enable  0:disable
+00005f   7796     clrr    0x196            	CLRR	_PUP1
+                                           ;	.line	60; "MC32P7311.c"	PDP1 = 0x00;   // io口下拉电阻   1:enable  0:disable
+000060   7797     clrr    0x197            	CLRR	_PDP1
+                                           ;	.line	61; "MC32P7311.c"	ANSEL1 = 0x00; // io类型选择  1:模拟输入  0:通用io
+000061   77b7     clrr    0x1b7            	CLRR	_ANSEL1
+                                           ;	.line	63; "MC32P7311.c"	DRVCR = 0x80;
+000062   3c80     movai   0x80             	MOVAI	0x80
+000063   578c     movra   0x18c            	MOVRA	_DRVCR
+                                           ;	.line	64; "MC32P7311.c"	}
+000064   000c     return                   	RETURN	
+                                           ; exit point of _IO_Init
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _CLR_RAM	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _CLR_RAM	;Function start
+                                           ; 2 exit points
+                                           ;	.line	36; "MC32P7311.c"	for (FSR0 = 0; FSR0 < 0xff; FSR0++)
+000065   7784     clrr    0x184            	CLRR	_FSR0
+                                           ;;unsigned compare: left < lit(0xFF=255), size=1
+                                           _00118_DS_
+000066   3cff     movai   0xff             	MOVAI	0xff
+000067   4984     rsubar  0x184            	RSUBAR	_FSR0
+000068   f187     jbclr   0x187, 0         	JBCLR	PFLAG,0
+000069   a06d     goto    0x6d             	GOTO	_00116_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	38; "MC32P7311.c"	INDF0 = 0x00;
+00006a   7780     clrr    0x180            	CLRR	_INDF0
+                                           ;	.line	36; "MC32P7311.c"	for (FSR0 = 0; FSR0 < 0xff; FSR0++)
+00006b   6784     incr    0x184            	INCR	_FSR0
+00006c   a066     goto    0x66             	GOTO	_00118_DS_
+                                           _00116_DS_
+                                           ;	.line	40; "MC32P7311.c"	FSR0 = 0xFF;
+00006d   3cff     movai   0xff             	MOVAI	0xff
+00006e   5784     movra   0x184            	MOVRA	_FSR0
+                                           ;	.line	41; "MC32P7311.c"	INDF0 = 0x00;
+00006f   7780     clrr    0x180            	CLRR	_INDF0
+                                           ;	.line	42; "MC32P7311.c"	}
+000070   000c     return                   	RETURN	
+                                           ; exit point of _CLR_RAM
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _delay_ms	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;15 compiler assigned registers:
+                                           ;   r0x1000
+                                           ;   STK00
+                                           ;   r0x1001
+                                           ;   STK01
+                                           ;   r0x1002
+                                           ;   STK02
+                                           ;   r0x1003
+                                           ;   r0x1004
+                                           ;   r0x1005
+                                           ;   r0x1006
+                                           ;   r0x1007
+                                           ;   r0x1008
+                                           ;   r0x1009
+                                           ;   r0x100A
+                                           ;   r0x100B
+                                           ;; Starting pCode block
+                                           _delay_ms	;Function start
+                                           ; 2 exit points
+                                           ;	.line	15; "MC32P7311.c"	void delay_ms(u32 xms)
+000071   560a     movra   0xa              	MOVRA	r0x1000
+000072   5806     movar   0x6              	MOVAR	STK00
+000073   5609     movra   0x9              	MOVRA	r0x1001
+000074   5805     movar   0x5              	MOVAR	STK01
+000075   5608     movra   0x8              	MOVRA	r0x1002
+000076   5804     movar   0x4              	MOVAR	STK02
+000077   5607     movra   0x7              	MOVRA	r0x1003
+                                           _00108_DS_
+                                           ;	.line	17; "MC32P7311.c"	while (xms)
+000078   5807     movar   0x7              	MOVAR	r0x1003
+000079   5c08     orar    0x8              	ORAR	r0x1002
+00007a   5c09     orar    0x9              	ORAR	r0x1001
+00007b   5c0a     orar    0xa              	ORAR	r0x1000
+00007c   f587     jbclr   0x187, 0x2       	JBCLR	PFLAG,2
+00007d   a0ab     goto    0xab             	GOTO	_00111_DS_
+                                           ;	.line	20; "MC32P7311.c"	while (i--)
+00007e   3c22     movai   0x22             	MOVAI	0x22
+00007f   560b     movra   0xb              	MOVRA	r0x1004
+000080   3c01     movai   0x1              	MOVAI	0x01
+000081   560c     movra   0xc              	MOVRA	r0x1005
+000082   760d     clrr    0xd              	CLRR	r0x1006
+000083   760e     clrr    0xe              	CLRR	r0x1007
+                                           _00105_DS_
+000084   580b     movar   0xb              	MOVAR	r0x1004
+000085   560f     movra   0xf              	MOVRA	r0x1008
+000086   580c     movar   0xc              	MOVAR	r0x1005
+000087   5610     movra   0x10             	MOVRA	r0x1009
+000088   580d     movar   0xd              	MOVAR	r0x1006
+000089   5611     movra   0x11             	MOVRA	r0x100A
+00008a   580e     movar   0xe              	MOVAR	r0x1007
+00008b   5612     movra   0x12             	MOVRA	r0x100B
+00008c   3cff     movai   0xff             	MOVAI	0xff
+00008d   7e0b     addra   0xb              	ADDRA	r0x1004
+00008e   3cff     movai   0xff             	MOVAI	0xff
+00008f   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+000090   7e0c     addra   0xc              	ADDRA	r0x1005
+000091   3cff     movai   0xff             	MOVAI	0xff
+000092   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+000093   7e0d     addra   0xd              	ADDRA	r0x1006
+000094   3cff     movai   0xff             	MOVAI	0xff
+000095   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+000096   7e0e     addra   0xe              	ADDRA	r0x1007
+000097   580f     movar   0xf              	MOVAR	r0x1008
+000098   5c10     orar    0x10             	ORAR	r0x1009
+000099   5c11     orar    0x11             	ORAR	r0x100A
+00009a   5c12     orar    0x12             	ORAR	r0x100B
+00009b   f587     jbclr   0x187, 0x2       	JBCLR	PFLAG,2
+00009c   a09f     goto    0x9f             	GOTO	_00107_DS_
+                                           ;	.line	22; "MC32P7311.c"	Nop();
+00009d   0000     nop                      	nop	
+00009e   a084     goto    0x84             	GOTO	_00105_DS_
+                                           _00107_DS_
+                                           ;	.line	24; "MC32P7311.c"	xms--;
+00009f   3cff     movai   0xff             	MOVAI	0xff
+0000a0   7e07     addra   0x7              	ADDRA	r0x1003
+0000a1   3cff     movai   0xff             	MOVAI	0xff
+0000a2   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+0000a3   7e08     addra   0x8              	ADDRA	r0x1002
+0000a4   3cff     movai   0xff             	MOVAI	0xff
+0000a5   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+0000a6   7e09     addra   0x9              	ADDRA	r0x1001
+0000a7   3cff     movai   0xff             	MOVAI	0xff
+0000a8   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+0000a9   7e0a     addra   0xa              	ADDRA	r0x1000
+0000aa   a078     goto    0x78             	GOTO	_00108_DS_
+                                           _00111_DS_
+                                           ;	.line	26; "MC32P7311.c"	}
+0000ab   000c     return                   	RETURN	
+                                           ; exit point of _delay_ms
+                                           
+                                           
+                                           ;	code size estimation:
+                                           ;	  156+    0 =   156 instructions (  312 byte)
+                                           
+                                           	end
+                                           ;--------------------------------------------------------
+                                           ; File Created by SN-SDCC : SinoMCU ANSI-C Compiler
+                                           ; Version 2.0.0 (Dec 11 2019) (MINGW32)
+                                           ; This file was generated Thu Sep 19 18:02:23 2024
+                                           ;--------------------------------------------------------
+                                           ; MC32 port for the RISC core
+                                           ;--------------------------------------------------------
+                                           ;	.file	"MC32P7311.c"
+                                           	list	p=7311
+                                           	radix dec
+                                           	include "7311.inc"
+                                           ;--------------------------------------------------------
+                                           ; external declarations
+                                           ;--------------------------------------------------------
+                                           	extern	_INDF0bits
+                                           	extern	_INDF1bits
+                                           	extern	_INDF2bits
+                                           	extern	_HIBYTEbits
+                                           	extern	_FSR0bits
+                                           	extern	_FSR1bits
+                                           	extern	_PCLbits
+                                           	extern	_PFLAGbits
+                                           	extern	_MCRbits
+                                           	extern	_INDF3bits
+                                           	extern	_INTEbits
+                                           	extern	_INTFbits
+                                           	extern	_DRVCRbits
+                                           	extern	_KBCRbits
+                                           	extern	_IOP0bits
+                                           	extern	_OEP0bits
+                                           	extern	_PUP0bits
+                                           	extern	_PDP0bits
+                                           	extern	_IOP1bits
+                                           	extern	_OEP1bits
+                                           	extern	_PUP1bits
+                                           	extern	_PDP1bits
+                                           	extern	_T0CRbits
+                                           	extern	_T0CNTbits
+                                           	extern	_T0LOADbits
+                                           	extern	_T0DATAbits
+                                           	extern	_T1CRbits
+                                           	extern	_T1CNTbits
+                                           	extern	_T1LOADbits
+                                           	extern	_T1DATAbits
+                                           	extern	_T2CRbits
+                                           	extern	_T2CNTbits
+                                           	extern	_T2LOADbits
+                                           	extern	_T2DATAbits
+                                           	extern	_T3CRbits
+                                           	extern	_T3CNTbits
+                                           	extern	_T3LOADbits
+                                           	extern	_PWM0DEbits
+                                           	extern	_PWM1DEbits
+                                           	extern	_PWM2DEbits
+                                           	extern	_PWMCR0bits
+                                           	extern	_PWMCR1bits
+                                           	extern	_OSCMbits
+                                           	extern	_LVDCRbits
+                                           	extern	_ADCR0bits
+                                           	extern	_ADCR1bits
+                                           	extern	_ADCR2bits
+                                           	extern	_ADRHbits
+                                           	extern	_ADRLbits
+                                           	extern	_ANSEL0bits
+                                           	extern	_ANSEL1bits
+                                           	extern	_OSCCALHbits
+                                           	extern	_OSCCALLbits
+                                           	extern	_INDF0
+                                           	extern	_INDF1
+                                           	extern	_INDF2
+                                           	extern	_HIBYTE
+                                           	extern	_FSR0
+                                           	extern	_FSR1
+                                           	extern	_PCL
+                                           	extern	_PFLAG
+                                           	extern	_MCR
+                                           	extern	_INDF3
+                                           	extern	_INTE
+                                           	extern	_INTF
+                                           	extern	_DRVCR
+                                           	extern	_KBCR
+                                           	extern	_IOP0
+                                           	extern	_OEP0
+                                           	extern	_PUP0
+                                           	extern	_PDP0
+                                           	extern	_IOP1
+                                           	extern	_OEP1
+                                           	extern	_PUP1
+                                           	extern	_PDP1
+                                           	extern	_T0CR
+                                           	extern	_T0CNT
+                                           	extern	_T0LOAD
+                                           	extern	_T0DATA
+                                           	extern	_T1CR
+                                           	extern	_T1CNT
+                                           	extern	_T1LOAD
+                                           	extern	_T1DATA
+                                           	extern	_T2CR
+                                           	extern	_T2CNT
+                                           	extern	_T2LOAD
+                                           	extern	_T2DATA
+                                           	extern	_T3CR
+                                           	extern	_T3CNT
+                                           	extern	_T3LOAD
+                                           	extern	_PWM0DE
+                                           	extern	_PWM1DE
+                                           	extern	_PWM2DE
+                                           	extern	_PWMCR0
+                                           	extern	_PWMCR1
+                                           	extern	_OSCM
+                                           	extern	_LVDCR
+                                           	extern	_ADCR0
+                                           	extern	_ADCR1
+                                           	extern	_ADCR2
+                                           	extern	_ADRH
+                                           	extern	_ADRL
+                                           	extern	_ANSEL0
+                                           	extern	_ANSEL1
+                                           	extern	_OSCCALH
+                                           	extern	_OSCCALL
+                                           ;--------------------------------------------------------
+                                           ; global declarations
+                                           ;--------------------------------------------------------
+                                           	global	_Sys_Init
+                                           	global	_IO_Init
+                                           	global	_CLR_RAM
+                                           	global	_delay_ms
+                                           	global	_timer1_pwm_config
+                                           	global	_timer1_pwm1_output
+                                           	global	_timer1_fpwm1_output
+                                           	global	_timer1_pwm_open
+                                           	global	_timer1_pwm_close
+                                           	global	_set_pwm_duty
+                                           	global	_main
+                                           	global	_int_isr
+                                           	global	_abuf
+                                           	global	_statusbuf
+                                           	global	_flag1
+                                           	global	_charge_buf
+                                           	global	_battery_refer_vol_buf
+                                           
+                                           	global STK06
+                                           	global STK05
+                                           	global STK04
+                                           	global STK03
+                                           	global STK02
+                                           	global STK01
+                                           	global STK00
+                                           
+                                           sharebank udata_ovr 0x0000
+                                           STK06	res 1
+                                           STK05	res 1
+                                           STK04	res 1
+                                           STK03	res 1
+                                           STK02	res 1
+                                           STK01	res 1
+                                           STK00	res 1
+                                           
+                                           ;--------------------------------------------------------
+                                           ; global definitions
+                                           ;--------------------------------------------------------
+                                           UD_MC32P7311_0	udata
+                                           _abuf	res	1
+                                           
+                                           UD_MC32P7311_1	udata
+                                           _statusbuf	res	1
+                                           
+                                           UD_MC32P7311_2	udata
+                                           _flag1	res	1
+                                           
+                                           ;--------------------------------------------------------
+                                           ; absolute symbol definitions
+                                           ;--------------------------------------------------------
+                                           ;--------------------------------------------------------
+                                           ; compiler-defined variables
+                                           ;--------------------------------------------------------
+                                           UDL_MC32P7311_0	udata
+                                           r0x1003	res	1
+                                           r0x1002	res	1
+                                           r0x1001	res	1
+                                           r0x1000	res	1
+                                           r0x1004	res	1
+                                           r0x1005	res	1
+                                           r0x1006	res	1
+                                           r0x1007	res	1
+                                           r0x1008	res	1
+                                           r0x1009	res	1
+                                           r0x100A	res	1
+                                           r0x100B	res	1
+                                           r0x100C	res	1
+                                           r0x100D	res	1
+                                           ;--------------------------------------------------------
+                                           ; initialized data
+                                           ;--------------------------------------------------------
+                                           
+                                           ID_MC32P7311_0	code
+                                           _charge_buf
+                                           	dw 0x2b
+                                           	dw 0x00
+                                           
+                                           
+                                           ID_MC32P7311_1	code
+                                           _battery_refer_vol_buf
+                                           	dw 0x00
+                                           
+                                           
+                                           ;@Allocation info for local variables in function 'delay_ms'
+                                           ;@delay_ms Sys_Init                  Allocated to registers ;size:2
+                                           ;@delay_ms CLR_RAM                   Allocated to registers ;size:2
+                                           ;@delay_ms IO_Init                   Allocated to registers ;size:2
+                                           ;@delay_ms delay_ms                  Allocated to registers ;size:2
+                                           ;@delay_ms INDF0bits                 Allocated to registers ;size:1
+                                           ;@delay_ms INDF1bits                 Allocated to registers ;size:1
+                                           ;@delay_ms INDF2bits                 Allocated to registers ;size:1
+                                           ;@delay_ms HIBYTEbits                Allocated to registers ;size:1
+                                           ;@delay_ms FSR0bits                  Allocated to registers ;size:1
+                                           ;@delay_ms FSR1bits                  Allocated to registers ;size:1
+                                           ;@delay_ms PCLbits                   Allocated to registers ;size:1
+                                           ;@delay_ms PFLAGbits                 Allocated to registers ;size:1
+                                           ;@delay_ms MCRbits                   Allocated to registers ;size:1
+                                           ;@delay_ms INDF3bits                 Allocated to registers ;size:1
+                                           ;@delay_ms INTEbits                  Allocated to registers ;size:1
+                                           ;@delay_ms INTFbits                  Allocated to registers ;size:1
+                                           ;@delay_ms DRVCRbits                 Allocated to registers ;size:1
+                                           ;@delay_ms KBCRbits                  Allocated to registers ;size:1
+                                           ;@delay_ms IOP0bits                  Allocated to registers ;size:1
+                                           ;@delay_ms OEP0bits                  Allocated to registers ;size:1
+                                           ;@delay_ms PUP0bits                  Allocated to registers ;size:1
+                                           ;@delay_ms PDP0bits                  Allocated to registers ;size:1
+                                           ;@delay_ms IOP1bits                  Allocated to registers ;size:1
+                                           ;@delay_ms OEP1bits                  Allocated to registers ;size:1
+                                           ;@delay_ms PUP1bits                  Allocated to registers ;size:1
+                                           ;@delay_ms PDP1bits                  Allocated to registers ;size:1
+                                           ;@delay_ms T0CRbits                  Allocated to registers ;size:1
+                                           ;@delay_ms T0CNTbits                 Allocated to registers ;size:1
+                                           ;@delay_ms T0LOADbits                Allocated to registers ;size:1
+                                           ;@delay_ms T0DATAbits                Allocated to registers ;size:1
+                                           ;@delay_ms T1CRbits                  Allocated to registers ;size:1
+                                           ;@delay_ms T1CNTbits                 Allocated to registers ;size:1
+                                           ;@delay_ms T1LOADbits                Allocated to registers ;size:1
+                                           ;@delay_ms T1DATAbits                Allocated to registers ;size:1
+                                           ;@delay_ms T2CRbits                  Allocated to registers ;size:1
+                                           ;@delay_ms T2CNTbits                 Allocated to registers ;size:1
+                                           ;@delay_ms T2LOADbits                Allocated to registers ;size:1
+                                           ;@delay_ms T2DATAbits                Allocated to registers ;size:1
+                                           ;@delay_ms T3CRbits                  Allocated to registers ;size:1
+                                           ;@delay_ms T3CNTbits                 Allocated to registers ;size:1
+                                           ;@delay_ms T3LOADbits                Allocated to registers ;size:1
+                                           ;@delay_ms PWM0DEbits                Allocated to registers ;size:1
+                                           ;@delay_ms PWM1DEbits                Allocated to registers ;size:1
+                                           ;@delay_ms PWM2DEbits                Allocated to registers ;size:1
+                                           ;@delay_ms PWMCR0bits                Allocated to registers ;size:1
+                                           ;@delay_ms PWMCR1bits                Allocated to registers ;size:1
+                                           ;@delay_ms OSCMbits                  Allocated to registers ;size:1
+                                           ;@delay_ms LVDCRbits                 Allocated to registers ;size:1
+                                           ;@delay_ms ADCR0bits                 Allocated to registers ;size:1
+                                           ;@delay_ms ADCR1bits                 Allocated to registers ;size:1
+                                           ;@delay_ms ADCR2bits                 Allocated to registers ;size:1
+                                           ;@delay_ms ADRHbits                  Allocated to registers ;size:1
+                                           ;@delay_ms ADRLbits                  Allocated to registers ;size:1
+                                           ;@delay_ms ANSEL0bits                Allocated to registers ;size:1
+                                           ;@delay_ms ANSEL1bits                Allocated to registers ;size:1
+                                           ;@delay_ms OSCCALHbits               Allocated to registers ;size:1
+                                           ;@delay_ms OSCCALLbits               Allocated to registers ;size:1
+                                           ;@delay_ms abuf                      Allocated to registers ;size:1
+                                           ;@delay_ms statusbuf                 Allocated to registers ;size:1
+                                           ;@delay_ms flag1                     Allocated to registers ;size:1
+                                           ;@delay_ms xms                       Allocated to registers ;size:4
+                                           ;@delay_ms i                         Allocated to registers r0x1004 r0x1005 r0x1006 r0x1007 ;size:4
+                                           ;@delay_ms INDF0                     Allocated to registers ;size:1
+                                           ;@delay_ms INDF1                     Allocated to registers ;size:1
+                                           ;@delay_ms INDF2                     Allocated to registers ;size:1
+                                           ;@delay_ms HIBYTE                    Allocated to registers ;size:1
+                                           ;@delay_ms FSR0                      Allocated to registers ;size:1
+                                           ;@delay_ms FSR1                      Allocated to registers ;size:1
+                                           ;@delay_ms PCL                       Allocated to registers ;size:1
+                                           ;@delay_ms PFLAG                     Allocated to registers ;size:1
+                                           ;@delay_ms MCR                       Allocated to registers ;size:1
+                                           ;@delay_ms INDF3                     Allocated to registers ;size:1
+                                           ;@delay_ms INTE                      Allocated to registers ;size:1
+                                           ;@delay_ms INTF                      Allocated to registers ;size:1
+                                           ;@delay_ms DRVCR                     Allocated to registers ;size:1
+                                           ;@delay_ms KBCR                      Allocated to registers ;size:1
+                                           ;@delay_ms IOP0                      Allocated to registers ;size:1
+                                           ;@delay_ms OEP0                      Allocated to registers ;size:1
+                                           ;@delay_ms PUP0                      Allocated to registers ;size:1
+                                           ;@delay_ms PDP0                      Allocated to registers ;size:1
+                                           ;@delay_ms IOP1                      Allocated to registers ;size:1
+                                           ;@delay_ms OEP1                      Allocated to registers ;size:1
+                                           ;@delay_ms PUP1                      Allocated to registers ;size:1
+                                           ;@delay_ms PDP1                      Allocated to registers ;size:1
+                                           ;@delay_ms T0CR                      Allocated to registers ;size:1
+                                           ;@delay_ms T0CNT                     Allocated to registers ;size:1
+                                           ;@delay_ms T0LOAD                    Allocated to registers ;size:1
+                                           ;@delay_ms T0DATA                    Allocated to registers ;size:1
+                                           ;@delay_ms T1CR                      Allocated to registers ;size:1
+                                           ;@delay_ms T1CNT                     Allocated to registers ;size:1
+                                           ;@delay_ms T1LOAD                    Allocated to registers ;size:1
+                                           ;@delay_ms T1DATA                    Allocated to registers ;size:1
+                                           ;@delay_ms T2CR                      Allocated to registers ;size:1
+                                           ;@delay_ms T2CNT                     Allocated to registers ;size:1
+                                           ;@delay_ms T2LOAD                    Allocated to registers ;size:1
+                                           ;@delay_ms T2DATA                    Allocated to registers ;size:1
+                                           ;@delay_ms T3CR                      Allocated to registers ;size:1
+                                           ;@delay_ms T3CNT                     Allocated to registers ;size:1
+                                           ;@delay_ms T3LOAD                    Allocated to registers ;size:1
+                                           ;@delay_ms PWM0DE                    Allocated to registers ;size:1
+                                           ;@delay_ms PWM1DE                    Allocated to registers ;size:1
+                                           ;@delay_ms PWM2DE                    Allocated to registers ;size:1
+                                           ;@delay_ms PWMCR0                    Allocated to registers ;size:1
+                                           ;@delay_ms PWMCR1                    Allocated to registers ;size:1
+                                           ;@delay_ms OSCM                      Allocated to registers ;size:1
+                                           ;@delay_ms LVDCR                     Allocated to registers ;size:1
+                                           ;@delay_ms ADCR0                     Allocated to registers ;size:1
+                                           ;@delay_ms ADCR1                     Allocated to registers ;size:1
+                                           ;@delay_ms ADCR2                     Allocated to registers ;size:1
+                                           ;@delay_ms ADRH                      Allocated to registers ;size:1
+                                           ;@delay_ms ADRL                      Allocated to registers ;size:1
+                                           ;@delay_ms ANSEL0                    Allocated to registers ;size:1
+                                           ;@delay_ms ANSEL1                    Allocated to registers ;size:1
+                                           ;@delay_ms OSCCALH                   Allocated to registers ;size:1
+                                           ;@delay_ms OSCCALL                   Allocated to registers ;size:1
+                                           ;@end Allocation info for local variables in function 'delay_ms';
+                                           ;@Allocation info for local variables in function 'CLR_RAM'
+                                           ;@end Allocation info for local variables in function 'CLR_RAM';
+                                           ;@Allocation info for local variables in function 'IO_Init'
+                                           ;@end Allocation info for local variables in function 'IO_Init';
+                                           ;@Allocation info for local variables in function 'timer1_pwm_config'
+                                           ;@end Allocation info for local variables in function 'timer1_pwm_config';
+                                           ;@Allocation info for local variables in function 'timer1_pwm1_output'
+                                           ;@end Allocation info for local variables in function 'timer1_pwm1_output';
+                                           ;@Allocation info for local variables in function 'timer1_fpwm1_output'
+                                           ;@end Allocation info for local variables in function 'timer1_fpwm1_output';
+                                           ;@Allocation info for local variables in function 'timer1_pwm_open'
+                                           ;@end Allocation info for local variables in function 'timer1_pwm_open';
+                                           ;@Allocation info for local variables in function 'timer1_pwm_close'
+                                           ;@end Allocation info for local variables in function 'timer1_pwm_close';
+                                           ;@Allocation info for local variables in function 'Sys_Init'
+                                           ;@end Allocation info for local variables in function 'Sys_Init';
+                                           ;@Allocation info for local variables in function 'set_pwm_duty'
+                                           ;@set_pwm_duty duty                      Allocated to registers ;size:1
+                                           ;@set_pwm_duty pwm_chx                   Allocated to registers ;size:1
+                                           ;@end Allocation info for local variables in function 'set_pwm_duty';
+                                           ;@Allocation info for local variables in function 'main'
+                                           ;@end Allocation info for local variables in function 'main';
+                                           ;@Allocation info for local variables in function 'int_isr'
+                                           ;@end Allocation info for local variables in function 'int_isr';
+                                           
+                                           ;--------------------------------------------------------
+                                           ; overlayable items in internal ram 
+                                           ;--------------------------------------------------------
+                                           ;	udata_ovr
+                                           ;--------------------------------------------------------
+                                           ; reset vector 
+                                           ;--------------------------------------------------------
+                                           STARTUP	code 0x0000
+                                           	goto	_main
+                                           ;--------------------------------------------------------
+                                           ; interrupt and initialization code
+                                           ;--------------------------------------------------------
+                                           c_interrupt	code	0x8
+                                           __sdcc_interrupt
+                                           ;***
+                                           ;  pBlock Stats: dbName = I
+                                           ;***
+                                           ;entry:  _int_isr	;Function start
+                                           ; 0 exit points
+                                           ;2 compiler assigned registers:
+                                           ;   r0x100C
+                                           ;   r0x100D
+                                           ;; Starting pCode block
+                                           _int_isr	;Function start
+                                           ; 0 exit points
+                                           ;	.line	158; "MC32P7311.c"	__endasm;
+                                           	;
+                                           	movra	_abuf;
+                                           	swapar	_PFLAG;
+                                           	movra	_statusbuf;
+                                           	
+                                           ;	.line	176; "MC32P7311.c"	if (T3IF & T3IE)
+                                           	CLRR	r0x100C
+                                           	JBCLR	_INTFbits,7
+                                           	INCR	r0x100C
+                                           	CLRR	r0x100D
+                                           	JBCLR	_INTEbits,7
+                                           	INCR	r0x100D
+                                           	MOVAR	r0x100D
+                                           	ANDRA	r0x100C
+                                           	MOVAI	0x00
+                                           	ORAR	r0x100C
+                                           	JBCLR	PFLAG,2
+                                           	GOTO	_00162_DS_
+                                           ;	.line	178; "MC32P7311.c"	T3IF = 0;
+                                           	BCLR	_INTFbits,7
+                                           _00162_DS_
+                                           ;	.line	186; "MC32P7311.c"	if (ADIF & ADIE)
+                                           	CLRR	r0x100C
+                                           	JBCLR	_INTFbits,6
+                                           	INCR	r0x100C
+                                           	CLRR	r0x100D
+                                           	JBCLR	_INTEbits,6
+                                           	INCR	r0x100D
+                                           	MOVAR	r0x100D
+                                           	ANDRA	r0x100C
+                                           	MOVAI	0x00
+                                           	ORAR	r0x100C
+                                           	JBCLR	PFLAG,2
+                                           	GOTO	_00164_DS_
+                                           ;	.line	188; "MC32P7311.c"	ADIF = 0;
+                                           	BCLR	_INTFbits,6
+                                           _00164_DS_
+                                           ;	.line	205; "MC32P7311.c"	__endasm;
+                                           	;
+                                           	swapar	_statusbuf;
+                                           	movra	_PFLAG;
+                                           	swapr	_abuf;
+                                           	swapar	_abuf;
+                                           	
+                                           END_OF_INTERRUPT
+                                           ;	.line	206; "MC32P7311.c"	}
+                                           	RETIE	
+                                           
+                                           ;--------------------------------------------------------
+                                           ; code
+                                           ;--------------------------------------------------------
+                                           code_MC32P7311	code
+                                           ;***
+                                           ;  pBlock Stats: dbName = M
+                                           ;***
+                                           ;entry:  _main	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;functions called:
+                                           ;   _Sys_Init
+                                           ;   _timer1_pwm1_output
+                                           ;   _delay_ms
+                                           ;   _timer1_fpwm1_output
+                                           ;   _delay_ms
+                                           ;   _Sys_Init
+                                           ;   _timer1_pwm1_output
+                                           ;   _delay_ms
+                                           ;   _timer1_fpwm1_output
+                                           ;   _delay_ms
+                                           ;3 compiler assigned registers:
+                                           ;   STK02
+                                           ;   STK01
+                                           ;   STK00
+                                           ;; Starting pCode block
+                                           _main	;Function start
+                                           ; 2 exit points
+                                           ;	.line	137; "MC32P7311.c"	Sys_Init();
+                                           	CALL	_Sys_Init
+                                           _00156_DS_
+                                           ;	.line	145; "MC32P7311.c"	timer1_pwm1_output();
+                                           	CALL	_timer1_pwm1_output
+                                           ;	.line	146; "MC32P7311.c"	delay_ms(500);
+                                           	MOVAI	0xf4
+                                           	MOVRA	STK02
+                                           	MOVAI	0x01
+                                           	MOVRA	STK01
+                                           	MOVAI	0x00
+                                           	MOVRA	STK00
+                                           	MOVAI	0x00
+                                           	CALL	_delay_ms
+                                           ;	.line	147; "MC32P7311.c"	timer1_fpwm1_output();
+                                           	CALL	_timer1_fpwm1_output
+                                           ;	.line	148; "MC32P7311.c"	delay_ms(500);
+                                           	MOVAI	0xf4
+                                           	MOVRA	STK02
+                                           	MOVAI	0x01
+                                           	MOVRA	STK01
+                                           	MOVAI	0x00
+                                           	MOVRA	STK00
+                                           	MOVAI	0x00
+                                           	CALL	_delay_ms
+                                           	GOTO	_00156_DS_
+                                           ;	.line	150; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _main
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _set_pwm_duty	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _set_pwm_duty	;Function start
+                                           ; 2 exit points
+                                           ;	.line	133; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _set_pwm_duty
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _Sys_Init	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;functions called:
+                                           ;   _CLR_RAM
+                                           ;   _IO_Init
+                                           ;   _timer1_pwm_config
+                                           ;   _CLR_RAM
+                                           ;   _IO_Init
+                                           ;   _timer1_pwm_config
+                                           ;; Starting pCode block
+                                           _Sys_Init	;Function start
+                                           ; 2 exit points
+                                           ;	.line	118; "MC32P7311.c"	GIE = 0;
+                                           	BCLR	_MCRbits,7
+                                           ;	.line	119; "MC32P7311.c"	CLR_RAM();
+                                           	CALL	_CLR_RAM
+                                           ;	.line	120; "MC32P7311.c"	IO_Init();
+                                           	CALL	_IO_Init
+                                           ;	.line	122; "MC32P7311.c"	timer1_pwm_config();
+                                           	CALL	_timer1_pwm_config
+                                           ;	.line	123; "MC32P7311.c"	GIE = 1;
+                                           	BSET	_MCRbits,7
+                                           ;	.line	124; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _Sys_Init
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer1_pwm_close	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer1_pwm_close	;Function start
+                                           ; 2 exit points
+                                           ;	.line	108; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _timer1_pwm_close
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer1_pwm_open	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer1_pwm_open	;Function start
+                                           ; 2 exit points
+                                           ;	.line	103; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _timer1_pwm_open
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer1_fpwm1_output	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer1_fpwm1_output	;Function start
+                                           ; 2 exit points
+                                           ;	.line	96; "MC32P7311.c"	FPWMEN = 1;
+                                           	BSET	_PWMCR0bits,7
+                                           ;	.line	97; "MC32P7311.c"	PWM1OE = 0;
+                                           	BCLR	_T1CRbits,6
+                                           ;	.line	98; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _timer1_fpwm1_output
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer1_pwm1_output	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer1_pwm1_output	;Function start
+                                           ; 2 exit points
+                                           ;	.line	90; "MC32P7311.c"	FPWMEN = 0;
+                                           	BCLR	_PWMCR0bits,7
+                                           ;	.line	91; "MC32P7311.c"	PWM1OE = 1;
+                                           	BSET	_T1CRbits,6
+                                           ;	.line	92; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _timer1_pwm1_output
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer1_pwm_config	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer1_pwm_config	;Function start
+                                           ; 2 exit points
+                                           ;	.line	74; "MC32P7311.c"	T1CR |= 0x01 << 2; // 4分频
+                                           	BSET	_T1CR,2
+                                           ;	.line	76; "MC32P7311.c"	T1LOAD = 100 - 1;
+                                           	MOVAI	0x63
+                                           	MOVRA	_T1LOAD
+                                           ;	.line	78; "MC32P7311.c"	T1DATA = 50; // 占空比 == T1DATA / T1LOAD
+                                           	MOVAI	0x32
+                                           	MOVRA	_T1DATA
+                                           ;	.line	82; "MC32P7311.c"	PWMCR1 |= 0x01 << 4; // TIMER计数时钟为高频32MHz
+                                           	BSET	_PWMCR1,4
+                                           ;	.line	85; "MC32P7311.c"	TC1EN = 1; // 启动定时器
+                                           	BSET	_T1CRbits,7
+                                           ;	.line	86; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _timer1_pwm_config
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _IO_Init	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _IO_Init	;Function start
+                                           ; 2 exit points
+                                           ;	.line	51; "MC32P7311.c"	IOP0 = 0x00;   // io口数据位
+                                           	CLRR	_IOP0
+                                           ;	.line	52; "MC32P7311.c"	OEP0 = 0xFF;   // io口方向 1:out  0:in   P00、1输出为开漏
+                                           	MOVAI	0xff
+                                           	MOVRA	_OEP0
+                                           ;	.line	53; "MC32P7311.c"	PUP0 = 0x00;   // io口上拉电阻   1:enable  0:disable
+                                           	CLRR	_PUP0
+                                           ;	.line	54; "MC32P7311.c"	PDP0 = 0x00;   // io口下拉电阻   1:enable  0:disable
+                                           	CLRR	_PDP0
+                                           ;	.line	55; "MC32P7311.c"	ANSEL0 = 0x00; // io类型选择  1:模拟输入  0:通用io
+                                           	CLRR	_ANSEL0
+                                           ;	.line	57; "MC32P7311.c"	IOP1 = 0x00;   // io口数据位
+                                           	CLRR	_IOP1
+                                           ;	.line	58; "MC32P7311.c"	OEP1 = 0xFF;   // io口方向 1:out  0:in   P13输出为开漏
+                                           	MOVAI	0xff
+                                           	MOVRA	_OEP1
+                                           ;	.line	59; "MC32P7311.c"	PUP1 = 0x00;   // io口上拉电阻   1:enable  0:disable
+                                           	CLRR	_PUP1
+                                           ;	.line	60; "MC32P7311.c"	PDP1 = 0x00;   // io口下拉电阻   1:enable  0:disable
+                                           	CLRR	_PDP1
+                                           ;	.line	61; "MC32P7311.c"	ANSEL1 = 0x00; // io类型选择  1:模拟输入  0:通用io
+                                           	CLRR	_ANSEL1
+                                           ;	.line	63; "MC32P7311.c"	DRVCR = 0x80;
+                                           	MOVAI	0x80
+                                           	MOVRA	_DRVCR
+                                           ;	.line	64; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _IO_Init
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _CLR_RAM	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _CLR_RAM	;Function start
+                                           ; 2 exit points
+                                           ;	.line	36; "MC32P7311.c"	for (FSR0 = 0; FSR0 < 0xff; FSR0++)
+                                           	CLRR	_FSR0
+                                           ;;unsigned compare: left < lit(0xFF=255), size=1
+                                           _00118_DS_
+                                           	MOVAI	0xff
+                                           	RSUBAR	_FSR0
+                                           	JBCLR	PFLAG,0
+                                           	GOTO	_00116_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	38; "MC32P7311.c"	INDF0 = 0x00;
+                                           	CLRR	_INDF0
+                                           ;	.line	36; "MC32P7311.c"	for (FSR0 = 0; FSR0 < 0xff; FSR0++)
+                                           	INCR	_FSR0
+                                           	GOTO	_00118_DS_
+                                           _00116_DS_
+                                           ;	.line	40; "MC32P7311.c"	FSR0 = 0xFF;
+                                           	MOVAI	0xff
+                                           	MOVRA	_FSR0
+                                           ;	.line	41; "MC32P7311.c"	INDF0 = 0x00;
+                                           	CLRR	_INDF0
+                                           ;	.line	42; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _CLR_RAM
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _delay_ms	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;15 compiler assigned registers:
+                                           ;   r0x1000
+                                           ;   STK00
+                                           ;   r0x1001
+                                           ;   STK01
+                                           ;   r0x1002
+                                           ;   STK02
+                                           ;   r0x1003
+                                           ;   r0x1004
+                                           ;   r0x1005
+                                           ;   r0x1006
+                                           ;   r0x1007
+                                           ;   r0x1008
+                                           ;   r0x1009
+                                           ;   r0x100A
+                                           ;   r0x100B
+                                           ;; Starting pCode block
+                                           _delay_ms	;Function start
+                                           ; 2 exit points
+                                           ;	.line	15; "MC32P7311.c"	void delay_ms(u32 xms)
+                                           	MOVRA	r0x1000
+                                           	MOVAR	STK00
+                                           	MOVRA	r0x1001
+                                           	MOVAR	STK01
+                                           	MOVRA	r0x1002
+                                           	MOVAR	STK02
+                                           	MOVRA	r0x1003
+                                           _00108_DS_
+                                           ;	.line	17; "MC32P7311.c"	while (xms)
+                                           	MOVAR	r0x1003
+                                           	ORAR	r0x1002
+                                           	ORAR	r0x1001
+                                           	ORAR	r0x1000
+                                           	JBCLR	PFLAG,2
+                                           	GOTO	_00111_DS_
+                                           ;	.line	20; "MC32P7311.c"	while (i--)
+                                           	MOVAI	0x22
+                                           	MOVRA	r0x1004
+                                           	MOVAI	0x01
+                                           	MOVRA	r0x1005
+                                           	CLRR	r0x1006
+                                           	CLRR	r0x1007
+                                           _00105_DS_
+                                           	MOVAR	r0x1004
+                                           	MOVRA	r0x1008
+                                           	MOVAR	r0x1005
+                                           	MOVRA	r0x1009
+                                           	MOVAR	r0x1006
+                                           	MOVRA	r0x100A
+                                           	MOVAR	r0x1007
+                                           	MOVRA	r0x100B
+                                           	MOVAI	0xff
+                                           	ADDRA	r0x1004
+                                           	MOVAI	0xff
+                                           	JBSET	PFLAG,0
+                                           	ADDRA	r0x1005
+                                           	MOVAI	0xff
+                                           	JBSET	PFLAG,0
+                                           	ADDRA	r0x1006
+                                           	MOVAI	0xff
+                                           	JBSET	PFLAG,0
+                                           	ADDRA	r0x1007
+                                           	MOVAR	r0x1008
+                                           	ORAR	r0x1009
+                                           	ORAR	r0x100A
+                                           	ORAR	r0x100B
+                                           	JBCLR	PFLAG,2
+                                           	GOTO	_00107_DS_
+                                           ;	.line	22; "MC32P7311.c"	Nop();
+                                           	nop	
+                                           	GOTO	_00105_DS_
+                                           _00107_DS_
+                                           ;	.line	24; "MC32P7311.c"	xms--;
+                                           	MOVAI	0xff
+                                           	ADDRA	r0x1003
+                                           	MOVAI	0xff
+                                           	JBSET	PFLAG,0
+                                           	ADDRA	r0x1002
+                                           	MOVAI	0xff
+                                           	JBSET	PFLAG,0
+                                           	ADDRA	r0x1001
+                                           	MOVAI	0xff
+                                           	JBSET	PFLAG,0
+                                           	ADDRA	r0x1000
+                                           	GOTO	_00108_DS_
+                                           _00111_DS_
+                                           ;	.line	26; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _delay_ms
+                                           
+                                           
+                                           ;	code size estimation:
+                                           ;	  156+    0 =   156 instructions (  312 byte)
+                                           
+                                           	end
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : XXXXXXXX-------- XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0140 : XXXXXXXXXXXXXXXX XXXXXXXX-------- ---------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   168
+
