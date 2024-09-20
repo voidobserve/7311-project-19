@@ -1,5 +1,5 @@
 gplink-2.2.37 (Jan 22 2024)
-Listing File Generated: 2024-9-19  18:02:23
+Listing File Generated: 2024-9-20  11:37:49
  
  
 Address  Value    Disassembly              Source
@@ -120,14 +120,18 @@ Address  Value    Disassembly              Source
                                            	global	_IO_Init
                                            	global	_CLR_RAM
                                            	global	_delay_ms
+                                           	global	_timer0_pwm_config
                                            	global	_timer1_pwm_config
-                                           	global	_timer1_pwm1_output
-                                           	global	_timer1_fpwm1_output
                                            	global	_timer1_pwm_open
                                            	global	_timer1_pwm_close
-                                           	global	_set_pwm_duty
+                                           	global	_timer2_pwm_config
+                                           	global	_key_config
+                                           	global	_adc_config
+                                           	global	_key_scan
                                            	global	_main
                                            	global	_int_isr
+                                           	global	_key_press_flag
+                                           	global	_i
                                            	global	_abuf
                                            	global	_statusbuf
                                            	global	_flag1
@@ -155,12 +159,18 @@ Address  Value    Disassembly              Source
                                            ; global definitions
                                            ;--------------------------------------------------------
                                            UD_MC32P7311_0	udata
-                                           _abuf	res	1
+                                           _key_press_flag	res	1
                                            
                                            UD_MC32P7311_1	udata
-                                           _statusbuf	res	1
+                                           _i	res	1
                                            
                                            UD_MC32P7311_2	udata
+                                           _abuf	res	1
+                                           
+                                           UD_MC32P7311_3	udata
+                                           _statusbuf	res	1
+                                           
+                                           UD_MC32P7311_4	udata
                                            _flag1	res	1
                                            
                                            ;--------------------------------------------------------
@@ -170,12 +180,10 @@ Address  Value    Disassembly              Source
                                            ; compiler-defined variables
                                            ;--------------------------------------------------------
                                            UDL_MC32P7311_0	udata
+                                           r0x1005	res	1
+                                           r0x1004	res	1
                                            r0x1003	res	1
                                            r0x1002	res	1
-                                           r0x1001	res	1
-                                           r0x1000	res	1
-                                           r0x1004	res	1
-                                           r0x1005	res	1
                                            r0x1006	res	1
                                            r0x1007	res	1
                                            r0x1008	res	1
@@ -184,6 +192,9 @@ Address  Value    Disassembly              Source
                                            r0x100B	res	1
                                            r0x100C	res	1
                                            r0x100D	res	1
+                                           r0x100E	res	1
+                                           r0x100F	res	1
+                                           r0x1010	res	1
                                            ;--------------------------------------------------------
                                            ; initialized data
                                            ;--------------------------------------------------------
@@ -257,11 +268,13 @@ Address  Value    Disassembly              Source
                                            ;@delay_ms ANSEL1bits                Allocated to registers ;size:1
                                            ;@delay_ms OSCCALHbits               Allocated to registers ;size:1
                                            ;@delay_ms OSCCALLbits               Allocated to registers ;size:1
+                                           ;@delay_ms key_press_flag            Allocated to registers ;size:1
+                                           ;@delay_ms i                         Allocated to registers ;size:1
                                            ;@delay_ms abuf                      Allocated to registers ;size:1
                                            ;@delay_ms statusbuf                 Allocated to registers ;size:1
                                            ;@delay_ms flag1                     Allocated to registers ;size:1
                                            ;@delay_ms xms                       Allocated to registers ;size:4
-                                           ;@delay_ms i                         Allocated to registers r0x1004 r0x1005 r0x1006 r0x1007 ;size:4
+                                           ;@delay_ms i                         Allocated to registers r0x1006 r0x1007 r0x1008 r0x1009 ;size:4
                                            ;@delay_ms INDF0                     Allocated to registers ;size:1
                                            ;@delay_ms INDF1                     Allocated to registers ;size:1
                                            ;@delay_ms INDF2                     Allocated to registers ;size:1
@@ -320,22 +333,25 @@ Address  Value    Disassembly              Source
                                            ;@end Allocation info for local variables in function 'CLR_RAM';
                                            ;@Allocation info for local variables in function 'IO_Init'
                                            ;@end Allocation info for local variables in function 'IO_Init';
+                                           ;@Allocation info for local variables in function 'timer0_pwm_config'
+                                           ;@end Allocation info for local variables in function 'timer0_pwm_config';
                                            ;@Allocation info for local variables in function 'timer1_pwm_config'
                                            ;@end Allocation info for local variables in function 'timer1_pwm_config';
-                                           ;@Allocation info for local variables in function 'timer1_pwm1_output'
-                                           ;@end Allocation info for local variables in function 'timer1_pwm1_output';
-                                           ;@Allocation info for local variables in function 'timer1_fpwm1_output'
-                                           ;@end Allocation info for local variables in function 'timer1_fpwm1_output';
                                            ;@Allocation info for local variables in function 'timer1_pwm_open'
                                            ;@end Allocation info for local variables in function 'timer1_pwm_open';
                                            ;@Allocation info for local variables in function 'timer1_pwm_close'
                                            ;@end Allocation info for local variables in function 'timer1_pwm_close';
+                                           ;@Allocation info for local variables in function 'timer2_pwm_config'
+                                           ;@end Allocation info for local variables in function 'timer2_pwm_config';
+                                           ;@Allocation info for local variables in function 'key_config'
+                                           ;@end Allocation info for local variables in function 'key_config';
+                                           ;@Allocation info for local variables in function 'adc_config'
+                                           ;@end Allocation info for local variables in function 'adc_config';
                                            ;@Allocation info for local variables in function 'Sys_Init'
                                            ;@end Allocation info for local variables in function 'Sys_Init';
-                                           ;@Allocation info for local variables in function 'set_pwm_duty'
-                                           ;@set_pwm_duty duty                      Allocated to registers ;size:1
-                                           ;@set_pwm_duty pwm_chx                   Allocated to registers ;size:1
-                                           ;@end Allocation info for local variables in function 'set_pwm_duty';
+                                           ;@Allocation info for local variables in function 'key_scan'
+                                           ;@key_scan cnt                       Allocated to registers r0x100E ;size:1
+                                           ;@end Allocation info for local variables in function 'key_scan';
                                            ;@Allocation info for local variables in function 'main'
                                            ;@end Allocation info for local variables in function 'main';
                                            ;@Allocation info for local variables in function 'int_isr'
@@ -361,58 +377,58 @@ Address  Value    Disassembly              Source
                                            ;entry:  _int_isr	;Function start
                                            ; 0 exit points
                                            ;2 compiler assigned registers:
-                                           ;   r0x100C
-                                           ;   r0x100D
+                                           ;   r0x100F
+                                           ;   r0x1010
                                            ;; Starting pCode block
                                            _int_isr	;Function start
                                            ; 0 exit points
-                                           ;	.line	158; "MC32P7311.c"	__endasm;
+                                           ;	.line	295; "MC32P7311.c"	__endasm;
                                            	;
-000008   5615     movra   0x15             	movra	_abuf;
+000008   5618     movra   0x18             	movra	_abuf;
 000009   4587     swapar  0x187            	swapar	_PFLAG;
-00000a   5616     movra   0x16             	movra	_statusbuf;
+00000a   5619     movra   0x19             	movra	_statusbuf;
                                            	
-                                           ;	.line	176; "MC32P7311.c"	if (T3IF & T3IE)
-00000b   7613     clrr    0x13             	CLRR	r0x100C
+                                           ;	.line	313; "MC32P7311.c"	if (T3IF & T3IE)
+00000b   7614     clrr    0x14             	CLRR	r0x100F
 00000c   ff8b     jbclr   0x18b, 0x7       	JBCLR	_INTFbits,7
-00000d   6613     incr    0x13             	INCR	r0x100C
-00000e   7614     clrr    0x14             	CLRR	r0x100D
+00000d   6614     incr    0x14             	INCR	r0x100F
+00000e   7615     clrr    0x15             	CLRR	r0x1010
 00000f   ff8a     jbclr   0x18a, 0x7       	JBCLR	_INTEbits,7
-000010   6614     incr    0x14             	INCR	r0x100D
-000011   5814     movar   0x14             	MOVAR	r0x100D
-000012   7a13     andra   0x13             	ANDRA	r0x100C
+000010   6615     incr    0x15             	INCR	r0x1010
+000011   5815     movar   0x15             	MOVAR	r0x1010
+000012   7a14     andra   0x14             	ANDRA	r0x100F
 000013   3c00     movai   0                	MOVAI	0x00
-000014   5c13     orar    0x13             	ORAR	r0x100C
+000014   5c14     orar    0x14             	ORAR	r0x100F
 000015   f587     jbclr   0x187, 0x2       	JBCLR	PFLAG,2
-000016   a018     goto    0x18             	GOTO	_00162_DS_
-                                           ;	.line	178; "MC32P7311.c"	T3IF = 0;
+000016   a018     goto    0x18             	GOTO	_00212_DS_
+                                           ;	.line	315; "MC32P7311.c"	T3IF = 0;
 000017   df8b     bclr    0x18b, 0x7       	BCLR	_INTFbits,7
-                                           _00162_DS_
-                                           ;	.line	186; "MC32P7311.c"	if (ADIF & ADIE)
-000018   7613     clrr    0x13             	CLRR	r0x100C
+                                           _00212_DS_
+                                           ;	.line	323; "MC32P7311.c"	if (ADIF & ADIE)
+000018   7614     clrr    0x14             	CLRR	r0x100F
 000019   fd8b     jbclr   0x18b, 0x6       	JBCLR	_INTFbits,6
-00001a   6613     incr    0x13             	INCR	r0x100C
-00001b   7614     clrr    0x14             	CLRR	r0x100D
+00001a   6614     incr    0x14             	INCR	r0x100F
+00001b   7615     clrr    0x15             	CLRR	r0x1010
 00001c   fd8a     jbclr   0x18a, 0x6       	JBCLR	_INTEbits,6
-00001d   6614     incr    0x14             	INCR	r0x100D
-00001e   5814     movar   0x14             	MOVAR	r0x100D
-00001f   7a13     andra   0x13             	ANDRA	r0x100C
+00001d   6615     incr    0x15             	INCR	r0x1010
+00001e   5815     movar   0x15             	MOVAR	r0x1010
+00001f   7a14     andra   0x14             	ANDRA	r0x100F
 000020   3c00     movai   0                	MOVAI	0x00
-000021   5c13     orar    0x13             	ORAR	r0x100C
+000021   5c14     orar    0x14             	ORAR	r0x100F
 000022   f587     jbclr   0x187, 0x2       	JBCLR	PFLAG,2
-000023   a025     goto    0x25             	GOTO	_00164_DS_
-                                           ;	.line	188; "MC32P7311.c"	ADIF = 0;
+000023   a025     goto    0x25             	GOTO	_00214_DS_
+                                           ;	.line	325; "MC32P7311.c"	ADIF = 0;
 000024   dd8b     bclr    0x18b, 0x6       	BCLR	_INTFbits,6
-                                           _00164_DS_
-                                           ;	.line	205; "MC32P7311.c"	__endasm;
+                                           _00214_DS_
+                                           ;	.line	342; "MC32P7311.c"	__endasm;
                                            	;
-000025   4416     swapar  0x16             	swapar	_statusbuf;
+000025   4419     swapar  0x19             	swapar	_statusbuf;
 000026   5787     movra   0x187            	movra	_PFLAG;
-000027   4615     swapr   0x15             	swapr	_abuf;
-000028   4415     swapar  0x15             	swapar	_abuf;
+000027   4618     swapr   0x18             	swapr	_abuf;
+000028   4418     swapar  0x18             	swapar	_abuf;
                                            	
                                            END_OF_INTERRUPT
-                                           ;	.line	206; "MC32P7311.c"	}
+                                           ;	.line	343; "MC32P7311.c"	}
 000029   000d     retie                    	RETIE	
                                            
                                            ;--------------------------------------------------------
@@ -427,64 +443,186 @@ Address  Value    Disassembly              Source
                                            ;has an exit
                                            ;functions called:
                                            ;   _Sys_Init
-                                           ;   _timer1_pwm1_output
-                                           ;   _delay_ms
-                                           ;   _timer1_fpwm1_output
-                                           ;   _delay_ms
                                            ;   _Sys_Init
-                                           ;   _timer1_pwm1_output
-                                           ;   _delay_ms
-                                           ;   _timer1_fpwm1_output
-                                           ;   _delay_ms
-                                           ;3 compiler assigned registers:
-                                           ;   STK02
-                                           ;   STK01
-                                           ;   STK00
                                            ;; Starting pCode block
                                            _main	;Function start
                                            ; 2 exit points
-                                           ;	.line	137; "MC32P7311.c"	Sys_Init();
-00002a   8040     call    0x40             	CALL	_Sys_Init
-                                           _00156_DS_
-                                           ;	.line	145; "MC32P7311.c"	timer1_pwm1_output();
-00002b   804b     call    0x4b             	CALL	_timer1_pwm1_output
-                                           ;	.line	146; "MC32P7311.c"	delay_ms(500);
-00002c   3cf4     movai   0xf4             	MOVAI	0xf4
-00002d   5604     movra   0x4              	MOVRA	STK02
-00002e   3c01     movai   0x1              	MOVAI	0x01
-00002f   5605     movra   0x5              	MOVRA	STK01
-000030   3c00     movai   0                	MOVAI	0x00
-000031   5606     movra   0x6              	MOVRA	STK00
-000032   3c00     movai   0                	MOVAI	0x00
-000033   8071     call    0x71             	CALL	_delay_ms
-                                           ;	.line	147; "MC32P7311.c"	timer1_fpwm1_output();
-000034   8048     call    0x48             	CALL	_timer1_fpwm1_output
-                                           ;	.line	148; "MC32P7311.c"	delay_ms(500);
-000035   3cf4     movai   0xf4             	MOVAI	0xf4
-000036   5604     movra   0x4              	MOVRA	STK02
-000037   3c01     movai   0x1              	MOVAI	0x01
-000038   5605     movra   0x5              	MOVRA	STK01
-000039   3c00     movai   0                	MOVAI	0x00
-00003a   5606     movra   0x6              	MOVRA	STK00
-00003b   3c00     movai   0                	MOVAI	0x00
-00003c   8071     call    0x71             	CALL	_delay_ms
-00003d   a02b     goto    0x2b             	GOTO	_00156_DS_
-                                           ;	.line	150; "MC32P7311.c"	}
-00003e   000c     return                   	RETURN	
+                                           ;	.line	282; "MC32P7311.c"	Sys_Init();
+00002a   8087     call    0x87             	CALL	_Sys_Init
+                                           _00206_DS_
+                                           ;	.line	284; "MC32P7311.c"	while (1)
+00002b   a02b     goto    0x2b             	GOTO	_00206_DS_
+                                           ;	.line	287; "MC32P7311.c"	}
+00002c   000c     return                   	RETURN	
                                            ; exit point of _main
                                            
                                            ;***
                                            ;  pBlock Stats: dbName = C
                                            ;***
-                                           ;entry:  _set_pwm_duty	;Function start
+                                           ;entry:  _key_scan	;Function start
                                            ; 2 exit points
                                            ;has an exit
+                                           ;functions called:
+                                           ;   _delay_ms
+                                           ;   _delay_ms
+                                           ;   _delay_ms
+                                           ;   _delay_ms
+                                           ;   _delay_ms
+                                           ;   _delay_ms
+                                           ;4 compiler assigned registers:
+                                           ;   r0x100E
+                                           ;   STK02
+                                           ;   STK01
+                                           ;   STK00
                                            ;; Starting pCode block
-                                           _set_pwm_duty	;Function start
+                                           _key_scan	;Function start
                                            ; 2 exit points
-                                           ;	.line	133; "MC32P7311.c"	}
-00003f   000c     return                   	RETURN	
-                                           ; exit point of _set_pwm_duty
+                                           ;	.line	221; "MC32P7311.c"	if (0 == KEY_HEAT_PIN)
+00002d   f194     jbclr   0x194, 0         	JBCLR	_IOP1bits,0
+00002e   a04b     goto    0x4b             	GOTO	_00189_DS_
+                                           ;	.line	223; "MC32P7311.c"	for (i = 0; i < 20; i++)
+00002f   7617     clrr    0x17             	CLRR	_i
+000030   7613     clrr    0x13             	CLRR	r0x100E
+                                           ;;unsigned compare: left < lit(0x14=20), size=1
+                                           _00192_DS_
+000031   3c14     movai   0x14             	MOVAI	0x14
+000032   4817     rsubar  0x17             	RSUBAR	_i
+000033   f187     jbclr   0x187, 0         	JBCLR	PFLAG,0
+000034   a042     goto    0x42             	GOTO	_00161_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	225; "MC32P7311.c"	if (0 == KEY_HEAT_PIN)
+000035   f194     jbclr   0x194, 0         	JBCLR	_IOP1bits,0
+000036   a038     goto    0x38             	GOTO	_00160_DS_
+                                           ;	.line	227; "MC32P7311.c"	cnt++;
+000037   6613     incr    0x13             	INCR	r0x100E
+                                           _00160_DS_
+                                           ;	.line	229; "MC32P7311.c"	delay_ms(1);
+000038   3c01     movai   0x1              	MOVAI	0x01
+000039   5604     movra   0x4              	MOVRA	STK02
+00003a   3c00     movai   0                	MOVAI	0x00
+00003b   5605     movra   0x5              	MOVRA	STK01
+00003c   3c00     movai   0                	MOVAI	0x00
+00003d   5606     movra   0x6              	MOVRA	STK00
+00003e   3c00     movai   0                	MOVAI	0x00
+00003f   80d3     call    0xd3             	CALL	_delay_ms
+                                           ;	.line	223; "MC32P7311.c"	for (i = 0; i < 20; i++)
+000040   6617     incr    0x17             	INCR	_i
+000041   a031     goto    0x31             	GOTO	_00192_DS_
+                                           ;;unsigned compare: left < lit(0xF=15), size=1
+                                           _00161_DS_
+                                           ;	.line	232; "MC32P7311.c"	if (cnt >= 15)
+000042   3c0f     movai   0xf              	MOVAI	0x0f
+000043   4813     rsubar  0x13             	RSUBAR	r0x100E
+000044   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+000045   a048     goto    0x48             	GOTO	_00164_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	234; "MC32P7311.c"	key_press_flag = KEY_HEAT_PRESS;
+000046   3c01     movai   0x1              	MOVAI	0x01
+000047   5616     movra   0x16             	MOVRA	_key_press_flag
+                                           _00164_DS_
+                                           ;	.line	237; "MC32P7311.c"	while (0 == KEY_HEAT_PIN)
+000048   f194     jbclr   0x194, 0         	JBCLR	_IOP1bits,0
+000049   a086     goto    0x86             	GOTO	_00200_DS_
+00004a   a048     goto    0x48             	GOTO	_00164_DS_
+                                           _00189_DS_
+                                           ;	.line	240; "MC32P7311.c"	else if (0 == KEY_CHANGE_PIN)
+00004b   f194     jbclr   0x194, 0         	JBCLR	_IOP1bits,0
+00004c   a069     goto    0x69             	GOTO	_00186_DS_
+                                           ;	.line	242; "MC32P7311.c"	for (i = 0; i < 20; i++)
+00004d   7617     clrr    0x17             	CLRR	_i
+00004e   7613     clrr    0x13             	CLRR	r0x100E
+                                           ;;unsigned compare: left < lit(0x14=20), size=1
+                                           _00195_DS_
+00004f   3c14     movai   0x14             	MOVAI	0x14
+000050   4817     rsubar  0x17             	RSUBAR	_i
+000051   f187     jbclr   0x187, 0         	JBCLR	PFLAG,0
+000052   a060     goto    0x60             	GOTO	_00169_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	244; "MC32P7311.c"	if (0 == KEY_CHANGE_PIN)
+000053   f194     jbclr   0x194, 0         	JBCLR	_IOP1bits,0
+000054   a056     goto    0x56             	GOTO	_00168_DS_
+                                           ;	.line	246; "MC32P7311.c"	cnt++;
+000055   6613     incr    0x13             	INCR	r0x100E
+                                           _00168_DS_
+                                           ;	.line	248; "MC32P7311.c"	delay_ms(1);
+000056   3c01     movai   0x1              	MOVAI	0x01
+000057   5604     movra   0x4              	MOVRA	STK02
+000058   3c00     movai   0                	MOVAI	0x00
+000059   5605     movra   0x5              	MOVRA	STK01
+00005a   3c00     movai   0                	MOVAI	0x00
+00005b   5606     movra   0x6              	MOVRA	STK00
+00005c   3c00     movai   0                	MOVAI	0x00
+00005d   80d3     call    0xd3             	CALL	_delay_ms
+                                           ;	.line	242; "MC32P7311.c"	for (i = 0; i < 20; i++)
+00005e   6617     incr    0x17             	INCR	_i
+00005f   a04f     goto    0x4f             	GOTO	_00195_DS_
+                                           ;;unsigned compare: left < lit(0xF=15), size=1
+                                           _00169_DS_
+                                           ;	.line	251; "MC32P7311.c"	if (cnt >= 15)
+000060   3c0f     movai   0xf              	MOVAI	0x0f
+000061   4813     rsubar  0x13             	RSUBAR	r0x100E
+000062   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+000063   a066     goto    0x66             	GOTO	_00172_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	253; "MC32P7311.c"	key_press_flag = KEY_CHANGE_PRESS;
+000064   3c02     movai   0x2              	MOVAI	0x02
+000065   5616     movra   0x16             	MOVRA	_key_press_flag
+                                           _00172_DS_
+                                           ;	.line	256; "MC32P7311.c"	while (0 == KEY_CHANGE_PIN)
+000066   f194     jbclr   0x194, 0         	JBCLR	_IOP1bits,0
+000067   a086     goto    0x86             	GOTO	_00200_DS_
+000068   a066     goto    0x66             	GOTO	_00172_DS_
+                                           _00186_DS_
+                                           ;	.line	259; "MC32P7311.c"	else if (0 == KEY_POWER_PIN)
+000069   f194     jbclr   0x194, 0         	JBCLR	_IOP1bits,0
+00006a   a086     goto    0x86             	GOTO	_00200_DS_
+                                           ;	.line	261; "MC32P7311.c"	for (i = 0; i < 20; i++)
+00006b   7617     clrr    0x17             	CLRR	_i
+00006c   7613     clrr    0x13             	CLRR	r0x100E
+                                           ;;unsigned compare: left < lit(0x14=20), size=1
+                                           _00198_DS_
+00006d   3c14     movai   0x14             	MOVAI	0x14
+00006e   4817     rsubar  0x17             	RSUBAR	_i
+00006f   f187     jbclr   0x187, 0         	JBCLR	PFLAG,0
+000070   a07e     goto    0x7e             	GOTO	_00177_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	263; "MC32P7311.c"	if (0 == KEY_POWER_PIN)
+000071   f194     jbclr   0x194, 0         	JBCLR	_IOP1bits,0
+000072   a074     goto    0x74             	GOTO	_00176_DS_
+                                           ;	.line	265; "MC32P7311.c"	cnt++;
+000073   6613     incr    0x13             	INCR	r0x100E
+                                           _00176_DS_
+                                           ;	.line	267; "MC32P7311.c"	delay_ms(1);
+000074   3c01     movai   0x1              	MOVAI	0x01
+000075   5604     movra   0x4              	MOVRA	STK02
+000076   3c00     movai   0                	MOVAI	0x00
+000077   5605     movra   0x5              	MOVRA	STK01
+000078   3c00     movai   0                	MOVAI	0x00
+000079   5606     movra   0x6              	MOVRA	STK00
+00007a   3c00     movai   0                	MOVAI	0x00
+00007b   80d3     call    0xd3             	CALL	_delay_ms
+                                           ;	.line	261; "MC32P7311.c"	for (i = 0; i < 20; i++)
+00007c   6617     incr    0x17             	INCR	_i
+00007d   a06d     goto    0x6d             	GOTO	_00198_DS_
+                                           ;;unsigned compare: left < lit(0xF=15), size=1
+                                           _00177_DS_
+                                           ;	.line	270; "MC32P7311.c"	if (cnt >= 15)
+00007e   3c0f     movai   0xf              	MOVAI	0x0f
+00007f   4813     rsubar  0x13             	RSUBAR	r0x100E
+000080   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+000081   a084     goto    0x84             	GOTO	_00180_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	272; "MC32P7311.c"	key_press_flag = KEY_POWER_PRESS;
+000082   3c03     movai   0x3              	MOVAI	0x03
+000083   5616     movra   0x16             	MOVRA	_key_press_flag
+                                           _00180_DS_
+                                           ;	.line	275; "MC32P7311.c"	while (0 == KEY_POWER_PIN)
+000084   e194     jbset   0x194, 0         	JBSET	_IOP1bits,0
+000085   a084     goto    0x84             	GOTO	_00180_DS_
+                                           _00200_DS_
+                                           ;	.line	278; "MC32P7311.c"	}
+000086   000c     return                   	RETURN	
+                                           ; exit point of _key_scan
                                            
                                            ;***
                                            ;  pBlock Stats: dbName = C
@@ -495,26 +633,100 @@ Address  Value    Disassembly              Source
                                            ;functions called:
                                            ;   _CLR_RAM
                                            ;   _IO_Init
-                                           ;   _timer1_pwm_config
+                                           ;   _key_config
                                            ;   _CLR_RAM
                                            ;   _IO_Init
-                                           ;   _timer1_pwm_config
+                                           ;   _key_config
                                            ;; Starting pCode block
                                            _Sys_Init	;Function start
                                            ; 2 exit points
-                                           ;	.line	118; "MC32P7311.c"	GIE = 0;
-000040   df88     bclr    0x188, 0x7       	BCLR	_MCRbits,7
-                                           ;	.line	119; "MC32P7311.c"	CLR_RAM();
-000041   8065     call    0x65             	CALL	_CLR_RAM
-                                           ;	.line	120; "MC32P7311.c"	IO_Init();
-000042   8056     call    0x56             	CALL	_IO_Init
-                                           ;	.line	122; "MC32P7311.c"	timer1_pwm_config();
-000043   804e     call    0x4e             	CALL	_timer1_pwm_config
-                                           ;	.line	123; "MC32P7311.c"	GIE = 1;
-000044   cf88     bset    0x188, 0x7       	BSET	_MCRbits,7
-                                           ;	.line	124; "MC32P7311.c"	}
-000045   000c     return                   	RETURN	
+                                           ;	.line	195; "MC32P7311.c"	GIE = 0;
+000087   df88     bclr    0x188, 0x7       	BCLR	_MCRbits,7
+                                           ;	.line	196; "MC32P7311.c"	CLR_RAM();
+000088   80c7     call    0xc7             	CALL	_CLR_RAM
+                                           ;	.line	197; "MC32P7311.c"	IO_Init();
+000089   80b8     call    0xb8             	CALL	_IO_Init
+                                           ;	.line	203; "MC32P7311.c"	key_config();
+00008a   809a     call    0x9a             	CALL	_key_config
+                                           ;	.line	205; "MC32P7311.c"	GIE = 1;
+00008b   cf88     bset    0x188, 0x7       	BSET	_MCRbits,7
+                                           ;	.line	206; "MC32P7311.c"	}
+00008c   000c     return                   	RETURN	
                                            ; exit point of _Sys_Init
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _adc_config	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _adc_config	;Function start
+                                           ; 2 exit points
+                                           ;	.line	178; "MC32P7311.c"	ANSEL0 |= 0xc8; // P04 P11  P12 3  6  7  模拟输入  1 模拟输入  0  IO口
+00008d   3cc8     movai   0xc8             	MOVAI	0xc8
+00008e   5fb6     orra    0x1b6            	ORRA	_ANSEL0
+                                           ;	.line	179; "MC32P7311.c"	ADCR0 &= 0x07;
+00008f   3c07     movai   0x7              	MOVAI	0x07
+000090   7bb0     andra   0x1b0            	ANDRA	_ADCR0
+                                           ;	.line	180; "MC32P7311.c"	ADCR0 |= 0x78; // 通道7  12位
+000091   3c78     movai   0x78             	MOVAI	0x78
+000092   5fb0     orra    0x1b0            	ORRA	_ADCR0
+                                           ;	.line	181; "MC32P7311.c"	ADCR1 &= 0x00;
+000093   77b1     clrr    0x1b1            	CLRR	_ADCR1
+                                           ;	.line	182; "MC32P7311.c"	ADCR1 |= 0xe1; // 125K采样  内部3V
+000094   3ce1     movai   0xe1             	MOVAI	0xe1
+000095   5fb1     orra    0x1b1            	ORRA	_ADCR1
+                                           ;	.line	183; "MC32P7311.c"	ADCR2 = 0xff;  // 默认固定15个时钟
+000096   3cff     movai   0xff             	MOVAI	0xff
+000097   57b2     movra   0x1b2            	MOVRA	_ADCR2
+                                           ;	.line	184; "MC32P7311.c"	ADON = 1;	   // 使能ADC
+000098   c1b0     bset    0x1b0, 0         	BSET	_ADCR0bits,0
+                                           ;	.line	185; "MC32P7311.c"	}
+000099   000c     return                   	RETURN	
+                                           ; exit point of _adc_config
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _key_config	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _key_config	;Function start
+                                           ; 2 exit points
+                                           ;	.line	171; "MC32P7311.c"	P11PU = 1; // 上拉电阻
+00009a   c396     bset    0x196, 0x1       	BSET	_PUP1bits,1
+                                           ;	.line	172; "MC32P7311.c"	P11OE = 0; // 输入模式
+00009b   d395     bclr    0x195, 0x1       	BCLR	_OEP1bits,1
+                                           ;	.line	173; "MC32P7311.c"	}
+00009c   000c     return                   	RETURN	
+                                           ; exit point of _key_config
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer2_pwm_config	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer2_pwm_config	;Function start
+                                           ; 2 exit points
+                                           ;	.line	143; "MC32P7311.c"	T2CR |= 0x02; // 4分频
+00009d   c3a0     bset    0x1a0, 0x1       	BSET	_T2CR,1
+                                           ;	.line	144; "MC32P7311.c"	T2LOAD = 128 - 1;
+00009e   3c7f     movai   0x7f             	MOVAI	0x7f
+00009f   57a2     movra   0x1a2            	MOVRA	_T2LOAD
+                                           ;	.line	145; "MC32P7311.c"	T2DATA = 25; // 占空比 == T2DATA / T2LOAD
+0000a0   3c19     movai   0x19             	MOVAI	0x19
+0000a1   57a3     movra   0x1a3            	MOVRA	_T2DATA
+                                           ;	.line	147; "MC32P7311.c"	PWM2OE = 1;
+0000a2   cda0     bset    0x1a0, 0x6       	BSET	_T2CRbits,6
+                                           ;	.line	148; "MC32P7311.c"	TC2EN = 1; // 启动定时器
+0000a3   cfa0     bset    0x1a0, 0x7       	BSET	_T2CRbits,7
+                                           ;	.line	166; "MC32P7311.c"	}
+0000a4   000c     return                   	RETURN	
+                                           ; exit point of _timer2_pwm_config
                                            
                                            ;***
                                            ;  pBlock Stats: dbName = C
@@ -525,8 +737,10 @@ Address  Value    Disassembly              Source
                                            ;; Starting pCode block
                                            _timer1_pwm_close	;Function start
                                            ; 2 exit points
-                                           ;	.line	108; "MC32P7311.c"	}
-000046   000c     return                   	RETURN	
+                                           ;	.line	135; "MC32P7311.c"	PWM1OE = 0;
+0000a5   dd9c     bclr    0x19c, 0x6       	BCLR	_T1CRbits,6
+                                           ;	.line	136; "MC32P7311.c"	}
+0000a6   000c     return                   	RETURN	
                                            ; exit point of _timer1_pwm_close
                                            
                                            ;***
@@ -538,43 +752,11 @@ Address  Value    Disassembly              Source
                                            ;; Starting pCode block
                                            _timer1_pwm_open	;Function start
                                            ; 2 exit points
-                                           ;	.line	103; "MC32P7311.c"	}
-000047   000c     return                   	RETURN	
+                                           ;	.line	129; "MC32P7311.c"	PWM1OE = 1;
+0000a7   cd9c     bset    0x19c, 0x6       	BSET	_T1CRbits,6
+                                           ;	.line	130; "MC32P7311.c"	}
+0000a8   000c     return                   	RETURN	
                                            ; exit point of _timer1_pwm_open
-                                           
-                                           ;***
-                                           ;  pBlock Stats: dbName = C
-                                           ;***
-                                           ;entry:  _timer1_fpwm1_output	;Function start
-                                           ; 2 exit points
-                                           ;has an exit
-                                           ;; Starting pCode block
-                                           _timer1_fpwm1_output	;Function start
-                                           ; 2 exit points
-                                           ;	.line	96; "MC32P7311.c"	FPWMEN = 1;
-000048   cfac     bset    0x1ac, 0x7       	BSET	_PWMCR0bits,7
-                                           ;	.line	97; "MC32P7311.c"	PWM1OE = 0;
-000049   dd9c     bclr    0x19c, 0x6       	BCLR	_T1CRbits,6
-                                           ;	.line	98; "MC32P7311.c"	}
-00004a   000c     return                   	RETURN	
-                                           ; exit point of _timer1_fpwm1_output
-                                           
-                                           ;***
-                                           ;  pBlock Stats: dbName = C
-                                           ;***
-                                           ;entry:  _timer1_pwm1_output	;Function start
-                                           ; 2 exit points
-                                           ;has an exit
-                                           ;; Starting pCode block
-                                           _timer1_pwm1_output	;Function start
-                                           ; 2 exit points
-                                           ;	.line	90; "MC32P7311.c"	FPWMEN = 0;
-00004b   dfac     bclr    0x1ac, 0x7       	BCLR	_PWMCR0bits,7
-                                           ;	.line	91; "MC32P7311.c"	PWM1OE = 1;
-00004c   cd9c     bset    0x19c, 0x6       	BSET	_T1CRbits,6
-                                           ;	.line	92; "MC32P7311.c"	}
-00004d   000c     return                   	RETURN	
-                                           ; exit point of _timer1_pwm1_output
                                            
                                            ;***
                                            ;  pBlock Stats: dbName = C
@@ -585,21 +767,44 @@ Address  Value    Disassembly              Source
                                            ;; Starting pCode block
                                            _timer1_pwm_config	;Function start
                                            ; 2 exit points
-                                           ;	.line	74; "MC32P7311.c"	T1CR |= 0x01 << 2; // 4分频
-00004e   c59c     bset    0x19c, 0x2       	BSET	_T1CR,2
-                                           ;	.line	76; "MC32P7311.c"	T1LOAD = 100 - 1;
-00004f   3c63     movai   0x63             	MOVAI	0x63
-000050   579e     movra   0x19e            	MOVRA	_T1LOAD
-                                           ;	.line	78; "MC32P7311.c"	T1DATA = 50; // 占空比 == T1DATA / T1LOAD
-000051   3c32     movai   0x32             	MOVAI	0x32
-000052   579f     movra   0x19f            	MOVRA	_T1DATA
-                                           ;	.line	82; "MC32P7311.c"	PWMCR1 |= 0x01 << 4; // TIMER计数时钟为高频32MHz
-000053   c9ad     bset    0x1ad, 0x4       	BSET	_PWMCR1,4
-                                           ;	.line	85; "MC32P7311.c"	TC1EN = 1; // 启动定时器
-000054   cf9c     bset    0x19c, 0x7       	BSET	_T1CRbits,7
-                                           ;	.line	86; "MC32P7311.c"	}
-000055   000c     return                   	RETURN	
+                                           ;	.line	119; "MC32P7311.c"	T1LOAD = 52 - 1;
+0000a9   3c33     movai   0x33             	MOVAI	0x33
+0000aa   579e     movra   0x19e            	MOVRA	_T1LOAD
+                                           ;	.line	120; "MC32P7311.c"	T1DATA = 20; // 占空比 == T1DATA / T1LOAD
+0000ab   3c14     movai   0x14             	MOVAI	0x14
+0000ac   579f     movra   0x19f            	MOVRA	_T1DATA
+                                           ;	.line	121; "MC32P7311.c"	PWM1OE = 0;	 // 禁止PWM1输出
+0000ad   dd9c     bclr    0x19c, 0x6       	BCLR	_T1CRbits,6
+                                           ;	.line	122; "MC32P7311.c"	PWM1OE = 1;	 // 使能PWM1输出
+0000ae   cd9c     bset    0x19c, 0x6       	BSET	_T1CRbits,6
+                                           ;	.line	123; "MC32P7311.c"	TC1EN = 1;	 // 启动定时器
+0000af   cf9c     bset    0x19c, 0x7       	BSET	_T1CRbits,7
+                                           ;	.line	124; "MC32P7311.c"	}
+0000b0   000c     return                   	RETURN	
                                            ; exit point of _timer1_pwm_config
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer0_pwm_config	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer0_pwm_config	;Function start
+                                           ; 2 exit points
+                                           ;	.line	90; "MC32P7311.c"	T0LOAD = 52 - 1;
+0000b1   3c33     movai   0x33             	MOVAI	0x33
+0000b2   579a     movra   0x19a            	MOVRA	_T0LOAD
+                                           ;	.line	91; "MC32P7311.c"	T0DATA = 20; // 占空比 == T1DATA / T1LOAD
+0000b3   3c14     movai   0x14             	MOVAI	0x14
+0000b4   579b     movra   0x19b            	MOVRA	_T0DATA
+                                           ;	.line	93; "MC32P7311.c"	PWM0OE = 1; // 使能PWM输出
+0000b5   cd98     bset    0x198, 0x6       	BSET	_T0CRbits,6
+                                           ;	.line	94; "MC32P7311.c"	TC0EN = 1;
+0000b6   cf98     bset    0x198, 0x7       	BSET	_T0CRbits,7
+                                           ;	.line	95; "MC32P7311.c"	}
+0000b7   000c     return                   	RETURN	
+                                           ; exit point of _timer0_pwm_config
                                            
                                            ;***
                                            ;  pBlock Stats: dbName = C
@@ -611,32 +816,32 @@ Address  Value    Disassembly              Source
                                            _IO_Init	;Function start
                                            ; 2 exit points
                                            ;	.line	51; "MC32P7311.c"	IOP0 = 0x00;   // io口数据位
-000056   7790     clrr    0x190            	CLRR	_IOP0
+0000b8   7790     clrr    0x190            	CLRR	_IOP0
                                            ;	.line	52; "MC32P7311.c"	OEP0 = 0xFF;   // io口方向 1:out  0:in   P00、1输出为开漏
-000057   3cff     movai   0xff             	MOVAI	0xff
-000058   5791     movra   0x191            	MOVRA	_OEP0
+0000b9   3cff     movai   0xff             	MOVAI	0xff
+0000ba   5791     movra   0x191            	MOVRA	_OEP0
                                            ;	.line	53; "MC32P7311.c"	PUP0 = 0x00;   // io口上拉电阻   1:enable  0:disable
-000059   7792     clrr    0x192            	CLRR	_PUP0
+0000bb   7792     clrr    0x192            	CLRR	_PUP0
                                            ;	.line	54; "MC32P7311.c"	PDP0 = 0x00;   // io口下拉电阻   1:enable  0:disable
-00005a   7793     clrr    0x193            	CLRR	_PDP0
+0000bc   7793     clrr    0x193            	CLRR	_PDP0
                                            ;	.line	55; "MC32P7311.c"	ANSEL0 = 0x00; // io类型选择  1:模拟输入  0:通用io
-00005b   77b6     clrr    0x1b6            	CLRR	_ANSEL0
+0000bd   77b6     clrr    0x1b6            	CLRR	_ANSEL0
                                            ;	.line	57; "MC32P7311.c"	IOP1 = 0x00;   // io口数据位
-00005c   7794     clrr    0x194            	CLRR	_IOP1
+0000be   7794     clrr    0x194            	CLRR	_IOP1
                                            ;	.line	58; "MC32P7311.c"	OEP1 = 0xFF;   // io口方向 1:out  0:in   P13输出为开漏
-00005d   3cff     movai   0xff             	MOVAI	0xff
-00005e   5795     movra   0x195            	MOVRA	_OEP1
+0000bf   3cff     movai   0xff             	MOVAI	0xff
+0000c0   5795     movra   0x195            	MOVRA	_OEP1
                                            ;	.line	59; "MC32P7311.c"	PUP1 = 0x00;   // io口上拉电阻   1:enable  0:disable
-00005f   7796     clrr    0x196            	CLRR	_PUP1
+0000c1   7796     clrr    0x196            	CLRR	_PUP1
                                            ;	.line	60; "MC32P7311.c"	PDP1 = 0x00;   // io口下拉电阻   1:enable  0:disable
-000060   7797     clrr    0x197            	CLRR	_PDP1
+0000c2   7797     clrr    0x197            	CLRR	_PDP1
                                            ;	.line	61; "MC32P7311.c"	ANSEL1 = 0x00; // io类型选择  1:模拟输入  0:通用io
-000061   77b7     clrr    0x1b7            	CLRR	_ANSEL1
+0000c3   77b7     clrr    0x1b7            	CLRR	_ANSEL1
                                            ;	.line	63; "MC32P7311.c"	DRVCR = 0x80;
-000062   3c80     movai   0x80             	MOVAI	0x80
-000063   578c     movra   0x18c            	MOVRA	_DRVCR
+0000c4   3c80     movai   0x80             	MOVAI	0x80
+0000c5   578c     movra   0x18c            	MOVRA	_DRVCR
                                            ;	.line	64; "MC32P7311.c"	}
-000064   000c     return                   	RETURN	
+0000c6   000c     return                   	RETURN	
                                            ; exit point of _IO_Init
                                            
                                            ;***
@@ -649,27 +854,27 @@ Address  Value    Disassembly              Source
                                            _CLR_RAM	;Function start
                                            ; 2 exit points
                                            ;	.line	36; "MC32P7311.c"	for (FSR0 = 0; FSR0 < 0xff; FSR0++)
-000065   7784     clrr    0x184            	CLRR	_FSR0
+0000c7   7784     clrr    0x184            	CLRR	_FSR0
                                            ;;unsigned compare: left < lit(0xFF=255), size=1
                                            _00118_DS_
-000066   3cff     movai   0xff             	MOVAI	0xff
-000067   4984     rsubar  0x184            	RSUBAR	_FSR0
-000068   f187     jbclr   0x187, 0         	JBCLR	PFLAG,0
-000069   a06d     goto    0x6d             	GOTO	_00116_DS_
+0000c8   3cff     movai   0xff             	MOVAI	0xff
+0000c9   4984     rsubar  0x184            	RSUBAR	_FSR0
+0000ca   f187     jbclr   0x187, 0         	JBCLR	PFLAG,0
+0000cb   a0cf     goto    0xcf             	GOTO	_00116_DS_
                                            ;;genSkipc:3291: created from rifx:013B5EFC
                                            ;	.line	38; "MC32P7311.c"	INDF0 = 0x00;
-00006a   7780     clrr    0x180            	CLRR	_INDF0
+0000cc   7780     clrr    0x180            	CLRR	_INDF0
                                            ;	.line	36; "MC32P7311.c"	for (FSR0 = 0; FSR0 < 0xff; FSR0++)
-00006b   6784     incr    0x184            	INCR	_FSR0
-00006c   a066     goto    0x66             	GOTO	_00118_DS_
+0000cd   6784     incr    0x184            	INCR	_FSR0
+0000ce   a0c8     goto    0xc8             	GOTO	_00118_DS_
                                            _00116_DS_
                                            ;	.line	40; "MC32P7311.c"	FSR0 = 0xFF;
-00006d   3cff     movai   0xff             	MOVAI	0xff
-00006e   5784     movra   0x184            	MOVRA	_FSR0
+0000cf   3cff     movai   0xff             	MOVAI	0xff
+0000d0   5784     movra   0x184            	MOVRA	_FSR0
                                            ;	.line	41; "MC32P7311.c"	INDF0 = 0x00;
-00006f   7780     clrr    0x180            	CLRR	_INDF0
+0000d1   7780     clrr    0x180            	CLRR	_INDF0
                                            ;	.line	42; "MC32P7311.c"	}
-000070   000c     return                   	RETURN	
+0000d2   000c     return                   	RETURN	
                                            ; exit point of _CLR_RAM
                                            
                                            ;***
@@ -679,14 +884,12 @@ Address  Value    Disassembly              Source
                                            ; 2 exit points
                                            ;has an exit
                                            ;15 compiler assigned registers:
-                                           ;   r0x1000
-                                           ;   STK00
-                                           ;   r0x1001
-                                           ;   STK01
                                            ;   r0x1002
-                                           ;   STK02
+                                           ;   STK00
                                            ;   r0x1003
+                                           ;   STK01
                                            ;   r0x1004
+                                           ;   STK02
                                            ;   r0x1005
                                            ;   r0x1006
                                            ;   r0x1007
@@ -694,89 +897,91 @@ Address  Value    Disassembly              Source
                                            ;   r0x1009
                                            ;   r0x100A
                                            ;   r0x100B
+                                           ;   r0x100C
+                                           ;   r0x100D
                                            ;; Starting pCode block
                                            _delay_ms	;Function start
                                            ; 2 exit points
                                            ;	.line	15; "MC32P7311.c"	void delay_ms(u32 xms)
-000071   560a     movra   0xa              	MOVRA	r0x1000
-000072   5806     movar   0x6              	MOVAR	STK00
-000073   5609     movra   0x9              	MOVRA	r0x1001
-000074   5805     movar   0x5              	MOVAR	STK01
-000075   5608     movra   0x8              	MOVRA	r0x1002
-000076   5804     movar   0x4              	MOVAR	STK02
-000077   5607     movra   0x7              	MOVRA	r0x1003
+0000d3   560a     movra   0xa              	MOVRA	r0x1002
+0000d4   5806     movar   0x6              	MOVAR	STK00
+0000d5   5609     movra   0x9              	MOVRA	r0x1003
+0000d6   5805     movar   0x5              	MOVAR	STK01
+0000d7   5608     movra   0x8              	MOVRA	r0x1004
+0000d8   5804     movar   0x4              	MOVAR	STK02
+0000d9   5607     movra   0x7              	MOVRA	r0x1005
                                            _00108_DS_
                                            ;	.line	17; "MC32P7311.c"	while (xms)
-000078   5807     movar   0x7              	MOVAR	r0x1003
-000079   5c08     orar    0x8              	ORAR	r0x1002
-00007a   5c09     orar    0x9              	ORAR	r0x1001
-00007b   5c0a     orar    0xa              	ORAR	r0x1000
-00007c   f587     jbclr   0x187, 0x2       	JBCLR	PFLAG,2
-00007d   a0ab     goto    0xab             	GOTO	_00111_DS_
+0000da   5807     movar   0x7              	MOVAR	r0x1005
+0000db   5c08     orar    0x8              	ORAR	r0x1004
+0000dc   5c09     orar    0x9              	ORAR	r0x1003
+0000dd   5c0a     orar    0xa              	ORAR	r0x1002
+0000de   f587     jbclr   0x187, 0x2       	JBCLR	PFLAG,2
+0000df   a10d     goto    0x10d            	GOTO	_00111_DS_
                                            ;	.line	20; "MC32P7311.c"	while (i--)
-00007e   3c22     movai   0x22             	MOVAI	0x22
-00007f   560b     movra   0xb              	MOVRA	r0x1004
-000080   3c01     movai   0x1              	MOVAI	0x01
-000081   560c     movra   0xc              	MOVRA	r0x1005
-000082   760d     clrr    0xd              	CLRR	r0x1006
-000083   760e     clrr    0xe              	CLRR	r0x1007
+0000e0   3c1f     movai   0x1f             	MOVAI	0x1f
+0000e1   560b     movra   0xb              	MOVRA	r0x1006
+0000e2   3c01     movai   0x1              	MOVAI	0x01
+0000e3   560c     movra   0xc              	MOVRA	r0x1007
+0000e4   760d     clrr    0xd              	CLRR	r0x1008
+0000e5   760e     clrr    0xe              	CLRR	r0x1009
                                            _00105_DS_
-000084   580b     movar   0xb              	MOVAR	r0x1004
-000085   560f     movra   0xf              	MOVRA	r0x1008
-000086   580c     movar   0xc              	MOVAR	r0x1005
-000087   5610     movra   0x10             	MOVRA	r0x1009
-000088   580d     movar   0xd              	MOVAR	r0x1006
-000089   5611     movra   0x11             	MOVRA	r0x100A
-00008a   580e     movar   0xe              	MOVAR	r0x1007
-00008b   5612     movra   0x12             	MOVRA	r0x100B
-00008c   3cff     movai   0xff             	MOVAI	0xff
-00008d   7e0b     addra   0xb              	ADDRA	r0x1004
-00008e   3cff     movai   0xff             	MOVAI	0xff
-00008f   e187     jbset   0x187, 0         	JBSET	PFLAG,0
-000090   7e0c     addra   0xc              	ADDRA	r0x1005
-000091   3cff     movai   0xff             	MOVAI	0xff
-000092   e187     jbset   0x187, 0         	JBSET	PFLAG,0
-000093   7e0d     addra   0xd              	ADDRA	r0x1006
-000094   3cff     movai   0xff             	MOVAI	0xff
-000095   e187     jbset   0x187, 0         	JBSET	PFLAG,0
-000096   7e0e     addra   0xe              	ADDRA	r0x1007
-000097   580f     movar   0xf              	MOVAR	r0x1008
-000098   5c10     orar    0x10             	ORAR	r0x1009
-000099   5c11     orar    0x11             	ORAR	r0x100A
-00009a   5c12     orar    0x12             	ORAR	r0x100B
-00009b   f587     jbclr   0x187, 0x2       	JBCLR	PFLAG,2
-00009c   a09f     goto    0x9f             	GOTO	_00107_DS_
+0000e6   580b     movar   0xb              	MOVAR	r0x1006
+0000e7   560f     movra   0xf              	MOVRA	r0x100A
+0000e8   580c     movar   0xc              	MOVAR	r0x1007
+0000e9   5610     movra   0x10             	MOVRA	r0x100B
+0000ea   580d     movar   0xd              	MOVAR	r0x1008
+0000eb   5611     movra   0x11             	MOVRA	r0x100C
+0000ec   580e     movar   0xe              	MOVAR	r0x1009
+0000ed   5612     movra   0x12             	MOVRA	r0x100D
+0000ee   3cff     movai   0xff             	MOVAI	0xff
+0000ef   7e0b     addra   0xb              	ADDRA	r0x1006
+0000f0   3cff     movai   0xff             	MOVAI	0xff
+0000f1   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+0000f2   7e0c     addra   0xc              	ADDRA	r0x1007
+0000f3   3cff     movai   0xff             	MOVAI	0xff
+0000f4   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+0000f5   7e0d     addra   0xd              	ADDRA	r0x1008
+0000f6   3cff     movai   0xff             	MOVAI	0xff
+0000f7   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+0000f8   7e0e     addra   0xe              	ADDRA	r0x1009
+0000f9   580f     movar   0xf              	MOVAR	r0x100A
+0000fa   5c10     orar    0x10             	ORAR	r0x100B
+0000fb   5c11     orar    0x11             	ORAR	r0x100C
+0000fc   5c12     orar    0x12             	ORAR	r0x100D
+0000fd   f587     jbclr   0x187, 0x2       	JBCLR	PFLAG,2
+0000fe   a101     goto    0x101            	GOTO	_00107_DS_
                                            ;	.line	22; "MC32P7311.c"	Nop();
-00009d   0000     nop                      	nop	
-00009e   a084     goto    0x84             	GOTO	_00105_DS_
+0000ff   0000     nop                      	nop	
+000100   a0e6     goto    0xe6             	GOTO	_00105_DS_
                                            _00107_DS_
                                            ;	.line	24; "MC32P7311.c"	xms--;
-00009f   3cff     movai   0xff             	MOVAI	0xff
-0000a0   7e07     addra   0x7              	ADDRA	r0x1003
-0000a1   3cff     movai   0xff             	MOVAI	0xff
-0000a2   e187     jbset   0x187, 0         	JBSET	PFLAG,0
-0000a3   7e08     addra   0x8              	ADDRA	r0x1002
-0000a4   3cff     movai   0xff             	MOVAI	0xff
-0000a5   e187     jbset   0x187, 0         	JBSET	PFLAG,0
-0000a6   7e09     addra   0x9              	ADDRA	r0x1001
-0000a7   3cff     movai   0xff             	MOVAI	0xff
-0000a8   e187     jbset   0x187, 0         	JBSET	PFLAG,0
-0000a9   7e0a     addra   0xa              	ADDRA	r0x1000
-0000aa   a078     goto    0x78             	GOTO	_00108_DS_
+000101   3cff     movai   0xff             	MOVAI	0xff
+000102   7e07     addra   0x7              	ADDRA	r0x1005
+000103   3cff     movai   0xff             	MOVAI	0xff
+000104   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+000105   7e08     addra   0x8              	ADDRA	r0x1004
+000106   3cff     movai   0xff             	MOVAI	0xff
+000107   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+000108   7e09     addra   0x9              	ADDRA	r0x1003
+000109   3cff     movai   0xff             	MOVAI	0xff
+00010a   e187     jbset   0x187, 0         	JBSET	PFLAG,0
+00010b   7e0a     addra   0xa              	ADDRA	r0x1002
+00010c   a0da     goto    0xda             	GOTO	_00108_DS_
                                            _00111_DS_
                                            ;	.line	26; "MC32P7311.c"	}
-0000ab   000c     return                   	RETURN	
+00010d   000c     return                   	RETURN	
                                            ; exit point of _delay_ms
                                            
                                            
                                            ;	code size estimation:
-                                           ;	  156+    0 =   156 instructions (  312 byte)
+                                           ;	  254+    0 =   254 instructions (  508 byte)
                                            
                                            	end
                                            ;--------------------------------------------------------
                                            ; File Created by SN-SDCC : SinoMCU ANSI-C Compiler
                                            ; Version 2.0.0 (Dec 11 2019) (MINGW32)
-                                           ; This file was generated Thu Sep 19 18:02:23 2024
+                                           ; This file was generated Fri Sep 20 11:37:49 2024
                                            ;--------------------------------------------------------
                                            ; MC32 port for the RISC core
                                            ;--------------------------------------------------------
@@ -900,14 +1105,18 @@ Address  Value    Disassembly              Source
                                            	global	_IO_Init
                                            	global	_CLR_RAM
                                            	global	_delay_ms
+                                           	global	_timer0_pwm_config
                                            	global	_timer1_pwm_config
-                                           	global	_timer1_pwm1_output
-                                           	global	_timer1_fpwm1_output
                                            	global	_timer1_pwm_open
                                            	global	_timer1_pwm_close
-                                           	global	_set_pwm_duty
+                                           	global	_timer2_pwm_config
+                                           	global	_key_config
+                                           	global	_adc_config
+                                           	global	_key_scan
                                            	global	_main
                                            	global	_int_isr
+                                           	global	_key_press_flag
+                                           	global	_i
                                            	global	_abuf
                                            	global	_statusbuf
                                            	global	_flag1
@@ -935,12 +1144,18 @@ Address  Value    Disassembly              Source
                                            ; global definitions
                                            ;--------------------------------------------------------
                                            UD_MC32P7311_0	udata
-                                           _abuf	res	1
+                                           _key_press_flag	res	1
                                            
                                            UD_MC32P7311_1	udata
-                                           _statusbuf	res	1
+                                           _i	res	1
                                            
                                            UD_MC32P7311_2	udata
+                                           _abuf	res	1
+                                           
+                                           UD_MC32P7311_3	udata
+                                           _statusbuf	res	1
+                                           
+                                           UD_MC32P7311_4	udata
                                            _flag1	res	1
                                            
                                            ;--------------------------------------------------------
@@ -950,12 +1165,10 @@ Address  Value    Disassembly              Source
                                            ; compiler-defined variables
                                            ;--------------------------------------------------------
                                            UDL_MC32P7311_0	udata
+                                           r0x1005	res	1
+                                           r0x1004	res	1
                                            r0x1003	res	1
                                            r0x1002	res	1
-                                           r0x1001	res	1
-                                           r0x1000	res	1
-                                           r0x1004	res	1
-                                           r0x1005	res	1
                                            r0x1006	res	1
                                            r0x1007	res	1
                                            r0x1008	res	1
@@ -964,6 +1177,9 @@ Address  Value    Disassembly              Source
                                            r0x100B	res	1
                                            r0x100C	res	1
                                            r0x100D	res	1
+                                           r0x100E	res	1
+                                           r0x100F	res	1
+                                           r0x1010	res	1
                                            ;--------------------------------------------------------
                                            ; initialized data
                                            ;--------------------------------------------------------
@@ -1037,11 +1253,13 @@ Address  Value    Disassembly              Source
                                            ;@delay_ms ANSEL1bits                Allocated to registers ;size:1
                                            ;@delay_ms OSCCALHbits               Allocated to registers ;size:1
                                            ;@delay_ms OSCCALLbits               Allocated to registers ;size:1
+                                           ;@delay_ms key_press_flag            Allocated to registers ;size:1
+                                           ;@delay_ms i                         Allocated to registers ;size:1
                                            ;@delay_ms abuf                      Allocated to registers ;size:1
                                            ;@delay_ms statusbuf                 Allocated to registers ;size:1
                                            ;@delay_ms flag1                     Allocated to registers ;size:1
                                            ;@delay_ms xms                       Allocated to registers ;size:4
-                                           ;@delay_ms i                         Allocated to registers r0x1004 r0x1005 r0x1006 r0x1007 ;size:4
+                                           ;@delay_ms i                         Allocated to registers r0x1006 r0x1007 r0x1008 r0x1009 ;size:4
                                            ;@delay_ms INDF0                     Allocated to registers ;size:1
                                            ;@delay_ms INDF1                     Allocated to registers ;size:1
                                            ;@delay_ms INDF2                     Allocated to registers ;size:1
@@ -1100,22 +1318,25 @@ Address  Value    Disassembly              Source
                                            ;@end Allocation info for local variables in function 'CLR_RAM';
                                            ;@Allocation info for local variables in function 'IO_Init'
                                            ;@end Allocation info for local variables in function 'IO_Init';
+                                           ;@Allocation info for local variables in function 'timer0_pwm_config'
+                                           ;@end Allocation info for local variables in function 'timer0_pwm_config';
                                            ;@Allocation info for local variables in function 'timer1_pwm_config'
                                            ;@end Allocation info for local variables in function 'timer1_pwm_config';
-                                           ;@Allocation info for local variables in function 'timer1_pwm1_output'
-                                           ;@end Allocation info for local variables in function 'timer1_pwm1_output';
-                                           ;@Allocation info for local variables in function 'timer1_fpwm1_output'
-                                           ;@end Allocation info for local variables in function 'timer1_fpwm1_output';
                                            ;@Allocation info for local variables in function 'timer1_pwm_open'
                                            ;@end Allocation info for local variables in function 'timer1_pwm_open';
                                            ;@Allocation info for local variables in function 'timer1_pwm_close'
                                            ;@end Allocation info for local variables in function 'timer1_pwm_close';
+                                           ;@Allocation info for local variables in function 'timer2_pwm_config'
+                                           ;@end Allocation info for local variables in function 'timer2_pwm_config';
+                                           ;@Allocation info for local variables in function 'key_config'
+                                           ;@end Allocation info for local variables in function 'key_config';
+                                           ;@Allocation info for local variables in function 'adc_config'
+                                           ;@end Allocation info for local variables in function 'adc_config';
                                            ;@Allocation info for local variables in function 'Sys_Init'
                                            ;@end Allocation info for local variables in function 'Sys_Init';
-                                           ;@Allocation info for local variables in function 'set_pwm_duty'
-                                           ;@set_pwm_duty duty                      Allocated to registers ;size:1
-                                           ;@set_pwm_duty pwm_chx                   Allocated to registers ;size:1
-                                           ;@end Allocation info for local variables in function 'set_pwm_duty';
+                                           ;@Allocation info for local variables in function 'key_scan'
+                                           ;@key_scan cnt                       Allocated to registers r0x100E ;size:1
+                                           ;@end Allocation info for local variables in function 'key_scan';
                                            ;@Allocation info for local variables in function 'main'
                                            ;@end Allocation info for local variables in function 'main';
                                            ;@Allocation info for local variables in function 'int_isr'
@@ -1141,50 +1362,50 @@ Address  Value    Disassembly              Source
                                            ;entry:  _int_isr	;Function start
                                            ; 0 exit points
                                            ;2 compiler assigned registers:
-                                           ;   r0x100C
-                                           ;   r0x100D
+                                           ;   r0x100F
+                                           ;   r0x1010
                                            ;; Starting pCode block
                                            _int_isr	;Function start
                                            ; 0 exit points
-                                           ;	.line	158; "MC32P7311.c"	__endasm;
+                                           ;	.line	295; "MC32P7311.c"	__endasm;
                                            	;
                                            	movra	_abuf;
                                            	swapar	_PFLAG;
                                            	movra	_statusbuf;
                                            	
-                                           ;	.line	176; "MC32P7311.c"	if (T3IF & T3IE)
-                                           	CLRR	r0x100C
+                                           ;	.line	313; "MC32P7311.c"	if (T3IF & T3IE)
+                                           	CLRR	r0x100F
                                            	JBCLR	_INTFbits,7
-                                           	INCR	r0x100C
-                                           	CLRR	r0x100D
+                                           	INCR	r0x100F
+                                           	CLRR	r0x1010
                                            	JBCLR	_INTEbits,7
-                                           	INCR	r0x100D
-                                           	MOVAR	r0x100D
-                                           	ANDRA	r0x100C
+                                           	INCR	r0x1010
+                                           	MOVAR	r0x1010
+                                           	ANDRA	r0x100F
                                            	MOVAI	0x00
-                                           	ORAR	r0x100C
+                                           	ORAR	r0x100F
                                            	JBCLR	PFLAG,2
-                                           	GOTO	_00162_DS_
-                                           ;	.line	178; "MC32P7311.c"	T3IF = 0;
+                                           	GOTO	_00212_DS_
+                                           ;	.line	315; "MC32P7311.c"	T3IF = 0;
                                            	BCLR	_INTFbits,7
-                                           _00162_DS_
-                                           ;	.line	186; "MC32P7311.c"	if (ADIF & ADIE)
-                                           	CLRR	r0x100C
+                                           _00212_DS_
+                                           ;	.line	323; "MC32P7311.c"	if (ADIF & ADIE)
+                                           	CLRR	r0x100F
                                            	JBCLR	_INTFbits,6
-                                           	INCR	r0x100C
-                                           	CLRR	r0x100D
+                                           	INCR	r0x100F
+                                           	CLRR	r0x1010
                                            	JBCLR	_INTEbits,6
-                                           	INCR	r0x100D
-                                           	MOVAR	r0x100D
-                                           	ANDRA	r0x100C
+                                           	INCR	r0x1010
+                                           	MOVAR	r0x1010
+                                           	ANDRA	r0x100F
                                            	MOVAI	0x00
-                                           	ORAR	r0x100C
+                                           	ORAR	r0x100F
                                            	JBCLR	PFLAG,2
-                                           	GOTO	_00164_DS_
-                                           ;	.line	188; "MC32P7311.c"	ADIF = 0;
+                                           	GOTO	_00214_DS_
+                                           ;	.line	325; "MC32P7311.c"	ADIF = 0;
                                            	BCLR	_INTFbits,6
-                                           _00164_DS_
-                                           ;	.line	205; "MC32P7311.c"	__endasm;
+                                           _00214_DS_
+                                           ;	.line	342; "MC32P7311.c"	__endasm;
                                            	;
                                            	swapar	_statusbuf;
                                            	movra	_PFLAG;
@@ -1192,7 +1413,7 @@ Address  Value    Disassembly              Source
                                            	swapar	_abuf;
                                            	
                                            END_OF_INTERRUPT
-                                           ;	.line	206; "MC32P7311.c"	}
+                                           ;	.line	343; "MC32P7311.c"	}
                                            	RETIE	
                                            
                                            ;--------------------------------------------------------
@@ -1207,64 +1428,186 @@ Address  Value    Disassembly              Source
                                            ;has an exit
                                            ;functions called:
                                            ;   _Sys_Init
-                                           ;   _timer1_pwm1_output
-                                           ;   _delay_ms
-                                           ;   _timer1_fpwm1_output
-                                           ;   _delay_ms
                                            ;   _Sys_Init
-                                           ;   _timer1_pwm1_output
-                                           ;   _delay_ms
-                                           ;   _timer1_fpwm1_output
-                                           ;   _delay_ms
-                                           ;3 compiler assigned registers:
-                                           ;   STK02
-                                           ;   STK01
-                                           ;   STK00
                                            ;; Starting pCode block
                                            _main	;Function start
                                            ; 2 exit points
-                                           ;	.line	137; "MC32P7311.c"	Sys_Init();
+                                           ;	.line	282; "MC32P7311.c"	Sys_Init();
                                            	CALL	_Sys_Init
-                                           _00156_DS_
-                                           ;	.line	145; "MC32P7311.c"	timer1_pwm1_output();
-                                           	CALL	_timer1_pwm1_output
-                                           ;	.line	146; "MC32P7311.c"	delay_ms(500);
-                                           	MOVAI	0xf4
-                                           	MOVRA	STK02
-                                           	MOVAI	0x01
-                                           	MOVRA	STK01
-                                           	MOVAI	0x00
-                                           	MOVRA	STK00
-                                           	MOVAI	0x00
-                                           	CALL	_delay_ms
-                                           ;	.line	147; "MC32P7311.c"	timer1_fpwm1_output();
-                                           	CALL	_timer1_fpwm1_output
-                                           ;	.line	148; "MC32P7311.c"	delay_ms(500);
-                                           	MOVAI	0xf4
-                                           	MOVRA	STK02
-                                           	MOVAI	0x01
-                                           	MOVRA	STK01
-                                           	MOVAI	0x00
-                                           	MOVRA	STK00
-                                           	MOVAI	0x00
-                                           	CALL	_delay_ms
-                                           	GOTO	_00156_DS_
-                                           ;	.line	150; "MC32P7311.c"	}
+                                           _00206_DS_
+                                           ;	.line	284; "MC32P7311.c"	while (1)
+                                           	GOTO	_00206_DS_
+                                           ;	.line	287; "MC32P7311.c"	}
                                            	RETURN	
                                            ; exit point of _main
                                            
                                            ;***
                                            ;  pBlock Stats: dbName = C
                                            ;***
-                                           ;entry:  _set_pwm_duty	;Function start
+                                           ;entry:  _key_scan	;Function start
                                            ; 2 exit points
                                            ;has an exit
+                                           ;functions called:
+                                           ;   _delay_ms
+                                           ;   _delay_ms
+                                           ;   _delay_ms
+                                           ;   _delay_ms
+                                           ;   _delay_ms
+                                           ;   _delay_ms
+                                           ;4 compiler assigned registers:
+                                           ;   r0x100E
+                                           ;   STK02
+                                           ;   STK01
+                                           ;   STK00
                                            ;; Starting pCode block
-                                           _set_pwm_duty	;Function start
+                                           _key_scan	;Function start
                                            ; 2 exit points
-                                           ;	.line	133; "MC32P7311.c"	}
+                                           ;	.line	221; "MC32P7311.c"	if (0 == KEY_HEAT_PIN)
+                                           	JBCLR	_IOP1bits,0
+                                           	GOTO	_00189_DS_
+                                           ;	.line	223; "MC32P7311.c"	for (i = 0; i < 20; i++)
+                                           	CLRR	_i
+                                           	CLRR	r0x100E
+                                           ;;unsigned compare: left < lit(0x14=20), size=1
+                                           _00192_DS_
+                                           	MOVAI	0x14
+                                           	RSUBAR	_i
+                                           	JBCLR	PFLAG,0
+                                           	GOTO	_00161_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	225; "MC32P7311.c"	if (0 == KEY_HEAT_PIN)
+                                           	JBCLR	_IOP1bits,0
+                                           	GOTO	_00160_DS_
+                                           ;	.line	227; "MC32P7311.c"	cnt++;
+                                           	INCR	r0x100E
+                                           _00160_DS_
+                                           ;	.line	229; "MC32P7311.c"	delay_ms(1);
+                                           	MOVAI	0x01
+                                           	MOVRA	STK02
+                                           	MOVAI	0x00
+                                           	MOVRA	STK01
+                                           	MOVAI	0x00
+                                           	MOVRA	STK00
+                                           	MOVAI	0x00
+                                           	CALL	_delay_ms
+                                           ;	.line	223; "MC32P7311.c"	for (i = 0; i < 20; i++)
+                                           	INCR	_i
+                                           	GOTO	_00192_DS_
+                                           ;;unsigned compare: left < lit(0xF=15), size=1
+                                           _00161_DS_
+                                           ;	.line	232; "MC32P7311.c"	if (cnt >= 15)
+                                           	MOVAI	0x0f
+                                           	RSUBAR	r0x100E
+                                           	JBSET	PFLAG,0
+                                           	GOTO	_00164_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	234; "MC32P7311.c"	key_press_flag = KEY_HEAT_PRESS;
+                                           	MOVAI	0x01
+                                           	MOVRA	_key_press_flag
+                                           _00164_DS_
+                                           ;	.line	237; "MC32P7311.c"	while (0 == KEY_HEAT_PIN)
+                                           	JBCLR	_IOP1bits,0
+                                           	GOTO	_00200_DS_
+                                           	GOTO	_00164_DS_
+                                           _00189_DS_
+                                           ;	.line	240; "MC32P7311.c"	else if (0 == KEY_CHANGE_PIN)
+                                           	JBCLR	_IOP1bits,0
+                                           	GOTO	_00186_DS_
+                                           ;	.line	242; "MC32P7311.c"	for (i = 0; i < 20; i++)
+                                           	CLRR	_i
+                                           	CLRR	r0x100E
+                                           ;;unsigned compare: left < lit(0x14=20), size=1
+                                           _00195_DS_
+                                           	MOVAI	0x14
+                                           	RSUBAR	_i
+                                           	JBCLR	PFLAG,0
+                                           	GOTO	_00169_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	244; "MC32P7311.c"	if (0 == KEY_CHANGE_PIN)
+                                           	JBCLR	_IOP1bits,0
+                                           	GOTO	_00168_DS_
+                                           ;	.line	246; "MC32P7311.c"	cnt++;
+                                           	INCR	r0x100E
+                                           _00168_DS_
+                                           ;	.line	248; "MC32P7311.c"	delay_ms(1);
+                                           	MOVAI	0x01
+                                           	MOVRA	STK02
+                                           	MOVAI	0x00
+                                           	MOVRA	STK01
+                                           	MOVAI	0x00
+                                           	MOVRA	STK00
+                                           	MOVAI	0x00
+                                           	CALL	_delay_ms
+                                           ;	.line	242; "MC32P7311.c"	for (i = 0; i < 20; i++)
+                                           	INCR	_i
+                                           	GOTO	_00195_DS_
+                                           ;;unsigned compare: left < lit(0xF=15), size=1
+                                           _00169_DS_
+                                           ;	.line	251; "MC32P7311.c"	if (cnt >= 15)
+                                           	MOVAI	0x0f
+                                           	RSUBAR	r0x100E
+                                           	JBSET	PFLAG,0
+                                           	GOTO	_00172_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	253; "MC32P7311.c"	key_press_flag = KEY_CHANGE_PRESS;
+                                           	MOVAI	0x02
+                                           	MOVRA	_key_press_flag
+                                           _00172_DS_
+                                           ;	.line	256; "MC32P7311.c"	while (0 == KEY_CHANGE_PIN)
+                                           	JBCLR	_IOP1bits,0
+                                           	GOTO	_00200_DS_
+                                           	GOTO	_00172_DS_
+                                           _00186_DS_
+                                           ;	.line	259; "MC32P7311.c"	else if (0 == KEY_POWER_PIN)
+                                           	JBCLR	_IOP1bits,0
+                                           	GOTO	_00200_DS_
+                                           ;	.line	261; "MC32P7311.c"	for (i = 0; i < 20; i++)
+                                           	CLRR	_i
+                                           	CLRR	r0x100E
+                                           ;;unsigned compare: left < lit(0x14=20), size=1
+                                           _00198_DS_
+                                           	MOVAI	0x14
+                                           	RSUBAR	_i
+                                           	JBCLR	PFLAG,0
+                                           	GOTO	_00177_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	263; "MC32P7311.c"	if (0 == KEY_POWER_PIN)
+                                           	JBCLR	_IOP1bits,0
+                                           	GOTO	_00176_DS_
+                                           ;	.line	265; "MC32P7311.c"	cnt++;
+                                           	INCR	r0x100E
+                                           _00176_DS_
+                                           ;	.line	267; "MC32P7311.c"	delay_ms(1);
+                                           	MOVAI	0x01
+                                           	MOVRA	STK02
+                                           	MOVAI	0x00
+                                           	MOVRA	STK01
+                                           	MOVAI	0x00
+                                           	MOVRA	STK00
+                                           	MOVAI	0x00
+                                           	CALL	_delay_ms
+                                           ;	.line	261; "MC32P7311.c"	for (i = 0; i < 20; i++)
+                                           	INCR	_i
+                                           	GOTO	_00198_DS_
+                                           ;;unsigned compare: left < lit(0xF=15), size=1
+                                           _00177_DS_
+                                           ;	.line	270; "MC32P7311.c"	if (cnt >= 15)
+                                           	MOVAI	0x0f
+                                           	RSUBAR	r0x100E
+                                           	JBSET	PFLAG,0
+                                           	GOTO	_00180_DS_
+                                           ;;genSkipc:3291: created from rifx:013B5EFC
+                                           ;	.line	272; "MC32P7311.c"	key_press_flag = KEY_POWER_PRESS;
+                                           	MOVAI	0x03
+                                           	MOVRA	_key_press_flag
+                                           _00180_DS_
+                                           ;	.line	275; "MC32P7311.c"	while (0 == KEY_POWER_PIN)
+                                           	JBSET	_IOP1bits,0
+                                           	GOTO	_00180_DS_
+                                           _00200_DS_
+                                           ;	.line	278; "MC32P7311.c"	}
                                            	RETURN	
-                                           ; exit point of _set_pwm_duty
+                                           ; exit point of _key_scan
                                            
                                            ;***
                                            ;  pBlock Stats: dbName = C
@@ -1275,26 +1618,100 @@ Address  Value    Disassembly              Source
                                            ;functions called:
                                            ;   _CLR_RAM
                                            ;   _IO_Init
-                                           ;   _timer1_pwm_config
+                                           ;   _key_config
                                            ;   _CLR_RAM
                                            ;   _IO_Init
-                                           ;   _timer1_pwm_config
+                                           ;   _key_config
                                            ;; Starting pCode block
                                            _Sys_Init	;Function start
                                            ; 2 exit points
-                                           ;	.line	118; "MC32P7311.c"	GIE = 0;
+                                           ;	.line	195; "MC32P7311.c"	GIE = 0;
                                            	BCLR	_MCRbits,7
-                                           ;	.line	119; "MC32P7311.c"	CLR_RAM();
+                                           ;	.line	196; "MC32P7311.c"	CLR_RAM();
                                            	CALL	_CLR_RAM
-                                           ;	.line	120; "MC32P7311.c"	IO_Init();
+                                           ;	.line	197; "MC32P7311.c"	IO_Init();
                                            	CALL	_IO_Init
-                                           ;	.line	122; "MC32P7311.c"	timer1_pwm_config();
-                                           	CALL	_timer1_pwm_config
-                                           ;	.line	123; "MC32P7311.c"	GIE = 1;
+                                           ;	.line	203; "MC32P7311.c"	key_config();
+                                           	CALL	_key_config
+                                           ;	.line	205; "MC32P7311.c"	GIE = 1;
                                            	BSET	_MCRbits,7
-                                           ;	.line	124; "MC32P7311.c"	}
+                                           ;	.line	206; "MC32P7311.c"	}
                                            	RETURN	
                                            ; exit point of _Sys_Init
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _adc_config	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _adc_config	;Function start
+                                           ; 2 exit points
+                                           ;	.line	178; "MC32P7311.c"	ANSEL0 |= 0xc8; // P04 P11  P12 3  6  7  模拟输入  1 模拟输入  0  IO口
+                                           	MOVAI	0xc8
+                                           	ORRA	_ANSEL0
+                                           ;	.line	179; "MC32P7311.c"	ADCR0 &= 0x07;
+                                           	MOVAI	0x07
+                                           	ANDRA	_ADCR0
+                                           ;	.line	180; "MC32P7311.c"	ADCR0 |= 0x78; // 通道7  12位
+                                           	MOVAI	0x78
+                                           	ORRA	_ADCR0
+                                           ;	.line	181; "MC32P7311.c"	ADCR1 &= 0x00;
+                                           	CLRR	_ADCR1
+                                           ;	.line	182; "MC32P7311.c"	ADCR1 |= 0xe1; // 125K采样  内部3V
+                                           	MOVAI	0xe1
+                                           	ORRA	_ADCR1
+                                           ;	.line	183; "MC32P7311.c"	ADCR2 = 0xff;  // 默认固定15个时钟
+                                           	MOVAI	0xff
+                                           	MOVRA	_ADCR2
+                                           ;	.line	184; "MC32P7311.c"	ADON = 1;	   // 使能ADC
+                                           	BSET	_ADCR0bits,0
+                                           ;	.line	185; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _adc_config
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _key_config	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _key_config	;Function start
+                                           ; 2 exit points
+                                           ;	.line	171; "MC32P7311.c"	P11PU = 1; // 上拉电阻
+                                           	BSET	_PUP1bits,1
+                                           ;	.line	172; "MC32P7311.c"	P11OE = 0; // 输入模式
+                                           	BCLR	_OEP1bits,1
+                                           ;	.line	173; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _key_config
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer2_pwm_config	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer2_pwm_config	;Function start
+                                           ; 2 exit points
+                                           ;	.line	143; "MC32P7311.c"	T2CR |= 0x02; // 4分频
+                                           	BSET	_T2CR,1
+                                           ;	.line	144; "MC32P7311.c"	T2LOAD = 128 - 1;
+                                           	MOVAI	0x7f
+                                           	MOVRA	_T2LOAD
+                                           ;	.line	145; "MC32P7311.c"	T2DATA = 25; // 占空比 == T2DATA / T2LOAD
+                                           	MOVAI	0x19
+                                           	MOVRA	_T2DATA
+                                           ;	.line	147; "MC32P7311.c"	PWM2OE = 1;
+                                           	BSET	_T2CRbits,6
+                                           ;	.line	148; "MC32P7311.c"	TC2EN = 1; // 启动定时器
+                                           	BSET	_T2CRbits,7
+                                           ;	.line	166; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _timer2_pwm_config
                                            
                                            ;***
                                            ;  pBlock Stats: dbName = C
@@ -1305,7 +1722,9 @@ Address  Value    Disassembly              Source
                                            ;; Starting pCode block
                                            _timer1_pwm_close	;Function start
                                            ; 2 exit points
-                                           ;	.line	108; "MC32P7311.c"	}
+                                           ;	.line	135; "MC32P7311.c"	PWM1OE = 0;
+                                           	BCLR	_T1CRbits,6
+                                           ;	.line	136; "MC32P7311.c"	}
                                            	RETURN	
                                            ; exit point of _timer1_pwm_close
                                            
@@ -1318,43 +1737,11 @@ Address  Value    Disassembly              Source
                                            ;; Starting pCode block
                                            _timer1_pwm_open	;Function start
                                            ; 2 exit points
-                                           ;	.line	103; "MC32P7311.c"	}
+                                           ;	.line	129; "MC32P7311.c"	PWM1OE = 1;
+                                           	BSET	_T1CRbits,6
+                                           ;	.line	130; "MC32P7311.c"	}
                                            	RETURN	
                                            ; exit point of _timer1_pwm_open
-                                           
-                                           ;***
-                                           ;  pBlock Stats: dbName = C
-                                           ;***
-                                           ;entry:  _timer1_fpwm1_output	;Function start
-                                           ; 2 exit points
-                                           ;has an exit
-                                           ;; Starting pCode block
-                                           _timer1_fpwm1_output	;Function start
-                                           ; 2 exit points
-                                           ;	.line	96; "MC32P7311.c"	FPWMEN = 1;
-                                           	BSET	_PWMCR0bits,7
-                                           ;	.line	97; "MC32P7311.c"	PWM1OE = 0;
-                                           	BCLR	_T1CRbits,6
-                                           ;	.line	98; "MC32P7311.c"	}
-                                           	RETURN	
-                                           ; exit point of _timer1_fpwm1_output
-                                           
-                                           ;***
-                                           ;  pBlock Stats: dbName = C
-                                           ;***
-                                           ;entry:  _timer1_pwm1_output	;Function start
-                                           ; 2 exit points
-                                           ;has an exit
-                                           ;; Starting pCode block
-                                           _timer1_pwm1_output	;Function start
-                                           ; 2 exit points
-                                           ;	.line	90; "MC32P7311.c"	FPWMEN = 0;
-                                           	BCLR	_PWMCR0bits,7
-                                           ;	.line	91; "MC32P7311.c"	PWM1OE = 1;
-                                           	BSET	_T1CRbits,6
-                                           ;	.line	92; "MC32P7311.c"	}
-                                           	RETURN	
-                                           ; exit point of _timer1_pwm1_output
                                            
                                            ;***
                                            ;  pBlock Stats: dbName = C
@@ -1365,21 +1752,44 @@ Address  Value    Disassembly              Source
                                            ;; Starting pCode block
                                            _timer1_pwm_config	;Function start
                                            ; 2 exit points
-                                           ;	.line	74; "MC32P7311.c"	T1CR |= 0x01 << 2; // 4分频
-                                           	BSET	_T1CR,2
-                                           ;	.line	76; "MC32P7311.c"	T1LOAD = 100 - 1;
-                                           	MOVAI	0x63
+                                           ;	.line	119; "MC32P7311.c"	T1LOAD = 52 - 1;
+                                           	MOVAI	0x33
                                            	MOVRA	_T1LOAD
-                                           ;	.line	78; "MC32P7311.c"	T1DATA = 50; // 占空比 == T1DATA / T1LOAD
-                                           	MOVAI	0x32
+                                           ;	.line	120; "MC32P7311.c"	T1DATA = 20; // 占空比 == T1DATA / T1LOAD
+                                           	MOVAI	0x14
                                            	MOVRA	_T1DATA
-                                           ;	.line	82; "MC32P7311.c"	PWMCR1 |= 0x01 << 4; // TIMER计数时钟为高频32MHz
-                                           	BSET	_PWMCR1,4
-                                           ;	.line	85; "MC32P7311.c"	TC1EN = 1; // 启动定时器
+                                           ;	.line	121; "MC32P7311.c"	PWM1OE = 0;	 // 禁止PWM1输出
+                                           	BCLR	_T1CRbits,6
+                                           ;	.line	122; "MC32P7311.c"	PWM1OE = 1;	 // 使能PWM1输出
+                                           	BSET	_T1CRbits,6
+                                           ;	.line	123; "MC32P7311.c"	TC1EN = 1;	 // 启动定时器
                                            	BSET	_T1CRbits,7
-                                           ;	.line	86; "MC32P7311.c"	}
+                                           ;	.line	124; "MC32P7311.c"	}
                                            	RETURN	
                                            ; exit point of _timer1_pwm_config
+                                           
+                                           ;***
+                                           ;  pBlock Stats: dbName = C
+                                           ;***
+                                           ;entry:  _timer0_pwm_config	;Function start
+                                           ; 2 exit points
+                                           ;has an exit
+                                           ;; Starting pCode block
+                                           _timer0_pwm_config	;Function start
+                                           ; 2 exit points
+                                           ;	.line	90; "MC32P7311.c"	T0LOAD = 52 - 1;
+                                           	MOVAI	0x33
+                                           	MOVRA	_T0LOAD
+                                           ;	.line	91; "MC32P7311.c"	T0DATA = 20; // 占空比 == T1DATA / T1LOAD
+                                           	MOVAI	0x14
+                                           	MOVRA	_T0DATA
+                                           ;	.line	93; "MC32P7311.c"	PWM0OE = 1; // 使能PWM输出
+                                           	BSET	_T0CRbits,6
+                                           ;	.line	94; "MC32P7311.c"	TC0EN = 1;
+                                           	BSET	_T0CRbits,7
+                                           ;	.line	95; "MC32P7311.c"	}
+                                           	RETURN	
+                                           ; exit point of _timer0_pwm_config
                                            
                                            ;***
                                            ;  pBlock Stats: dbName = C
@@ -1459,14 +1869,12 @@ Address  Value    Disassembly              Source
                                            ; 2 exit points
                                            ;has an exit
                                            ;15 compiler assigned registers:
-                                           ;   r0x1000
-                                           ;   STK00
-                                           ;   r0x1001
-                                           ;   STK01
                                            ;   r0x1002
-                                           ;   STK02
+                                           ;   STK00
                                            ;   r0x1003
+                                           ;   STK01
                                            ;   r0x1004
+                                           ;   STK02
                                            ;   r0x1005
                                            ;   r0x1006
                                            ;   r0x1007
@@ -1474,56 +1882,58 @@ Address  Value    Disassembly              Source
                                            ;   r0x1009
                                            ;   r0x100A
                                            ;   r0x100B
+                                           ;   r0x100C
+                                           ;   r0x100D
                                            ;; Starting pCode block
                                            _delay_ms	;Function start
                                            ; 2 exit points
                                            ;	.line	15; "MC32P7311.c"	void delay_ms(u32 xms)
-                                           	MOVRA	r0x1000
-                                           	MOVAR	STK00
-                                           	MOVRA	r0x1001
-                                           	MOVAR	STK01
                                            	MOVRA	r0x1002
-                                           	MOVAR	STK02
+                                           	MOVAR	STK00
                                            	MOVRA	r0x1003
+                                           	MOVAR	STK01
+                                           	MOVRA	r0x1004
+                                           	MOVAR	STK02
+                                           	MOVRA	r0x1005
                                            _00108_DS_
                                            ;	.line	17; "MC32P7311.c"	while (xms)
-                                           	MOVAR	r0x1003
+                                           	MOVAR	r0x1005
+                                           	ORAR	r0x1004
+                                           	ORAR	r0x1003
                                            	ORAR	r0x1002
-                                           	ORAR	r0x1001
-                                           	ORAR	r0x1000
                                            	JBCLR	PFLAG,2
                                            	GOTO	_00111_DS_
                                            ;	.line	20; "MC32P7311.c"	while (i--)
-                                           	MOVAI	0x22
-                                           	MOVRA	r0x1004
+                                           	MOVAI	0x1f
+                                           	MOVRA	r0x1006
                                            	MOVAI	0x01
-                                           	MOVRA	r0x1005
-                                           	CLRR	r0x1006
-                                           	CLRR	r0x1007
+                                           	MOVRA	r0x1007
+                                           	CLRR	r0x1008
+                                           	CLRR	r0x1009
                                            _00105_DS_
-                                           	MOVAR	r0x1004
-                                           	MOVRA	r0x1008
-                                           	MOVAR	r0x1005
-                                           	MOVRA	r0x1009
                                            	MOVAR	r0x1006
                                            	MOVRA	r0x100A
                                            	MOVAR	r0x1007
                                            	MOVRA	r0x100B
+                                           	MOVAR	r0x1008
+                                           	MOVRA	r0x100C
+                                           	MOVAR	r0x1009
+                                           	MOVRA	r0x100D
                                            	MOVAI	0xff
-                                           	ADDRA	r0x1004
-                                           	MOVAI	0xff
-                                           	JBSET	PFLAG,0
-                                           	ADDRA	r0x1005
-                                           	MOVAI	0xff
-                                           	JBSET	PFLAG,0
                                            	ADDRA	r0x1006
                                            	MOVAI	0xff
                                            	JBSET	PFLAG,0
                                            	ADDRA	r0x1007
-                                           	MOVAR	r0x1008
-                                           	ORAR	r0x1009
-                                           	ORAR	r0x100A
+                                           	MOVAI	0xff
+                                           	JBSET	PFLAG,0
+                                           	ADDRA	r0x1008
+                                           	MOVAI	0xff
+                                           	JBSET	PFLAG,0
+                                           	ADDRA	r0x1009
+                                           	MOVAR	r0x100A
                                            	ORAR	r0x100B
+                                           	ORAR	r0x100C
+                                           	ORAR	r0x100D
                                            	JBCLR	PFLAG,2
                                            	GOTO	_00107_DS_
                                            ;	.line	22; "MC32P7311.c"	Nop();
@@ -1532,16 +1942,16 @@ Address  Value    Disassembly              Source
                                            _00107_DS_
                                            ;	.line	24; "MC32P7311.c"	xms--;
                                            	MOVAI	0xff
+                                           	ADDRA	r0x1005
+                                           	MOVAI	0xff
+                                           	JBSET	PFLAG,0
+                                           	ADDRA	r0x1004
+                                           	MOVAI	0xff
+                                           	JBSET	PFLAG,0
                                            	ADDRA	r0x1003
                                            	MOVAI	0xff
                                            	JBSET	PFLAG,0
                                            	ADDRA	r0x1002
-                                           	MOVAI	0xff
-                                           	JBSET	PFLAG,0
-                                           	ADDRA	r0x1001
-                                           	MOVAI	0xff
-                                           	JBSET	PFLAG,0
-                                           	ADDRA	r0x1000
                                            	GOTO	_00108_DS_
                                            _00111_DS_
                                            ;	.line	26; "MC32P7311.c"	}
@@ -1550,7 +1960,7 @@ Address  Value    Disassembly              Source
                                            
                                            
                                            ;	code size estimation:
-                                           ;	  156+    0 =   156 instructions (  312 byte)
+                                           ;	  254+    0 =   254 instructions (  508 byte)
                                            
                                            	end
 
@@ -1562,9 +1972,12 @@ MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
 0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
-0140 : XXXXXXXXXXXXXXXX XXXXXXXX-------- ---------------- ----------------
+0140 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0180 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+01C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0200 : XXXXXXXXXXXXXXXX XXXXXXXXXXXX---- ---------------- ----------------
 
 All other memory blocks unused.
 
-Program Memory Words Used:   168
+Program Memory Words Used:   266
 

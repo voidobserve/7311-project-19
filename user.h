@@ -6,7 +6,7 @@
 ;  *   	@晟矽微官网           : http://www.sinomcu.com/
 ;  *   	@版权                 : 2021 SINOMCU公司版权所有.
 ;  *---------------------- 建议 ---------------------------------
-;  *   				变量定义时使用全局变量	               	
+;  *   				变量定义时使用全局变量
 ******************************************************************************/
 #ifndef __USER_H
 #define __USER_H
@@ -20,11 +20,116 @@
 #define u8 unsigned char
 #define u16 unsigned int
 #define u32 unsigned long int
-#define uint8_t  unsigned char
+#define uint8_t unsigned char
 #define uint16_t unsigned int
 #define uint32_t unsigned long int
 
-// #define // 
+// #define //
+#define UNUSED_PIN P10D // P10是14脚芯片上没有的引脚
+
+// 驱动指示灯的引脚定义
+// #define LED_WORKING_PIN // 工作指示灯
+// #define LED_CHARGING_PIN // 充电指示灯
+// #define LED_FULL_CHARGE_PIN // 满电指示灯
+
+// 检测按键状态的引脚定义，检测到低电平为有效
+// #define KEY_HEAT_PIN P11D // 控制是否加热的引脚
+// #define KEY_CHANGE_PIN P11D // 控制模式的引脚
+// #define KEY_POWER_PIN P11D // 控制是否工作的引脚
+
+// #define CONTROL_HEAT_PIN // 驱动控制加热的引脚
+
+#ifndef CONTROL_HEAT_PIN
+#define CONTROL_HEAT_PIN UNUSED_PIN // 驱动控制加热的引脚
+#endif
+#ifndef KEY_HEAT_PIN
+#define KEY_HEAT_PIN UNUSED_PIN // 控制是否加热的引脚
+#endif
+#ifndef KEY_CHANGE_PIN
+#define KEY_CHANGE_PIN UNUSED_PIN // 控制模式的引脚
+#endif
+#ifndef KEY_POWER_PIN
+#define KEY_POWER_PIN UNUSED_PIN // 控制是否工作的引脚
+#endif
+
+#ifndef LED_WORKING_PIN
+#define LED_WORKING_PIN UNUSED_PIN // 工作指示灯
+#endif
+#ifndef LED_CHARGING_PIN
+#define LED_CHARGING_PIN UNUSED_PIN // 充电指示灯
+#endif
+#ifndef LED_FULL_CHARGE_PIN
+#define LED_FULL_CHARGE_PIN UNUSED_PIN // 满电指示灯
+#endif
+
+#define LED_WORKING_ON()         \
+	{                            \
+		do                       \
+		{                        \
+			LED_WORKING_PIN = 0; \
+		} while (0);             \
+	}
+#define LED_WORKING_OFF()        \
+	{                            \
+		do                       \
+		{                        \
+			LED_WORKING_PIN = 1; \
+		} while (0);             \
+	}
+#define LED_CHARGING_ON()         \
+	{                             \
+		do                        \
+		{                         \
+			LED_CHARGING_PIN = 0; \
+		} while (0);              \
+	}
+#define LED_CHARGING_OFF()        \
+	{                             \
+		do                        \
+		{                         \
+			LED_CHARGING_PIN = 1; \
+		} while (0);              \
+	}
+#define LED_FULL_CHARGE_ON()         \
+	{                                \
+		do                           \
+		{                            \
+			LED_FULL_CHARGE_PIN = 0; \
+		} while (0);                 \
+	}
+#define LED_FULL_CHARGE_OFF()        \
+	{                                \
+		do                           \
+		{                            \
+			LED_FULL_CHARGE_PIN = 1; \
+		} while (0);                 \
+	}
+/*实际测得给高电平为加热*/
+#define HEATING_ON()              \
+	{                             \
+		do                        \
+		{                         \
+			CONTROL_HEAT_PIN = 1; \
+		} while (0);              \
+	}
+#define HEATING_OFF()             \
+	{                             \
+		do                        \
+		{                         \
+			CONTROL_HEAT_PIN = 0; \
+		} while (0);              \
+	}
+
+enum
+{
+	KEY_NONE = 0,
+	KEY_HEAT_PRESS,	  // 控制加热的按键按下
+	KEY_CHANGE_PRESS, // 控制模式的按键按下
+	KEY_POWER_PRESS,  // 电源按键按下
+};
+volatile u8 key_press_flag; // 存放按键状态的标志位
+
+volatile u8 i; // 循环计数值
 
 // 定义充电时驱动升压（充电）电路的PWM占空比
 // 电池没有电时，测得充电样板上最大的占空比为43.8%
@@ -44,30 +149,25 @@ void IO_Init(void);
 // void TIMER1_PWM_Init(void);
 
 //============Define  Flag=================
-typedef union {
-   	unsigned char byte;
-   	struct
-   	{
-   	   	u8 bit0 : 1;
-   	   	u8 bit1 : 1;
-   	   	u8 bit2 : 1;
-   	   	u8 bit3 : 1;
-   	   	u8 bit4 : 1;
-   	   	u8 bit5 : 1;
-   	   	u8 bit6 : 1;
-   	   	u8 bit7 : 1;
-   	} bits;
-}bit_flag;
+typedef union
+{
+	unsigned char byte;
+	struct
+	{
+		u8 bit0 : 1;
+		u8 bit1 : 1;
+		u8 bit2 : 1;
+		u8 bit3 : 1;
+		u8 bit4 : 1;
+		u8 bit5 : 1;
+		u8 bit6 : 1;
+		u8 bit7 : 1;
+	} bits;
+} bit_flag;
 volatile bit_flag flag1;
-
-//#define    	FLAG_TIMER0_5000ms  	flag1.bits.bit0	 
-
+#define FLAG_IS_DEVICE_OPEN flag1.bits.bit0 // 设备是否开机的标志位，0--未开机，1--开机
+// #define    	FLAG_TIMER0_5000ms  	flag1.bits.bit0
 
 #endif // end __USER_H
 
-
 /**************************** end of file *********************************************/
-
-
-
-

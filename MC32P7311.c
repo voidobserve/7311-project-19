@@ -16,7 +16,7 @@ void delay_ms(u32 xms)
 {
 	while (xms)
 	{
-		u32 i = 290;
+		u32 i = 287;
 		while (i--)
 		{
 			Nop();
@@ -62,49 +62,130 @@ void IO_Init(void)
 
 	DRVCR = 0x80;
 }
-/************************************************
-;  *    @Function Name       : timer1_pwm_config
-;  *    @Description         :
-;  *    @IN_Parameter        :
-;  *    @Return parameter    :
-;  ***********************************************/
+
+// 定时器0的pwm配置--输出引脚 P16
+void timer0_pwm_config(void)
+{
+
+	// ====================================================
+	// 接近15.645KHz版本，前提条件：FCPU = FOSC / 4
+	// T0CR |= 0x02; // 4分频
+	// T0LOAD = 128 - 1;
+	// T0DATA = 25; // 占空比 == T0DATA / T0LOAD
+	// // PWM0OE = 0; // 禁止PWM输出
+	// PWM0OE = 1;
+	// TC0EN = 1;	// 启动定时器
+
+	// ====================================================
+	// 接近154.19KHz版本，前提条件：FCPU = FOSC / 4
+	// FCPU = FOSC / 4 之后，FCPU为 8MHz，定时器即使不分频，计数一次约为0.125us
+	// T0LOAD 至少要有100以上，才能更方便地调节占空比，因此定时器计数溢出一次的时间约为12.5us，约为80KHz，做不到154.19KHz
+	// T0LOAD = 100 - 1;
+	// T0DATA = 25; // 占空比 == T0DATA / T0LOAD
+	// // PWM0OE = 0; // 禁止PWM输出
+	// PWM0OE = 1; // 使能PWM输出
+	// TC0EN = 1;	// 启动定时器
+
+	// 如果一定要接近154.19KHz，使用以下配置：
+	T0LOAD = 52 - 1;
+	T0DATA = 20; // 占空比 == T1DATA / T1LOAD
+	// PWM0OE = 0;	 // 禁止PWM输出
+	PWM0OE = 1; // 使能PWM输出
+	TC0EN = 1;
+}
+
+// 定时器1pwm配置，输出引脚 P17
 void timer1_pwm_config(void)
 {
-	// T1CR = 0x40; // PWM1输出  Fcpu 	1分频	0.25us
-	// T1CNT = 100 - 1; //
-	T1LOAD = 100 - 1;
-	// T1LOAD = 2;
-	T1DATA = 50; // 占空比 == T1DATA / T1LOAD
+	// ====================================================
+	// 接近15.645KHz版本，前提条件：FCPU = FOSC / 4
+	// T1CR |= 0x02; // 4分频
+	// T1LOAD = 128 - 1;
+	// T1DATA = 25; // 占空比 == T1DATA / T1LOAD
+	// PWM1OE = 0; // 禁止PWM1输出
+	// TC1EN = 1;	// 启动定时器
 
-	// PWMCR0 = 0xA4; // FPWM输出  FPWM取反 2*TPWM
-	// PWMCR1 = 0x00; // T1时钟为Fcpu，TMRCKS无效
-	PWMCR1 |= 0x01 << 4; // TIMER计数时钟为高频32MHz
+	// ====================================================
+	// 接近154.19KHz版本，前提条件：FCPU = FOSC / 4
+	// FCPU = FOSC / 4 之后，FCPU为 8MHz，定时器即使不分频，计数一次约为0.125us
+	// T1LOAD 至少要有100以上，才能更方便地调节占空比，因此定时器计数溢出一次的时间约为12.5us，约为80KHz，做不到154.19KHz
+	// T1LOAD = 100 - 1;
+	// T1DATA = 25; // 占空比 == T1DATA / T1LOAD
+	// // PWM1OE = 0; // 禁止PWM1输出
+	// // PWM1OE = 1; // 使能PWM1输出
+	// TC1EN = 1;	// 启动定时器
 
-	// PWM1OE = 0; //  禁止PWM1输出
-	TC1EN = 1; // 启动定时器
-}
-
-void timer1_pwm1_output(void)
-{
-	FPWMEN = 0;
-	PWM1OE = 1;
-}
-
-void timer1_fpwm1_output(void)
-{
-	FPWMEN = 1;
-	PWM1OE = 0;
+	// 如果一定要接近154.19KHz，使用以下配置：
+	T1LOAD = 52 - 1;
+	T1DATA = 20; // 占空比 == T1DATA / T1LOAD
+	PWM1OE = 0;	 // 禁止PWM1输出
+	PWM1OE = 1;	 // 使能PWM1输出
+	TC1EN = 1;	 // 启动定时器
 }
 
 // 开启定时器1的pwm，默认是PWM1
 void timer1_pwm_open(void)
 {
+	PWM1OE = 1;
 }
 
 // 关闭定时器1的pwm
 void timer1_pwm_close(void)
 {
+	PWM1OE = 0;
 }
+
+// 定时器2的PWM配置，输出引脚 P15
+void timer2_pwm_config(void)
+{
+	// ====================================================
+	// 接近15.645KHz版本，前提条件：FCPU = FOSC / 4
+	T2CR |= 0x02; // 4分频
+	T2LOAD = 128 - 1;
+	T2DATA = 25; // 占空比 == T2DATA / T2LOAD
+	// PWM2OE = 0; // 禁止PWM输出
+	PWM2OE = 1;
+	TC2EN = 1; // 启动定时器
+
+	// ====================================================
+	// 接近154.19KHz版本，前提条件：FCPU = FOSC / 4
+	// FCPU = FOSC / 4 之后，FCPU为 8MHz，定时器即使不分频，计数一次约为0.125us
+	// T2LOAD 至少要有100以上，才能更方便地调节占空比，因此定时器计数溢出一次的时间约为12.5us，约为80KHz，做不到154.19KHz
+	// T2LOAD = 100 - 1;
+	// T2DATA = 25; // 占空比 == T2DATA / T2LOAD
+	// // PWM2OE = 0; // 禁止PWM输出
+	// PWM2OE = 1; // 使能PWM输出
+	// TC2EN = 1;	// 启动定时器
+
+	// 如果一定要接近154.19KHz，使用以下配置：
+	// T2LOAD = 52 - 1;
+	// T2DATA = 20; // 占空比 == T1DATA / T1LOAD
+	// // PWM2OE = 0;	 // 禁止PWM输出
+	// PWM2OE = 1;	 // 使能PWM输出
+	// TC2EN = 1;
+}
+
+// 按键检测引脚的配置：
+void key_config(void)
+{
+	P11PU = 1; // 上拉电阻
+	P11OE = 0; // 输入模式
+}
+
+// adc配置
+// void adc_config(void)
+// {
+// 	// ANSEL0 |= 0xc8; // P04 P11  P12 3  6  7  模拟输入  1 模拟输入  0  IO口
+
+
+
+// 	ADCR0 &= 0x07;
+// 	ADCR0 |= 0x78; // 通道7  12位
+// 	ADCR1 &= 0x00;
+// 	ADCR1 |= 0xe1; // 125K采样  内部3V
+// 	ADCR2 = 0xff;  // 默认固定15个时钟
+// 	ADON = 1;	   // 使能ADC
+// }
 
 /************************************************
 ;  *    @Function Name       : Sys_Init
@@ -118,16 +199,84 @@ void Sys_Init(void)
 	CLR_RAM();
 	IO_Init();
 
-	timer1_pwm_config();
+	// timer0_pwm_config();
+	// timer1_pwm_config();
+	// timer2_pwm_config();
+
+	key_config();
+
 	GIE = 1;
 }
 
 // 设置PWM的占空比
-void set_pwm_duty(u8 pwm_chx, u8 duty)
+// void set_pwm_duty(u8 pwm_chx, u8 duty)
+// {
+// 	// if (PWM_CHX_PWM1 == pwm_chx)
+// 	{
+// 		// 如果要修改驱动电机的pwm占空比
+// 	}
+// }
+
+// 按键扫描函数
+void key_scan(void)
 {
-	// if (PWM_CHX_PWM1 == pwm_chx)
+	u8 cnt = 0;
+	if (0 == KEY_HEAT_PIN)
 	{
-		// 如果要修改驱动电机的pwm占空比
+		for (i = 0; i < 20; i++)
+		{
+			if (0 == KEY_HEAT_PIN)
+			{
+				cnt++;
+			}
+			delay_ms(1);
+		}
+
+		if (cnt >= 15)
+		{
+			key_press_flag = KEY_HEAT_PRESS;
+		}
+
+		while (0 == KEY_HEAT_PIN)
+			; // 等待按键松开
+	}
+	else if (0 == KEY_CHANGE_PIN)
+	{
+		for (i = 0; i < 20; i++)
+		{
+			if (0 == KEY_CHANGE_PIN)
+			{
+				cnt++;
+			}
+			delay_ms(1);
+		}
+
+		if (cnt >= 15)
+		{
+			key_press_flag = KEY_CHANGE_PRESS;
+		}
+
+		while (0 == KEY_CHANGE_PIN)
+			; // 等待按键松开
+	}
+	else if (0 == KEY_POWER_PIN)
+	{
+		for (i = 0; i < 20; i++)
+		{
+			if (0 == KEY_POWER_PIN)
+			{
+				cnt++;
+			}
+			delay_ms(1);
+		}
+
+		if (cnt >= 15)
+		{
+			key_press_flag = KEY_POWER_PRESS;
+		}
+
+		while (0 == KEY_POWER_PIN)
+			; // 等待按键松开
 	}
 }
 
@@ -137,14 +286,6 @@ void main(void)
 
 	while (1)
 	{
-
-		// P10D = ~P10D;
-		// delay_ms(200);
-
-		timer1_pwm1_output();
-		delay_ms(500);
-		timer1_fpwm1_output();
-		delay_ms(500);
 	}
 }
 
@@ -203,3 +344,52 @@ void int_isr(void) __interrupt
 	swapar _abuf;
 	__endasm;
 }
+
+#if 0
+while (1)
+{
+	// 延时测试：
+	// P10D = ~P10D;
+	// delay_ms(200);
+
+	// 定时器开启PWM、关闭PWM测试
+	// timer1_pwm_close();
+	// delay_ms(500);
+	// timer1_pwm_open();
+	// delay_ms(500);
+
+	// 宏函数+指示灯驱动引脚功能测试：
+	// LED_WORKING_ON();
+	// delay_ms(500);
+	// LED_WORKING_OFF();
+	// delay_ms(500);
+
+	// 按键扫描和执行对应的功能测试：
+	// key_scan();
+	// if (key_press_flag)
+	// {
+	// 	// 如果有按键按下，进一步判断是哪个按键按下
+
+	// 	switch (key_press_flag)
+	// 	{
+	// 	case KEY_HEAT_PRESS:
+	// 		// P10D = ~P10D;
+	// 		break;
+
+	// 	case KEY_CHANGE_PRESS:
+	// 		// P10D = ~P10D;
+	// 		break;
+
+	// 	case KEY_POWER_PRESS:
+	// 		P10D = ~P10D;
+	// 		break;
+
+	// 	default:
+	// 		break;
+	// 	}
+
+	// 	key_press_flag = KEY_NONE;
+	// }
+}
+
+#endif
