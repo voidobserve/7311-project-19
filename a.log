@@ -2139,3 +2139,269 @@
 2024-09-20 02:39:08 INFO: update frmSys.propertyGrid_sys
 2024-09-20 02:39:08 INFO: readAX
 2024-09-20 02:39:08 INFO: readRAM
+2024-09-20 03:42:12 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:42:12 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:42:12 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:42:12 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:42:12 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:42:12 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:42:12 INFO: readAX
+2024-09-20 03:42:12 INFO: readRAM
+2024-09-20 03:42:25 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:42:25 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:42:25 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:42:25 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:42:25 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:42:25 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:42:25 INFO: readAX
+2024-09-20 03:42:25 INFO: readRAM
+2024-09-20 03:42:59 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:42:59 INFO: Sdcc项目，对PC=0x0077, 搜行号 ... ## 0 .
+2024-09-20 03:42:59 INFO: C项目，在.lst文件中，没找到PC=0x0077所对应的行号, 再走一个步进试试.
+2024-09-20 03:42:59 INFO: Sdcc项目，对PC=0x0094, 搜行号 ... ## 0 .
+2024-09-20 03:42:59 INFO: Sdcc项目，对PC=0x0094, 找到了
+2024-09-20 03:42:59 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:42:59 INFO: readAX
+2024-09-20 03:42:59 INFO: readRAM
+2024-09-20 03:43:00 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:00 INFO: Sdcc项目，对PC=0x0094, 搜行号 ... ## 0 .
+2024-09-20 03:43:00 INFO: Sdcc项目，对PC=0x0094, 找到了
+2024-09-20 03:43:00 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:00 INFO: readAX
+2024-09-20 03:43:00 INFO: readRAM
+2024-09-20 03:43:01 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:01 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:01 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:01 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:01 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:01 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:01 INFO: readAX
+2024-09-20 03:43:01 INFO: readRAM
+2024-09-20 03:43:07 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:07 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:07 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:07 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:07 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:07 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:07 INFO: readAX
+2024-09-20 03:43:07 INFO: readRAM
+2024-09-20 03:43:07 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:07 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:07 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:08 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:08 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:08 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:08 INFO: readAX
+2024-09-20 03:43:08 INFO: readRAM
+2024-09-20 03:43:18 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:18 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:18 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:18 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:18 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:18 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:18 INFO: readAX
+2024-09-20 03:43:18 INFO: readRAM
+2024-09-20 03:43:19 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:19 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:19 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:19 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:19 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:19 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:19 INFO: readAX
+2024-09-20 03:43:19 INFO: readRAM
+2024-09-20 03:43:20 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:20 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:20 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:20 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:20 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:20 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:20 INFO: readAX
+2024-09-20 03:43:20 INFO: readRAM
+2024-09-20 03:43:23 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:23 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:23 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:23 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:23 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:23 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:23 INFO: readAX
+2024-09-20 03:43:23 INFO: readRAM
+2024-09-20 03:43:25 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:25 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:25 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:25 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:25 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:25 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:25 INFO: readAX
+2024-09-20 03:43:25 INFO: readRAM
+2024-09-20 03:43:26 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:26 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:26 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:26 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:26 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:26 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:26 INFO: readAX
+2024-09-20 03:43:26 INFO: readRAM
+2024-09-20 03:43:27 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:27 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:27 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:27 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:27 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:27 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:27 INFO: readAX
+2024-09-20 03:43:27 INFO: readRAM
+2024-09-20 03:43:29 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:29 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:29 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:29 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:29 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:29 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:29 INFO: readAX
+2024-09-20 03:43:29 INFO: readRAM
+2024-09-20 03:43:30 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:30 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:30 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:30 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:30 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:30 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:30 INFO: readAX
+2024-09-20 03:43:30 INFO: readRAM
+2024-09-20 03:43:49 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:49 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:49 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:49 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:49 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:49 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:49 INFO: readAX
+2024-09-20 03:43:49 INFO: readRAM
+2024-09-20 03:43:54 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:54 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 03:43:54 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 03:43:54 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:54 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:54 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:54 INFO: readAX
+2024-09-20 03:43:54 INFO: readRAM
+2024-09-20 03:43:54 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 03:43:54 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 03:43:54 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 03:43:54 INFO: update frmSys.propertyGrid_sys
+2024-09-20 03:43:54 INFO: readAX
+2024-09-20 03:43:54 INFO: readRAM
+2024-09-20 04:48:14 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 04:48:14 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 04:48:14 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 04:48:14 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 04:48:14 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 04:48:14 INFO: update frmSys.propertyGrid_sys
+2024-09-20 04:48:14 INFO: readAX
+2024-09-20 04:48:14 INFO: readRAM
+2024-09-20 04:48:19 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 04:48:19 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 04:48:19 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 04:48:19 INFO: update frmSys.propertyGrid_sys
+2024-09-20 04:48:19 INFO: readAX
+2024-09-20 04:48:19 INFO: readRAM
+2024-09-20 04:48:20 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 04:48:20 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 04:48:20 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 04:48:20 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 04:48:20 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 04:48:20 INFO: update frmSys.propertyGrid_sys
+2024-09-20 04:48:20 INFO: readAX
+2024-09-20 04:48:20 INFO: readRAM
+2024-09-20 04:48:48 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 04:48:48 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 04:48:48 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 04:48:48 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 04:48:48 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 04:48:48 INFO: update frmSys.propertyGrid_sys
+2024-09-20 04:48:48 INFO: readAX
+2024-09-20 04:48:48 INFO: readRAM
+2024-09-20 04:52:29 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 04:52:29 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 04:52:29 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 04:52:29 INFO: update frmSys.propertyGrid_sys
+2024-09-20 04:52:29 INFO: readAX
+2024-09-20 04:52:29 INFO: readRAM
+2024-09-20 04:52:30 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 04:52:30 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 04:52:30 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 04:52:30 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 04:52:30 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 04:52:30 INFO: update frmSys.propertyGrid_sys
+2024-09-20 04:52:30 INFO: readAX
+2024-09-20 04:52:30 INFO: readRAM
+2024-09-20 05:06:05 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 05:06:05 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 05:06:05 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 05:06:05 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 05:06:05 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 05:06:05 INFO: update frmSys.propertyGrid_sys
+2024-09-20 05:06:05 INFO: readAX
+2024-09-20 05:06:05 INFO: readRAM
+2024-09-20 05:15:37 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 05:15:37 INFO: Sdcc项目，对PC=0x0221, 搜行号 ... ## 0 .
+2024-09-20 05:15:37 INFO: C项目，在.lst文件中，没找到PC=0x0221所对应的行号, 再走一个步进试试.
+2024-09-20 05:15:37 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 05:15:37 INFO: Sdcc项目，对PC=0x0221, 搜行号 ... ## 0 .
+2024-09-20 05:15:37 INFO: C项目，在.lst文件中，没找到PC=0x0221所对应的行号, 再走一个步进试试.
+2024-09-20 05:15:37 INFO: Sdcc项目，对PC=0x0223, 搜行号 ... ## 0 .
+2024-09-20 05:15:37 INFO: Sdcc项目，对PC=0x0223, 找到了
+2024-09-20 05:15:37 INFO: update frmSys.propertyGrid_sys
+2024-09-20 05:15:37 INFO: readAX
+2024-09-20 05:15:37 INFO: readRAM
+2024-09-20 05:15:38 INFO: Sdcc项目，对PC=0x0224, 搜行号 ... ## 0 .
+2024-09-20 05:15:38 INFO: Sdcc项目，对PC=0x0224, 找到了
+2024-09-20 05:15:38 INFO: update frmSys.propertyGrid_sys
+2024-09-20 05:15:38 INFO: readAX
+2024-09-20 05:15:38 INFO: readRAM
+2024-09-20 05:18:56 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 05:18:56 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 05:18:56 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 05:18:56 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 05:18:56 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 05:18:56 INFO: update frmSys.propertyGrid_sys
+2024-09-20 05:18:56 INFO: readAX
+2024-09-20 05:18:56 INFO: readRAM
+2024-09-20 05:19:12 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 05:19:12 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 05:19:12 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 05:19:12 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 05:19:12 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 05:19:12 INFO: update frmSys.propertyGrid_sys
+2024-09-20 05:19:12 INFO: readAX
+2024-09-20 05:19:12 INFO: readRAM
+2024-09-20 05:19:12 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 05:19:12 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 05:19:12 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 05:19:12 INFO: update frmSys.propertyGrid_sys
+2024-09-20 05:19:12 INFO: readAX
+2024-09-20 05:19:13 INFO: readRAM
+2024-09-20 05:20:06 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 05:20:06 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 05:20:06 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 05:20:06 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 05:20:06 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 05:20:06 INFO: update frmSys.propertyGrid_sys
+2024-09-20 05:20:06 INFO: readAX
+2024-09-20 05:20:06 INFO: readRAM
+2024-09-20 05:22:15 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 05:22:15 INFO: Sdcc项目，对PC=0x0014, 搜行号 ... ## 0 .
+2024-09-20 05:22:15 INFO: Sdcc项目，对PC=0x0014, 找到了
+2024-09-20 05:22:15 INFO: update frmSys.propertyGrid_sys
+2024-09-20 05:22:15 INFO: readAX
+2024-09-20 05:22:15 INFO: readRAM
+2024-09-20 05:22:15 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 05:22:15 INFO: Sdcc项目，对PC=0x0014, 搜行号 ... ## 0 .
+2024-09-20 05:22:15 INFO: Sdcc项目，对PC=0x0014, 找到了
+2024-09-20 05:22:15 INFO: update frmSys.propertyGrid_sys
+2024-09-20 05:22:15 INFO: readAX
+2024-09-20 05:22:15 INFO: readRAM
+2024-09-20 05:22:16 INFO: FrmMain.cs, Risc/CRisc/Pic ReadCPU_3394(), find pcValue file, open it
+2024-09-20 05:22:16 INFO: Sdcc项目，对PC=0x0000, 搜行号 ... ## 0 .
+2024-09-20 05:22:16 INFO: C项目，在.lst文件中，没找到PC=0x0000所对应的行号, 再走一个步进试试.
+2024-09-20 05:22:16 INFO: Sdcc项目，对PC=0x0010, 搜行号 ... ## 0 .
+2024-09-20 05:22:16 INFO: Sdcc项目，对PC=0x0010, 找到了
+2024-09-20 05:22:16 INFO: update frmSys.propertyGrid_sys
+2024-09-20 05:22:16 INFO: readAX
+2024-09-20 05:22:16 INFO: readRAM

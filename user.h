@@ -24,20 +24,26 @@
 #define uint16_t unsigned int
 #define uint32_t unsigned long int
 
+#define USE_MY_DEBUG 1
+
 // #define //
 #define UNUSED_PIN P10D // P10是14脚芯片上没有的引脚
 
 // 驱动指示灯的引脚定义
-// #define LED_WORKING_PIN // 工作指示灯
-// #define LED_CHARGING_PIN // 充电指示灯
-// #define LED_FULL_CHARGE_PIN // 满电指示灯
+#define LED_WORKING_PIN P14D // 工作指示灯
+#define LED_CHARGING_PIN P04D // 充电指示灯
+#define LED_FULL_CHARGE_PIN P11D // 满电指示灯
 
 // 检测按键状态的引脚定义，检测到低电平为有效
-// #define KEY_HEAT_PIN P11D // 控制是否加热的引脚
-// #define KEY_CHANGE_PIN P11D // 控制模式的引脚
-// #define KEY_POWER_PIN P11D // 控制是否工作的引脚
+#define KEY_HEAT_PIN P00D // 控制是否加热的引脚
+#define KEY_CHANGE_PIN P01D // 控制模式的引脚
+#if USE_MY_DEBUG
+#define KEY_POWER_PIN P05D // 控制是否工作的引脚(这里使用P05来仿真)
+#else
+#define KEY_POWER_PIN P13D // 控制是否工作的引脚
+#endif
 
-// #define CONTROL_HEAT_PIN // 驱动控制加热的引脚
+#define CONTROL_HEAT_PIN P12D // 驱动控制加热的引脚
 
 #ifndef CONTROL_HEAT_PIN
 #define CONTROL_HEAT_PIN UNUSED_PIN // 驱动控制加热的引脚
@@ -123,9 +129,18 @@
 // 定义adc检测的引脚，用在adc切换检测引脚
 enum
 {
-	ADC_PIN_P11 = 1,
-	ADC_PIN_P12,
+	ADC_PIN_P03_AN2 = 1, // 检测电池降压后的电压的引脚
+	ADC_PIN_P02_AN1,	 // 检测是否有充电的电压
 };
+
+// 定义模式，三种不同频率的模式
+enum
+{
+	MODE_1 = 0, // 一上电，按下电源按键，使用的模式
+	MODE_2,
+	MODE_3,
+};
+volatile u8 mode_flag; // 存放模式的标志位
 
 // 定义按键的状态
 enum
@@ -140,6 +155,10 @@ volatile u8 key_press_flag; // 存放按键状态的标志位
 volatile u8 i; // 循环计数值
 
 volatile u16 adc_val; // 存放adc检测到的数值
+
+// u16 mode_pwm_duty; // 存放不同模式下，对应的pwm占空比，实际占空比 == TxDATA / TxLOAD
+
+volatile u32 time_ms_cnt; // 毫秒计数(用于运行15min后自动关机)
 
 // 定义充电时驱动升压（充电）电路的PWM占空比
 // 电池没有电时，测得充电样板上最大的占空比为43.8%
@@ -176,7 +195,7 @@ typedef union
 } bit_flag;
 volatile bit_flag flag1;
 #define FLAG_IS_DEVICE_OPEN flag1.bits.bit0 // 设备是否开机的标志位，0--未开机，1--开机
-#define FLAG_IS_HEATING flag1.bits.bit1 // 加热是否工作的标志位
+#define FLAG_IS_HEATING flag1.bits.bit1		// 加热是否工作的标志位
 
 #endif // end __USER_H
 

@@ -20,6 +20,9 @@ void delay_ms(u32 xms)
 		while (i--)
 		{
 			Nop();
+			__asm;
+			CLRWDT; // 喂狗指令
+			__endasm;
 		}
 		xms--;
 	}
@@ -106,15 +109,14 @@ void IO_Init(void)
 // 定时器0的pwm配置--输出引脚 P16
 void timer0_pwm_config(void)
 {
-
 	// ====================================================
 	// 接近15.645KHz版本，前提条件：FCPU = FOSC / 4
-	// T0CR |= 0x02; // 4分频
-	// T0LOAD = 128 - 1;
-	// T0DATA = 25; // 占空比 == T0DATA / T0LOAD
-	// // PWM0OE = 0; // 禁止PWM输出
+	T0CR |= 0x02; // 4分频
+	T0LOAD = 128 - 1;
+	T0DATA = 25; // 占空比 == T0DATA / T0LOAD
+	PWM0OE = 0;	 // 禁止PWM输出
 	// PWM0OE = 1;
-	// TC0EN = 1;	// 启动定时器
+	TC0EN = 1; // 启动定时器
 
 	// ====================================================
 	// 接近154.19KHz版本，前提条件：FCPU = FOSC / 4
@@ -127,11 +129,11 @@ void timer0_pwm_config(void)
 	// TC0EN = 1;	// 启动定时器
 
 	// 如果一定要接近154.19KHz，使用以下配置：
-	T0LOAD = 52 - 1;
-	T0DATA = 20; // 占空比 == T1DATA / T1LOAD
-	// PWM0OE = 0;	 // 禁止PWM输出
-	PWM0OE = 1; // 使能PWM输出
-	TC0EN = 1;
+	// T0LOAD = 52 - 1;
+	// T0DATA = 20; // 占空比 == T1DATA / T1LOAD
+	// // PWM0OE = 0;	 // 禁止PWM输出
+	// PWM0OE = 1; // 使能PWM输出
+	// TC0EN = 1;
 }
 
 // 定时器1pwm配置，输出引脚 P17
@@ -139,11 +141,11 @@ void timer1_pwm_config(void)
 {
 	// ====================================================
 	// 接近15.645KHz版本，前提条件：FCPU = FOSC / 4
-	// T1CR |= 0x02; // 4分频
-	// T1LOAD = 128 - 1;
-	// T1DATA = 25; // 占空比 == T1DATA / T1LOAD
-	// PWM1OE = 0; // 禁止PWM1输出
-	// TC1EN = 1;	// 启动定时器
+	T1CR |= 0x02; // 4分频
+	T1LOAD = 128 - 1;
+	T1DATA = 25; // 占空比 == T1DATA / T1LOAD
+	PWM1OE = 0;	 // 禁止PWM1输出
+	TC1EN = 1;	 // 启动定时器
 
 	// ====================================================
 	// 接近154.19KHz版本，前提条件：FCPU = FOSC / 4
@@ -156,11 +158,11 @@ void timer1_pwm_config(void)
 	// TC1EN = 1;	// 启动定时器
 
 	// 如果一定要接近154.19KHz，使用以下配置：
-	T1LOAD = 52 - 1;
-	T1DATA = 20; // 占空比 == T1DATA / T1LOAD
-	PWM1OE = 0;	 // 禁止PWM1输出
-	PWM1OE = 1;	 // 使能PWM1输出
-	TC1EN = 1;	 // 启动定时器
+	// T1LOAD = 52 - 1;
+	// T1DATA = 20; // 占空比 == T1DATA / T1LOAD
+	// PWM1OE = 0;	 // 禁止PWM1输出
+	// PWM1OE = 1;	 // 使能PWM1输出
+	// TC1EN = 1;	 // 启动定时器
 }
 
 // 开启定时器1的pwm，默认是PWM1
@@ -180,12 +182,12 @@ void timer2_pwm_config(void)
 {
 	// ====================================================
 	// 接近15.645KHz版本，前提条件：FCPU = FOSC / 4
-	T2CR |= 0x02; // 4分频
-	T2LOAD = 128 - 1;
-	T2DATA = 25; // 占空比 == T2DATA / T2LOAD
-	// PWM2OE = 0; // 禁止PWM输出
-	PWM2OE = 1;
-	TC2EN = 1; // 启动定时器
+	// T2CR |= 0x02; // 4分频
+	// T2LOAD = 128 - 1;
+	// T2DATA = 25; // 占空比 == T2DATA / T2LOAD
+	// // PWM2OE = 0; // 禁止PWM输出
+	// PWM2OE = 1;
+	// TC2EN = 1; // 启动定时器
 
 	// ====================================================
 	// 接近154.19KHz版本，前提条件：FCPU = FOSC / 4
@@ -198,18 +200,29 @@ void timer2_pwm_config(void)
 	// TC2EN = 1;	// 启动定时器
 
 	// 如果一定要接近154.19KHz，使用以下配置：
-	// T2LOAD = 52 - 1;
-	// T2DATA = 20; // 占空比 == T1DATA / T1LOAD
-	// // PWM2OE = 0;	 // 禁止PWM输出
+	T2LOAD = 52 - 1;
+	T2DATA = 20; // 占空比 == T1DATA / T1LOAD
+	PWM2OE = 0;	 // 禁止PWM输出
 	// PWM2OE = 1;	 // 使能PWM输出
-	// TC2EN = 1;
+	TC2EN = 1;
 }
 
 // 按键检测引脚的配置：
 void key_config(void)
 {
-	P11PU = 1; // 上拉电阻
-	P11OE = 0; // 输入模式
+#if USE_MY_DEBUG
+	// 由于P13无法参与仿真，这里使用P05
+	P05PU = 1;
+	P05OE = 0;
+#else
+	P13PU = 1; // 上拉
+	P13OE = 0; // 输入模式
+#endif
+	P00PU = 1;
+	P00OE = 0;
+
+	P01PU = 1;
+	P01OE = 0;
 }
 
 // adc配置
@@ -242,9 +255,9 @@ void adc_sel_pin(u8 adc_pin)
 	// 根据传参，切换成对应的通道
 	switch (adc_pin)
 	{
-	case ADC_PIN_P11:
-		ADCR0 |= 0x03 << 5; // AIN6--P11
-		break;
+		// case ADC_PIN_P11:
+		// 	ADCR0 |= 0x03 << 5; // AIN6--P11
+		// 	break;
 
 	default:
 		break;
@@ -297,12 +310,12 @@ void Sys_Init(void)
 	CLR_RAM();
 	IO_Init();
 
-	// timer0_pwm_config();
-	// timer1_pwm_config();
-	// timer2_pwm_config();
+	timer0_pwm_config();
+	timer1_pwm_config();
+	timer2_pwm_config();
 
-	// key_config();
-	// adc_config();
+	key_config();
+	adc_config();
 
 	GIE = 1;
 }
@@ -387,7 +400,7 @@ void key_handle(void)
 		// 如果有按键按下，进一步判断是哪个按键按下
 		switch (key_press_flag)
 		{
-		case KEY_HEAT_PRESS:
+		case KEY_HEAT_PRESS: // 加热按键按下
 			if (FLAG_IS_DEVICE_OPEN)
 			{
 				// 如果设备已经处于工作状态，才可以打开加热
@@ -404,20 +417,62 @@ void key_handle(void)
 			}
 			break;
 
-		case KEY_CHANGE_PRESS:
-			
+		case KEY_CHANGE_PRESS: // 控制模式的按键按下
+			// 初始为 89.9%占空比，每按一次 从 89.9%->100%->80.5%->89.9%->...这样变化
+			if (FLAG_IS_DEVICE_OPEN)
+			{
+				// 如果开机，才切换模式
+				if (MODE_1 == mode_flag)
+				{
+					// 设置PWM的占空比
+					T0DATA = 255;
+					T1DATA = 255; // 100%占空比（确保大于TxLOAD的值就可以）
+
+					mode_flag = MODE_2;
+				}
+				else if (MODE_2 == mode_flag)
+				{
+					// 设置PWM的占空比
+					T0DATA = 103;
+					T1DATA = 103; // 80.5%占空比
+
+					mode_flag = MODE_3;
+				}
+				else if (MODE_3 == mode_flag)
+				{
+					// 设置PWM的占空比
+					T0DATA = 115;
+					T1DATA = 115; // 89.9%占空比
+
+					mode_flag = MODE_1;
+				}
+			}
 			break;
 
-		case KEY_POWER_PRESS:
-			if (0== FLAG_IS_DEVICE_OPEN )
+		case KEY_POWER_PRESS: // 电源按键按下
+			if (0 == FLAG_IS_DEVICE_OPEN)
 			{
-				//如果未开机，关机->开机
+				// 如果未开机，关机->开机
+				LED_WORKING_ON(); // 打开电源指示灯
 				FLAG_IS_DEVICE_OPEN = 1;
+
+				// 设定正转、反转的PWM的初始占空比
+				T0DATA = 115;
+				T1DATA = 115; // 约为 89.9%
+
+				// 打开控制正转的PWM
+				PWM0OE = 1;
 			}
 			else
 			{
 				// 开机->关机
 				FLAG_IS_DEVICE_OPEN = 0;
+				LED_WORKING_OFF(); // 关闭电源指示灯
+				HEATING_OFF(); // 关闭加热
+
+				// 关闭 正转和反转的PWM
+				PWM0OE = 0;
+				PWM1OE = 0;
 			}
 			break;
 
@@ -429,14 +484,37 @@ void key_handle(void)
 	}
 }
 
+// 控制2min调转一次方向
+// void fun(void)
+// {
+
+// }
+
 void main(void)
 {
 	Sys_Init();
 
+	// delay_ms(10);
+	// P10D = 1;
+	// delay_ms(10);
+	// P10D = 0;
+	// delay_ms(10);
+	// P10D = 1;
+	// delay_ms(10);
+
+	// FLAG_IS_DEVICE_OPEN = 1;
+	// PWM0OE = 1;
+
 	while (1)
 	{
+		// P10D = 0;
+
 		key_scan();
 		key_handle();
+
+		__asm;
+		CLRWDT; // 喂狗指令
+		__endasm;
 	}
 }
 
