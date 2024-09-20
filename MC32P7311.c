@@ -25,6 +25,46 @@ void delay_ms(u32 xms)
 	}
 }
 
+// 发送32位数据，低位先行
+void send_32bits_data_by_irsir(u32 send_data)
+{
+	// 先发送格式头 9ms高电平+4.5ms低电平
+	// __set_input_pull_up(); // 高电平
+	P10D = 1;
+	delay_ms(15);
+	// __set_output_open_drain(); // 低电平
+	P10D = 0;
+	delay_ms(7); // 延时4.5ms
+
+	for (u8 i = 0; i < 32; i++)
+	{
+		if ((send_data >> i) & 0x01)
+		{
+			// 如果要发送逻辑1
+			// __set_input_pull_up();	   // 高电平
+			P10D = 1;
+			delay_ms(6); //
+			// __set_output_open_drain(); // 低电平
+			P10D = 0;
+			delay_ms(17); //
+		}
+		else
+		{
+			// 如果要发送逻辑0
+			// __set_input_pull_up();	   // 高电平
+			P10D = 1;
+			delay_ms(6); //
+			// __set_output_open_drain(); // 低电平
+			P10D = 0;
+			delay_ms(6); //
+		}
+	}
+
+	// 最后，设置为低电平
+	// __set_output_open_drain(); // 低电平
+	P10D = 0;
+}
+
 /************************************************
 ;  *    @Function Name       : C_RAM
 ;  *    @Description         : 初始化RAM
@@ -173,19 +213,77 @@ void key_config(void)
 }
 
 // adc配置
-// void adc_config(void)
-// {
-// 	// ANSEL0 |= 0xc8; // P04 P11  P12 3  6  7  模拟输入  1 模拟输入  0  IO口
+void adc_config(void)
+{
+	// ANSEL0 |= 0xc8; // P04 P11  P12 3  6  7  模拟输入  1 模拟输入  0  IO口
+	// ADCR0 &= 0x07;
+	// ADCR0 |= 0x78; // 通道7  12位
 
+	// 关闭上下拉
+	P11PU = 0;
+	P11PD = 0;
+	P11OE = 0;	// 输入模式
+	P11ANS = 1; // 模拟输入
 
+	ADCR0 = 0x0A;		// 12位精度、不启用ADC转换，不使能ADC
+	ADCR0 |= 0x03 << 5; // AIN6--P11
+	// ADCR0 = 0x6A;
 
-// 	ADCR0 &= 0x07;
-// 	ADCR0 |= 0x78; // 通道7  12位
-// 	ADCR1 &= 0x00;
-// 	ADCR1 |= 0xe1; // 125K采样  内部3V
-// 	ADCR2 = 0xff;  // 默认固定15个时钟
-// 	ADON = 1;	   // 使能ADC
-// }
+	// ADCR1 &= 0x00; // 清零寄存器
+	// ADCR1 |= 0xE1; // 125K采样  内部3V参考电压
+	ADCR1 = 0xE1; // 125K采样（最高精度）  内部3V参考电压
+	ADCR2 = 0xFF; // ADC采样时间为15个ADC时钟
+	ADON = 1;	  // 使能ADC
+}
+
+// 切换adc检测的引脚
+void adc_sel_pin(u8 adc_pin)
+{
+	// 根据传参，切换成对应的通道
+	switch (adc_pin)
+	{
+	case ADC_PIN_P11:
+		ADCR0 |= 0x03 << 5; // AIN6--P11
+		break;
+
+	default:
+		break;
+	}
+
+	delay_ms(1); // 切换adc检测的引脚后，要延时一段时间，防止意料之外的检测结果
+}
+
+// 获取adc单次转换后的值
+u16 adc_get_val(void)
+{
+	u8 cnt = 0; // adc采集次数的计数
+	u16 g_temp_value = 0;
+	u16 g_tmpbuff = 0;
+	u16 g_adcmax = 0;
+	u16 g_adcmin = 0xFFFF;
+
+	// 采集20次，去掉前两次采样，再去掉一个最大值和一个最小值，再取平均值
+	for (cnt = 0; cnt < 20; cnt++)
+	{
+		ADEOC = 0; // 清除ADC转换完成标志位，启动AD转换
+		while (!ADEOC)
+			;				 // 等待转换完成
+		g_temp_value = ADRH; // 取出转换后的值
+		g_temp_value = g_temp_value << 4 | (ADRL & 0x0F);
+		if (cnt < 2)
+			continue; // 丢弃前两次采样的
+		if (g_temp_value > g_adcmax)
+			g_adcmax = g_temp_value; // 最大
+		if (g_temp_value < g_adcmin)
+			g_adcmin = g_temp_value; // 最小
+		g_tmpbuff += g_temp_value;
+	}
+	g_tmpbuff -= g_adcmax;			 // 去掉一个最大
+	g_tmpbuff -= g_adcmin;			 // 去掉一个最小
+	g_temp_value = (g_tmpbuff >> 4); // 除以16，取平均值
+
+	return g_temp_value;
+}
 
 /************************************************
 ;  *    @Function Name       : Sys_Init
@@ -203,7 +301,8 @@ void Sys_Init(void)
 	// timer1_pwm_config();
 	// timer2_pwm_config();
 
-	key_config();
+	// key_config();
+	// adc_config();
 
 	GIE = 1;
 }
@@ -280,12 +379,64 @@ void key_scan(void)
 	}
 }
 
+// 处理按键对应的功能
+void key_handle(void)
+{
+	if (key_press_flag)
+	{
+		// 如果有按键按下，进一步判断是哪个按键按下
+		switch (key_press_flag)
+		{
+		case KEY_HEAT_PRESS:
+			if (FLAG_IS_DEVICE_OPEN)
+			{
+				// 如果设备已经处于工作状态，才可以打开加热
+				if (0 == FLAG_IS_HEATING)
+				{
+					HEATING_ON(); // 打开加热
+					FLAG_IS_HEATING = 1;
+				}
+				else
+				{
+					HEATING_OFF(); // 关闭加热
+					FLAG_IS_HEATING = 0;
+				}
+			}
+			break;
+
+		case KEY_CHANGE_PRESS:
+			
+			break;
+
+		case KEY_POWER_PRESS:
+			if (0== FLAG_IS_DEVICE_OPEN )
+			{
+				//如果未开机，关机->开机
+				FLAG_IS_DEVICE_OPEN = 1;
+			}
+			else
+			{
+				// 开机->关机
+				FLAG_IS_DEVICE_OPEN = 0;
+			}
+			break;
+
+		default:
+			break;
+		}
+
+		key_press_flag = KEY_NONE;
+	}
+}
+
 void main(void)
 {
 	Sys_Init();
 
 	while (1)
 	{
+		key_scan();
+		key_handle();
 	}
 }
 
@@ -313,20 +464,20 @@ void int_isr(void) __interrupt
 	// 	T2IF = 0;
 	// }
 	//=======T3========================
-	if (T3IF & T3IE)
-	{
-		T3IF = 0;
-	}
+	// if (T3IF & T3IE)
+	// {
+	// 	T3IF = 0;
+	// }
 	//=======键盘======================
 	// if (KBIF & KBIE)
 	// {
 	// 	KBIF = 0;
 	// }
 	//=======ADC=======================
-	if (ADIF & ADIE)
-	{
-		ADIF = 0;
-	}
+	// if (ADIF & ADIE)
+	// {
+	// 	ADIF = 0;
+	// }
 	//=======外部中断0=================
 	// if (INT0IF & INT0IE)
 	// {
@@ -390,6 +541,11 @@ while (1)
 
 	// 	key_press_flag = KEY_NONE;
 	// }
+
+	// adc检测测试：
+	adc_val = adc_get_val();
+	send_32bits_data_by_irsir((u32)adc_val);
+	delay_ms(200);
 }
 
 #endif

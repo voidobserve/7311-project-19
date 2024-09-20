@@ -120,6 +120,14 @@
 		} while (0);              \
 	}
 
+// 定义adc检测的引脚，用在adc切换检测引脚
+enum
+{
+	ADC_PIN_P11 = 1,
+	ADC_PIN_P12,
+};
+
+// 定义按键的状态
 enum
 {
 	KEY_NONE = 0,
@@ -130,6 +138,8 @@ enum
 volatile u8 key_press_flag; // 存放按键状态的标志位
 
 volatile u8 i; // 循环计数值
+
+volatile u16 adc_val; // 存放adc检测到的数值
 
 // 定义充电时驱动升压（充电）电路的PWM占空比
 // 电池没有电时，测得充电样板上最大的占空比为43.8%
@@ -166,7 +176,7 @@ typedef union
 } bit_flag;
 volatile bit_flag flag1;
 #define FLAG_IS_DEVICE_OPEN flag1.bits.bit0 // 设备是否开机的标志位，0--未开机，1--开机
-// #define    	FLAG_TIMER0_5000ms  	flag1.bits.bit0
+#define FLAG_IS_HEATING flag1.bits.bit1 // 加热是否工作的标志位
 
 #endif // end __USER_H
 
