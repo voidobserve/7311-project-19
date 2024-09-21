@@ -1,5 +1,5 @@
 gplink-2.2.37 (Jan 22 2024)
-Map File - Created 2024-9-20  17:22:15
+Map File - Created 2024-9-21  14:35:45
  
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -8,17 +8,18 @@ Map File - Created 2024-9-20  17:22:15
            ID_MC32P7311_0       code   0x000001    program   0x000004
            ID_MC32P7311_1       code   0x000003    program   0x000002
               c_interrupt       code   0x000008    program   0x000010
-           code_MC32P7311       code   0x000010    program   0x000414
+           code_MC32P7311       code   0x000010    program   0x00062c
                 sharebank      udata   00000000       data   0x000007
-          UDL_MC32P7311_0      udata   0x000007       data   0x000021
-           UD_MC32P7311_4      udata   0x000028       data   0x000004
-           UD_MC32P7311_3      udata   0x00002c       data   0x000002
-           UD_MC32P7311_0      udata   0x00002e       data   0x000001
-           UD_MC32P7311_1      udata   0x00002f       data   0x000001
-           UD_MC32P7311_2      udata   0x000030       data   0x000001
-           UD_MC32P7311_5      udata   0x000031       data   0x000001
-           UD_MC32P7311_6      udata   0x000032       data   0x000001
-           UD_MC32P7311_7      udata   0x000033       data   0x000001
+          UDL_MC32P7311_0      udata   0x000007       data   0x000018
+           UD_MC32P7311_4      udata   0x00001f       data   0x000004
+           UD_MC32P7311_5      udata   0x000023       data   0x000004
+           UD_MC32P7311_3      udata   0x000027       data   0x000002
+           UD_MC32P7311_0      udata   0x000029       data   0x000001
+           UD_MC32P7311_1      udata   0x00002a       data   0x000001
+           UD_MC32P7311_2      udata   0x00002b       data   0x000001
+           UD_MC32P7311_6      udata   0x00002c       data   0x000001
+           UD_MC32P7311_7      udata   0x00002d       data   0x000001
+           UD_MC32P7311_8      udata   0x00002e       data   0x000001
      UD_abs_mc32p7311_180      udata   0x000180       data   0x000001
      UD_abs_mc32p7311_181      udata   0x000181       data   0x000001
      UD_abs_mc32p7311_182      udata   0x000182       data   0x000001
@@ -80,9 +81,9 @@ Map File - Created 2024-9-20  17:22:15
                             0x000003    0x000003
                             00000000    00000000
                             0x000008    0x00000f
-                            0x000010    0x000219
+                            0x000010    0x000325
  
-                            534 program addresses used
+                            802 program addresses used
  
                               Symbols
                      Name    Address   Location    Storage File
@@ -94,113 +95,143 @@ Map File - Created 2024-9-20  17:22:15
                     STK02   0x000004       data     extern MC32P7311.asm
                     STK01   0x000005       data     extern MC32P7311.asm
                     STK00   0x000006       data     extern MC32P7311.asm
-               _mode_flag   0x00002e       data     extern MC32P7311.asm
-          _key_press_flag   0x00002f       data     extern MC32P7311.asm
-                       _i   0x000030       data     extern MC32P7311.asm
-                 _adc_val   0x00002c       data     extern MC32P7311.asm
-             _time_ms_cnt   0x000028       data     extern MC32P7311.asm
-                    _abuf   0x000031       data     extern MC32P7311.asm
-               _statusbuf   0x000032       data     extern MC32P7311.asm
-                   _flag1   0x000033       data     extern MC32P7311.asm
-                  r0x1007   0x000007       data     static MC32P7311.asm
-                  r0x1006   0x000008       data     static MC32P7311.asm
-                  r0x1005   0x000009       data     static MC32P7311.asm
-                  r0x1004   0x00000a       data     static MC32P7311.asm
-                  r0x1008   0x00000b       data     static MC32P7311.asm
-                  r0x1009   0x00000c       data     static MC32P7311.asm
-                  r0x100A   0x00000d       data     static MC32P7311.asm
-                  r0x100B   0x00000e       data     static MC32P7311.asm
-                  r0x100C   0x00000f       data     static MC32P7311.asm
-                  r0x100D   0x000010       data     static MC32P7311.asm
-                  r0x100E   0x000011       data     static MC32P7311.asm
-                  r0x100F   0x000012       data     static MC32P7311.asm
-                  r0x1021   0x000013       data     static MC32P7311.asm
-                  r0x1020   0x000014       data     static MC32P7311.asm
-                  r0x101F   0x000015       data     static MC32P7311.asm
-                  r0x101E   0x000016       data     static MC32P7311.asm
-                  r0x1022   0x000017       data     static MC32P7311.asm
-                  r0x1026   0x000018       data     static MC32P7311.asm
-                  r0x1025   0x000019       data     static MC32P7311.asm
-                  r0x1024   0x00001a       data     static MC32P7311.asm
-                  r0x1023   0x00001b       data     static MC32P7311.asm
-                  r0x1011   0x00001c       data     static MC32P7311.asm
-                  r0x1012   0x00001d       data     static MC32P7311.asm
-                  r0x1013   0x00001e       data     static MC32P7311.asm
-                  r0x1014   0x00001f       data     static MC32P7311.asm
-                  r0x1015   0x000020       data     static MC32P7311.asm
-                  r0x1016   0x000021       data     static MC32P7311.asm
-                  r0x1017   0x000022       data     static MC32P7311.asm
-                  r0x1018   0x000023       data     static MC32P7311.asm
-                  r0x1019   0x000024       data     static MC32P7311.asm
-                  r0x101B   0x000025       data     static MC32P7311.asm
-                  r0x101A   0x000026       data     static MC32P7311.asm
-                  r0x1010   0x000027       data     static MC32P7311.asm
+               _mode_flag   0x000029       data     extern MC32P7311.asm
+          _key_press_flag   0x00002a       data     extern MC32P7311.asm
+                       _i   0x00002b       data     extern MC32P7311.asm
+                 _adc_val   0x000027       data     extern MC32P7311.asm
+         _turn_dir_ms_cnt   0x00001f       data     extern MC32P7311.asm
+        _shut_down_ms_cnt   0x000023       data     extern MC32P7311.asm
+                    _abuf   0x00002c       data     extern MC32P7311.asm
+               _statusbuf   0x00002d       data     extern MC32P7311.asm
+                   _flag1   0x00002e       data     extern MC32P7311.asm
+                  r0x1011   0x000007       data     static MC32P7311.asm
+                  r0x1010   0x000008       data     static MC32P7311.asm
+                  r0x100F   0x000009       data     static MC32P7311.asm
+                  r0x100E   0x00000a       data     static MC32P7311.asm
+                  r0x1012   0x00000b       data     static MC32P7311.asm
+                  r0x1013   0x00000c       data     static MC32P7311.asm
+                  r0x1014   0x00000d       data     static MC32P7311.asm
+                  r0x1015   0x00000e       data     static MC32P7311.asm
+                  r0x1016   0x00000f       data     static MC32P7311.asm
+                  r0x1017   0x000010       data     static MC32P7311.asm
+                  r0x1018   0x000011       data     static MC32P7311.asm
+                  r0x1019   0x000012       data     static MC32P7311.asm
+                  r0x1020   0x000013       data     static MC32P7311.asm
+                  r0x101F   0x000014       data     static MC32P7311.asm
+                  r0x101E   0x000015       data     static MC32P7311.asm
+                  r0x101D   0x000016       data     static MC32P7311.asm
+                  r0x1021   0x000017       data     static MC32P7311.asm
+                  r0x1025   0x000018       data     static MC32P7311.asm
+                  r0x1024   0x000019       data     static MC32P7311.asm
+                  r0x1023   0x00001a       data     static MC32P7311.asm
+                  r0x1022   0x00001b       data     static MC32P7311.asm
+                  r0x101A   0x00001c       data     static MC32P7311.asm
+                  r0x101B   0x00001d       data     static MC32P7311.asm
+                  r0x101C   0x00001e       data     static MC32P7311.asm
               _charge_buf   0x000001    program     extern MC32P7311.asm
    _battery_refer_vol_buf   0x000003    program     extern MC32P7311.asm
          __sdcc_interrupt   0x000008    program     static MC32P7311.asm
                  _int_isr   0x000008    program     extern MC32P7311.asm
          END_OF_INTERRUPT   0x00000f    program     static MC32P7311.asm
                     _main   0x000010    program     extern MC32P7311.asm
-               _00341_DS_   0x000011    program     static MC32P7311.asm
-              _key_handle   0x000016    program     extern MC32P7311.asm
-               _00295_DS_   0x00002a    program     static MC32P7311.asm
-               _00299_DS_   0x000031    program     static MC32P7311.asm
-               _00307_DS_   0x000034    program     static MC32P7311.asm
-               _00314_DS_   0x000041    program     static MC32P7311.asm
-               _00311_DS_   0x00004c    program     static MC32P7311.asm
-               _00318_DS_   0x000056    program     static MC32P7311.asm
-               _00329_DS_   0x000060    program     static MC32P7311.asm
-               _00332_DS_   0x000065    program     static MC32P7311.asm
-               _00335_DS_   0x000066    program     static MC32P7311.asm
-                _key_scan   0x000067    program     extern MC32P7311.asm
-               _00282_DS_   0x00006b    program     static MC32P7311.asm
-               _00250_DS_   0x000072    program     static MC32P7311.asm
-               _00251_DS_   0x00007c    program     static MC32P7311.asm
-               _00254_DS_   0x000082    program     static MC32P7311.asm
-               _00279_DS_   0x000085    program     static MC32P7311.asm
-               _00285_DS_   0x000089    program     static MC32P7311.asm
-               _00258_DS_   0x000090    program     static MC32P7311.asm
-               _00259_DS_   0x00009a    program     static MC32P7311.asm
-               _00262_DS_   0x0000a0    program     static MC32P7311.asm
-               _00276_DS_   0x0000a3    program     static MC32P7311.asm
-               _00288_DS_   0x0000a7    program     static MC32P7311.asm
-               _00266_DS_   0x0000ae    program     static MC32P7311.asm
-               _00267_DS_   0x0000b8    program     static MC32P7311.asm
-               _00270_DS_   0x0000be    program     static MC32P7311.asm
-               _00290_DS_   0x0000c0    program     static MC32P7311.asm
-                _Sys_Init   0x0000c1    program     extern MC32P7311.asm
-             _adc_get_val   0x0000cb    program     extern MC32P7311.asm
-               _00199_DS_   0x0000d3    program     static MC32P7311.asm
-               _00188_DS_   0x0000d4    program     static MC32P7311.asm
-               _00239_DS_   0x0000f7    program     static MC32P7311.asm
-               _00194_DS_   0x0000fd    program     static MC32P7311.asm
-               _00240_DS_   0x000103    program     static MC32P7311.asm
-               _00196_DS_   0x000109    program     static MC32P7311.asm
-               _00197_DS_   0x00010f    program     static MC32P7311.asm
-             _adc_sel_pin   0x00012e    program     extern MC32P7311.asm
-              _adc_config   0x000137    program     extern MC32P7311.asm
-              _key_config   0x000145    program     extern MC32P7311.asm
-       _timer2_pwm_config   0x00014c    program     extern MC32P7311.asm
-        _timer1_pwm_close   0x000153    program     extern MC32P7311.asm
-         _timer1_pwm_open   0x000155    program     extern MC32P7311.asm
-       _timer1_pwm_config   0x000157    program     extern MC32P7311.asm
-       _timer0_pwm_config   0x00015f    program     extern MC32P7311.asm
-                 _IO_Init   0x000167    program     extern MC32P7311.asm
-                 _CLR_RAM   0x000176    program     extern MC32P7311.asm
-               _00147_DS_   0x000177    program     static MC32P7311.asm
-               _00145_DS_   0x00017e    program     static MC32P7311.asm
-_send_32bits_data_by_irsir   0x000182    program     extern MC32P7311.asm
-               _00121_DS_   0x00019c    program     static MC32P7311.asm
-               _00139_DS_   0x0001ac    program     static MC32P7311.asm
-               _00140_DS_   0x0001b3    program     static MC32P7311.asm
-               _00117_DS_   0x0001c8    program     static MC32P7311.asm
-               _00122_DS_   0x0001da    program     static MC32P7311.asm
-               _00119_DS_   0x0001dc    program     static MC32P7311.asm
-                _delay_ms   0x0001de    program     extern MC32P7311.asm
-               _00108_DS_   0x0001e5    program     static MC32P7311.asm
-               _00105_DS_   0x0001f1    program     static MC32P7311.asm
-               _00107_DS_   0x00020d    program     static MC32P7311.asm
-               _00111_DS_   0x000219    program     static MC32P7311.asm
+               _00626_DS_   0x000014    program     static MC32P7311.asm
+   _low_power_scan_handle   0x00001f    program     extern MC32P7311.asm
+               _00608_DS_   0x000022    program     static MC32P7311.asm
+               _00610_DS_   0x000025    program     static MC32P7311.asm
+               _00611_DS_   0x000030    program     static MC32P7311.asm
+    _shutdown_scan_handle   0x000031    program     extern MC32P7311.asm
+               _00602_DS_   0x000049    program     static MC32P7311.asm
+               _00590_DS_   0x000054    program     static MC32P7311.asm
+               _00592_DS_   0x000058    program     static MC32P7311.asm
+    _turn_dir_scan_handle   0x000059    program     extern MC32P7311.asm
+               _00576_DS_   0x000071    program     static MC32P7311.asm
+               _00555_DS_   0x000079    program     static MC32P7311.asm
+               _00556_DS_   0x00007c    program     static MC32P7311.asm
+               _00560_DS_   0x000081    program     static MC32P7311.asm
+               _00562_DS_   0x000085    program     static MC32P7311.asm
+         _adc_scan_handle   0x000086    program     extern MC32P7311.asm
+               _00437_DS_   0x00008b    program     static MC32P7311.asm
+               _00540_DS_   0x00009b    program     static MC32P7311.asm
+               _00384_DS_   0x00009f    program     static MC32P7311.asm
+               _00541_DS_   0x0000a5    program     static MC32P7311.asm
+               _00385_DS_   0x0000a8    program     static MC32P7311.asm
+               _00393_DS_   0x0000b1    program     static MC32P7311.asm
+               _00404_DS_   0x0000b8    program     static MC32P7311.asm
+               _00544_DS_   0x0000be    program     static MC32P7311.asm
+               _00400_DS_   0x0000c1    program     static MC32P7311.asm
+               _00438_DS_   0x0000c7    program     static MC32P7311.asm
+               _00406_DS_   0x0000c9    program     static MC32P7311.asm
+               _00440_DS_   0x0000cd    program     static MC32P7311.asm
+               _00547_DS_   0x0000dd    program     static MC32P7311.asm
+               _00408_DS_   0x0000e0    program     static MC32P7311.asm
+               _00416_DS_   0x0000e9    program     static MC32P7311.asm
+               _00433_DS_   0x0000f0    program     static MC32P7311.asm
+               _00549_DS_   0x0000f6    program     static MC32P7311.asm
+               _00424_DS_   0x0000f9    program     static MC32P7311.asm
+               _00441_DS_   0x000103    program     static MC32P7311.asm
+               _00442_DS_   0x000105    program     static MC32P7311.asm
+              _key_handle   0x000106    program     extern MC32P7311.asm
+               _00333_DS_   0x00011a    program     static MC32P7311.asm
+               _00337_DS_   0x000121    program     static MC32P7311.asm
+               _00345_DS_   0x000124    program     static MC32P7311.asm
+               _00352_DS_   0x000131    program     static MC32P7311.asm
+               _00349_DS_   0x00013c    program     static MC32P7311.asm
+               _00356_DS_   0x000146    program     static MC32P7311.asm
+               _00363_DS_   0x000153    program     static MC32P7311.asm
+               _00373_DS_   0x00015a    program     static MC32P7311.asm
+               _00376_DS_   0x00015b    program     static MC32P7311.asm
+                _key_scan   0x00015c    program     extern MC32P7311.asm
+               _00298_DS_   0x000161    program     static MC32P7311.asm
+               _00265_DS_   0x000168    program     static MC32P7311.asm
+               _00328_DS_   0x000172    program     static MC32P7311.asm
+               _00269_DS_   0x00017a    program     static MC32P7311.asm
+               _00273_DS_   0x00017c    program     static MC32P7311.asm
+               _00301_DS_   0x000183    program     static MC32P7311.asm
+               _00275_DS_   0x00018a    program     static MC32P7311.asm
+               _00276_DS_   0x000194    program     static MC32P7311.asm
+               _00279_DS_   0x00019a    program     static MC32P7311.asm
+               _00293_DS_   0x00019d    program     static MC32P7311.asm
+               _00304_DS_   0x0001a0    program     static MC32P7311.asm
+               _00283_DS_   0x0001a7    program     static MC32P7311.asm
+               _00284_DS_   0x0001b1    program     static MC32P7311.asm
+               _00287_DS_   0x0001b7    program     static MC32P7311.asm
+               _00306_DS_   0x0001b9    program     static MC32P7311.asm
+                _Sys_Init   0x0001ba    program     extern MC32P7311.asm
+             _adc_get_val   0x0001c4    program     extern MC32P7311.asm
+               _00214_DS_   0x0001cc    program     static MC32P7311.asm
+               _00203_DS_   0x0001cd    program     static MC32P7311.asm
+               _00254_DS_   0x0001f0    program     static MC32P7311.asm
+               _00209_DS_   0x0001f6    program     static MC32P7311.asm
+               _00255_DS_   0x0001fc    program     static MC32P7311.asm
+               _00211_DS_   0x000202    program     static MC32P7311.asm
+               _00212_DS_   0x000208    program     static MC32P7311.asm
+             _adc_sel_pin   0x000227    program     extern MC32P7311.asm
+               _00198_DS_   0x00022d    program     static MC32P7311.asm
+               _00185_DS_   0x000235    program     static MC32P7311.asm
+               _00187_DS_   0x000238    program     static MC32P7311.asm
+              _adc_config   0x000241    program     extern MC32P7311.asm
+              _key_config   0x000251    program     extern MC32P7311.asm
+       _timer2_pwm_config   0x000258    program     extern MC32P7311.asm
+        _timer1_pwm_close   0x00025f    program     extern MC32P7311.asm
+         _timer1_pwm_open   0x000261    program     extern MC32P7311.asm
+       _timer1_pwm_config   0x000263    program     extern MC32P7311.asm
+       _timer0_pwm_config   0x00026b    program     extern MC32P7311.asm
+                 _IO_Init   0x000273    program     extern MC32P7311.asm
+                 _CLR_RAM   0x000282    program     extern MC32P7311.asm
+               _00147_DS_   0x000283    program     static MC32P7311.asm
+               _00145_DS_   0x00028a    program     static MC32P7311.asm
+_send_32bits_data_by_irsir   0x00028e    program     extern MC32P7311.asm
+               _00121_DS_   0x0002a8    program     static MC32P7311.asm
+               _00139_DS_   0x0002b8    program     static MC32P7311.asm
+               _00140_DS_   0x0002bf    program     static MC32P7311.asm
+               _00117_DS_   0x0002d4    program     static MC32P7311.asm
+               _00122_DS_   0x0002e6    program     static MC32P7311.asm
+               _00119_DS_   0x0002e8    program     static MC32P7311.asm
+                _delay_ms   0x0002ea    program     extern MC32P7311.asm
+               _00108_DS_   0x0002f1    program     static MC32P7311.asm
+               _00105_DS_   0x0002fd    program     static MC32P7311.asm
+               _00107_DS_   0x000319    program     static MC32P7311.asm
+               _00111_DS_   0x000325    program     static MC32P7311.asm
                _INDF0bits   0x000180       data     extern mc32p7311.asm
                    _INDF0   0x000180       data     extern mc32p7311.asm
                _INDF1bits   0x000181       data     extern mc32p7311.asm

@@ -26,16 +26,28 @@
 
 #define USE_MY_DEBUG 1
 
+#define ADCDETECT_CHARING_THRESHOLD 4095 // 检测是否充电的adc值
+
+/*
+	检测电池是否充满电的adc值
+	这里是计算得出，
+	原来测得电池电压 8.04V，在检测引脚用万用表测得是2.59V，ADC转换后的值是 2753 -- 2.01V
+	那么计算，满电时电池电压为 8.40V,在万用表测得应该是2.70V,ADC转换后的值是 2852
+*/
+#define ADCDETECT_BAT_THRESHOLD 2852 //
+
+#define ONE_CYCLE_TIME_MS 80 // 一次主循环的耗时，单位：ms
+
 // #define //
 #define UNUSED_PIN P10D // P10是14脚芯片上没有的引脚
 
 // 驱动指示灯的引脚定义
-#define LED_WORKING_PIN P14D // 工作指示灯
-#define LED_CHARGING_PIN P04D // 充电指示灯
+#define LED_WORKING_PIN P14D	 // 工作指示灯
+#define LED_CHARGING_PIN P04D	 // 充电指示灯
 #define LED_FULL_CHARGE_PIN P11D // 满电指示灯
 
 // 检测按键状态的引脚定义，检测到低电平为有效
-#define KEY_HEAT_PIN P00D // 控制是否加热的引脚
+#define KEY_HEAT_PIN P00D	// 控制是否加热的引脚
 #define KEY_CHANGE_PIN P01D // 控制模式的引脚
 #if USE_MY_DEBUG
 #define KEY_POWER_PIN P05D // 控制是否工作的引脚(这里使用P05来仿真)
@@ -158,7 +170,8 @@ volatile u16 adc_val; // 存放adc检测到的数值
 
 // u16 mode_pwm_duty; // 存放不同模式下，对应的pwm占空比，实际占空比 == TxDATA / TxLOAD
 
-volatile u32 time_ms_cnt; // 毫秒计数(用于运行15min后自动关机)
+volatile u32 turn_dir_ms_cnt; // 控制在运行时每2min切换一次转向的计时变量
+volatile u32 shut_down_ms_cnt;	  // 毫秒计数(用于运行15min后自动关机)
 
 // 定义充电时驱动升压（充电）电路的PWM占空比
 // 电池没有电时，测得充电样板上最大的占空比为43.8%
@@ -196,6 +209,10 @@ typedef union
 volatile bit_flag flag1;
 #define FLAG_IS_DEVICE_OPEN flag1.bits.bit0 // 设备是否开机的标志位，0--未开机，1--开机
 #define FLAG_IS_HEATING flag1.bits.bit1		// 加热是否工作的标志位
+#define FLAG_IS_IN_CHARGING flag1.bits.bit2 // 是否处于充电的标志位
+#define FLAG_DIR flag1.bits.bit3			// 正转，反转的标志位， 0--正转（默认是0为正转），1--反转
+
+#define FLAG_BAT_IS_NEED_CHARGE flag1.bits.bit4 // 电池是否需要充电的标志位, 0--不需要充电，1--需要充电
 
 #endif // end __USER_H
 
