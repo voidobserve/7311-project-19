@@ -26,15 +26,28 @@
 
 #define USE_MY_DEBUG 1
 
-#define ADCDETECT_CHARING_THRESHOLD 4095 // 检测是否充电的adc值
+// #define ADCDETECT_CHARING_THRESHOLD 4095 // 检测是否充电的adc值
+#define ADCDETECT_CHARING_THRESHOLD 2048 // 检测是否充电的adc值
 
 /*
-	检测电池是否充满电的adc值
-	这里是计算得出，
-	原来测得电池电压 8.04V，在检测引脚用万用表测得是2.59V，ADC转换后的值是 2753 -- 2.01V
-	那么计算，满电时电池电压为 8.40V,在万用表测得应该是2.70V,ADC转换后的值是 2852
+	最新的板，检测电池降压后的电压，外部的上拉电阻为1M，外部的下拉电阻为220K，
+	那么分压系数 == 220K / (1M + 220K) == 0.180，实际测得和计算得 0.174
+
+	通过一个电源来作为电池，给电源设定电压：8.39V，ADC配置的参考电压为内部的3V，12位精度（0~4095）
+	在AD测得的数据：1596、1595、1596、1595
+	在电池降压后的检测IO测得的数据：1.46V
+
+	给电源设定电压：8.00V，
+	在AD测得的数据：1502、1501、1502、1501
+	在电池降压后的检测IO测得的数据：1.39V
+
+	用实际的电池来接入，电池电压：7.98~7.99V，
+	在AD测得的数据：1488、1487、1488、1487，
+	在电池降压后的检测IO测得的数据：1.39V
 */
-#define ADCDETECT_BAT_THRESHOLD 2852 //
+#define ADCDETECT_BAT_FULL 1595		 // 检测电池是否充满电的adc值--对应电池电压 8.40V
+#define ADCDETECT_BAT_WILL_FULL 1501 // 电池将要满电的adc值--对应电池电压 8.00V
+#define ADCDETECT_BAT_EMPTY 1147	 // 电池为空，那么充电时只有充电的电压，如果没有输出PWM控制升压的话，实际测得只有 0.84V
 
 #define ONE_CYCLE_TIME_MS 80 // 一次主循环的耗时，单位：ms
 
@@ -44,16 +57,16 @@
 // 驱动指示灯的引脚定义
 #define LED_WORKING_PIN P14D	 // 工作指示灯
 #define LED_CHARGING_PIN P04D	 // 充电指示灯
-#define LED_FULL_CHARGE_PIN P11D // 满电指示灯
+#define LED_FULL_CHARGE_PIN P03D // 满电指示灯
 
 // 检测按键状态的引脚定义，检测到低电平为有效
-#define KEY_HEAT_PIN P00D	// 控制是否加热的引脚
-#define KEY_CHANGE_PIN P01D // 控制模式的引脚
 #if USE_MY_DEBUG
-#define KEY_POWER_PIN P05D // 控制是否工作的引脚(这里使用P05来仿真)
+#define KEY_HEAT_PIN P05D // 控制是否加热的引脚(这里使用P05来仿真)
 #else
-#define KEY_POWER_PIN P13D // 控制是否工作的引脚
+#define KEY_HEAT_PIN P13D // 控制是否加热的引脚
 #endif
+#define KEY_POWER_PIN P11D	// 控制是否工作的引脚
+#define KEY_CHANGE_PIN P01D // 控制模式的引脚
 
 #define CONTROL_HEAT_PIN P12D // 驱动控制加热的引脚
 
@@ -141,8 +154,8 @@
 // 定义adc检测的引脚，用在adc切换检测引脚
 enum
 {
-	ADC_PIN_P03_AN2 = 1, // 检测电池降压后的电压的引脚
-	ADC_PIN_P02_AN1,	 // 检测是否有充电的电压
+	ADC_PIN_P00_AN0 = 1, // 检测是否有充电的电压
+	ADC_PIN_P02_AN1,	 // 检测电池降压后的电压的引脚
 };
 
 // 定义模式，三种不同频率的模式
@@ -170,8 +183,8 @@ volatile u16 adc_val; // 存放adc检测到的数值
 
 // u16 mode_pwm_duty; // 存放不同模式下，对应的pwm占空比，实际占空比 == TxDATA / TxLOAD
 
-volatile u32 turn_dir_ms_cnt; // 控制在运行时每2min切换一次转向的计时变量
-volatile u32 shut_down_ms_cnt;	  // 毫秒计数(用于运行15min后自动关机)
+volatile u32 turn_dir_ms_cnt;  // 控制在运行时每2min切换一次转向的计时变量
+volatile u32 shut_down_ms_cnt; // 毫秒计数(用于运行15min后自动关机)
 
 // 定义充电时驱动升压（充电）电路的PWM占空比
 // 电池没有电时，测得充电样板上最大的占空比为43.8%
