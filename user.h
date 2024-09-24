@@ -32,6 +32,8 @@
 /*
 	最新的板，检测电池降压后的电压，外部的上拉电阻为1M，外部的下拉电阻为220K，
 	那么分压系数 == 220K / (1M + 220K) == 0.180，实际测得和计算得 0.174
+	电池检测引脚检测的ad值会比实际的还要小300mV（在检测引脚的电压），
+	而且电池以0.95A或1.2A充电时，电池电压会提升0.04V（在检测引脚的电压），需要减去这些数据
 
 	通过一个电源来作为电池，给电源设定电压：8.39V，ADC配置的参考电压为内部的3V，12位精度（0~4095）
 	在AD测得的数据：1596、1595、1596、1595
@@ -45,13 +47,16 @@
 	在AD测得的数据：1488、1487、1488、1487，
 	在电池降压后的检测IO测得的数据：1.39V
 */
-#define ADCDETECT_BAT_FULL 1595		 // 检测电池是否充满电的adc值--对应电池电压 8.40V
-#define ADCDETECT_BAT_WILL_FULL 1501 // 电池将要满电的adc值--对应电池电压 8.00V
+// #define ADCDETECT_BAT_FULL 1595		 // 检测电池是否充满电的adc值--对应电池电压 8.40V
+// #define ADCDETECT_BAT_WILL_FULL 1501 // 电池将要满电的adc值--对应电池电压 8.00V
+// #define ADCDETECT_BAT_EMPTY 1147	 // 电池为空，那么充电时只有充电的电压，如果没有输出PWM控制升压的话，实际测得只有 0.84V
+#define ADCDETECT_BAT_FULL 1640		 // 检测电池是否充满电的adc值--对应电池电压 8.40V
+#define ADCDETECT_BAT_WILL_FULL 1545 // 电池将要满电的adc值--对应电池电压 8.00V
 #define ADCDETECT_BAT_EMPTY 1147	 // 电池为空，那么充电时只有充电的电压，如果没有输出PWM控制升压的话，实际测得只有 0.84V
+// #define ADCDETECT_BAT_EMPTY 833	 //（填这项数据，在充电时插拔电池，指示灯会来回闪烁） 电池为空，那么充电时只有充电的电压，如果没有输出PWM控制升压的话，实际测得只有 0.84V
 
 #define ONE_CYCLE_TIME_MS 80 // 一次主循环的耗时，单位：ms
 
-// #define //
 #define UNUSED_PIN P10D // P10是14脚芯片上没有的引脚
 
 // 驱动指示灯的引脚定义
@@ -181,18 +186,8 @@ volatile u8 i; // 循环计数值
 
 volatile u16 adc_val; // 存放adc检测到的数值
 
-// u16 mode_pwm_duty; // 存放不同模式下，对应的pwm占空比，实际占空比 == TxDATA / TxLOAD
-
 volatile u32 turn_dir_ms_cnt;  // 控制在运行时每2min切换一次转向的计时变量
 volatile u32 shut_down_ms_cnt; // 毫秒计数(用于运行15min后自动关机)
-
-// 定义充电时驱动升压（充电）电路的PWM占空比
-// 电池没有电时，测得充电样板上最大的占空比为43.8%
-// 电池几乎满电时，测得充电样板上最大的占空比为
-const u8 charge_buf[] = {43, 0};
-
-// 定义电池不同电量下，在adc检测到的电压值（不是adc值）
-const u8 battery_refer_vol_buf[] = {0};
 
 // demo提供的中断服务程序使用到的两个变量：
 u8 abuf;
@@ -226,6 +221,7 @@ volatile bit_flag flag1;
 #define FLAG_DIR flag1.bits.bit3			// 正转，反转的标志位， 0--正转（默认是0为正转），1--反转
 
 #define FLAG_BAT_IS_NEED_CHARGE flag1.bits.bit4 // 电池是否需要充电的标志位, 0--不需要充电，1--需要充电
+#define FLAG_BAT_IS_FULL flag1.bits.bit5 // 电池是否满电的标志位，0--未满电，1--满电
 
 #endif // end __USER_H
 

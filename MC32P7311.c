@@ -33,7 +33,7 @@ void delay_ms(u32 xms)
 // 发送32位数据，低位先行
 void send_32bits_data_by_irsir(u32 send_data)
 {
-	// 先发送格式头 9ms高电平+4.5ms低电平
+	// 先发送格式头
 	// __set_input_pull_up(); // 高电平
 	P10D = 1;
 	delay_ms(15);
@@ -168,17 +168,17 @@ void timer1_pwm_config(void)
 	// TC1EN = 1;	 // 启动定时器
 }
 
-// 开启定时器1的pwm，默认是PWM1
-void timer1_pwm_open(void)
-{
-	PWM1OE = 1;
-}
+// // 开启定时器1的pwm，默认是PWM1
+// void timer1_pwm_open(void)
+// {
+// 	PWM1OE = 1;
+// }
 
-// 关闭定时器1的pwm
-void timer1_pwm_close(void)
-{
-	PWM1OE = 0;
-}
+// // 关闭定时器1的pwm
+// void timer1_pwm_close(void)
+// {
+// 	PWM1OE = 0;
+// }
 
 // 定时器2的PWM配置，输出引脚 P15
 void timer2_pwm_config(void)
@@ -204,10 +204,10 @@ void timer2_pwm_config(void)
 
 	// 如果一定要接近154.19KHz，使用以下配置：
 	T2LOAD = 52 - 1;
-	// T2DATA = 22; // 占空比 == TxDATA / TxLOAD   实际测得是43%占空比
-	T2DATA = 23; // 占空比 == TxDATA / TxLOAD   实际测得是46.15%占空比
-	// T2DATA = 24; // 占空比 == TxDATA / TxLOAD   实际测得是47.69%占空比
-	PWM2OE = 0; // 禁止PWM输出
+	// T2DATA = 22; // 占空比 == TxDATA / TxLOAD
+	// T2DATA = 23; // 占空比 == TxDATA / TxLOAD   实际测得是43%占空比
+	T2DATA = 24; // 占空比 == TxDATA / TxLOAD   实际测得是46.15%占空比
+	PWM2OE = 0;	 // 禁止PWM输出
 	// PWM2OE = 1;	 // 使能PWM输出
 	TC2EN = 1;
 }
@@ -524,15 +524,16 @@ void key_handle(void)
 
 void adc_scan_handle(void)
 {
-	u8 cnt = 0;					 // 计数值，用于检测电池是否满电，也是用于检测是否插入/拔出充电器的计数值
-	u8 need_charge_cnt = 0;		 // 计数值，用于检测是否要快速充电
-	u8 need_charge_slow_cnt = 0; // 计数值，用于检测是否要稍微降低充电速度
-	u8 flag_bat_is_empty = 0;	 // 标志位，用于检测是否拔出了电池
+	volatile u8 cnt = 0;				  // 计数值，用于检测电池是否满电，也是用于检测是否插入/拔出充电器的计数值
+	volatile u8 need_charge_cnt = 0;	  // 计数值，用于检测是否要快速充电
+	volatile u8 need_charge_slow_cnt = 0; // 计数值，用于检测是否要稍微降低充电速度
+	volatile u8 flag_bat_is_empty = 0;	  // 标志位，用于检测是否拔出了电池
 
 	adc_sel_pin(ADC_PIN_P02_AN1); // 切换到检测电池降压后的电压的检测引脚
 	for (i = 0; i < 10; i++)
 	{
 		adc_val = adc_get_val();
+		// send_32bits_data_by_irsir(adc_val);
 		if (FLAG_IS_IN_CHARGING)
 		{
 			// 如果正在充电，检测是否充满电
@@ -570,23 +571,33 @@ void adc_scan_handle(void)
 				PWM2OE = 0;			  // 关闭控制升压电路的pwm
 				// FLAG_IS_IN_CHARGING = 0; // 不能给这个标志位清零（交给充电扫描来清零）
 				FLAG_BAT_IS_NEED_CHARGE = 0;
-
+				FLAG_BAT_IS_FULL = 1;
 				break;
 			}
 			else if (need_charge_cnt >= 8)
 			{
-				// 如果在充电，且电池需要充电（电池电量小于 满电-死区电量 ）
-				T2DATA = 23;		   // 占空比 == TxDATA / TxLOAD   实际测得是46.15%占空比
+				// 如果在充电，且电池需要充电（电池电量小于 ADCDETECT_BAT_WILL_FULL，电池将要满电的电压）
+				T2DATA = 24;		   // 占空比 == TxDATA / TxLOAD   实际测得是46.15%占空比
 				LED_FULL_CHARGE_OFF(); // 关闭充满电的指示灯
 				FLAG_BAT_IS_NEED_CHARGE = 1;
+				FLAG_BAT_IS_FULL = 0;
+
+#if USE_MY_DEBUG
+// send_32bits_data_by_irsir(0xA5A5);
+#endif
 				break;
 			}
-			else if (need_charge_slow_cnt >= 8)
+			else if (need_charge_slow_cnt >= 8 && 0 == FLAG_BAT_IS_FULL)
 			{
 				// 如果需要降低充电速度
-				T2DATA = 22;		   // 占空比 == TxDATA / TxLOAD   实际测得是41.54%、43%或44.62 这两个占空比
+				T2DATA = 23;		   // 占空比 == TxDATA / TxLOAD   实际测得是41.54%、43%或44.62 这两个占空比
 				LED_FULL_CHARGE_OFF(); // 关闭充满电的指示灯
 				FLAG_BAT_IS_NEED_CHARGE = 1;
+
+#if USE_MY_DEBUG
+				// P10D = ~P10D;
+// send_32bits_data_by_irsir(0x5A5A);
+#endif
 				break;
 			}
 		} // if (FLAG_IS_IN_CHARGING)
@@ -601,6 +612,7 @@ void adc_scan_handle(void)
 			{
 				// 如果未在充电，且电池需要充电（电池电量小于 满电-死区电量 ）
 				FLAG_BAT_IS_NEED_CHARGE = 1;
+				FLAG_BAT_IS_FULL = 0;
 				break;
 			}
 		}
@@ -630,13 +642,15 @@ void adc_scan_handle(void)
 				break;
 			} // if (cnt >= 8)
 
-			if (PWM2OE == 0 && FLAG_BAT_IS_NEED_CHARGE)
+			if ((PWM2OE == 0) && FLAG_BAT_IS_NEED_CHARGE)
 			{
 				// 如果正在充电时，检测到没有打开控制充电（升压）电路的PWM，并且电池需要充电
 				// 有可能是充满了电，关闭了pwm，又使用了一段时间，导致耗电，这样要重新打开充电的功能
 				LED_CHARGING_ON(); // 开启充电指示灯
 				PWM2OE = 1;		   // 开启控制升压电路的pwm
-								   // FLAG_IS_IN_CHARGING = 1; // 这里不用给这个标志位置一
+
+				// P10D = ~P10D;
+				// FLAG_IS_IN_CHARGING = 1; // 这里不用给这个标志位置一
 			}
 
 		} // if (FLAG_IS_IN_CHARGING)
@@ -650,7 +664,7 @@ void adc_scan_handle(void)
 
 			if (cnt >= 8)
 			{
-				if (FLAG_BAT_IS_NEED_CHARGE)
+				// if (FLAG_BAT_IS_NEED_CHARGE)
 				{
 					LED_CHARGING_ON(); // 开启充电指示灯
 					PWM2OE = 1;		   // 开启控制升压电路的pwm
@@ -660,7 +674,7 @@ void adc_scan_handle(void)
 				break;
 			} // if (cnt >= 8)
 		}
-	}
+	} // for (i = 0; i < 10; i++)
 }
 
 void turn_dir_scan_handle(void)
@@ -766,10 +780,12 @@ void main(void)
 	LED_FULL_CHARGE_OFF();
 	LED_CHARGING_OFF();
 
+	// adc_sel_pin(ADC_PIN_P02_AN1); // 测试用，测量电池降压后的电压
+
 	while (1)
 	{
 #if USE_MY_DEBUG
-		P10D = 1; // 测试一次循环所需的时间
+		// P10D = 1; // 测试一次循环所需的时间
 #endif
 
 		key_scan();
@@ -780,8 +796,12 @@ void main(void)
 		shutdown_scan_handle(); // 自动关机检测和处理函数
 		low_power_scan_handle();
 
+		// adc_val = adc_get_val();
+		// send_32bits_data_by_irsir(adc_val);
+		// delay_ms(20);
+
 #if USE_MY_DEBUG
-		P10D = 0; // 测试一次循环所需的时间
+		// P10D = 0; // 测试一次循环所需的时间
 #endif
 
 		__asm;
