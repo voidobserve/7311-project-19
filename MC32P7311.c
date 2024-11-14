@@ -757,17 +757,99 @@ void low_power_scan_handle(void)
 		return;
 	}
 
-	GIE = 0;
-	KBIF = 0;
-	KBIE = 1;
+label:
+	GIE = 0; // 禁用所有中断
+	// KBIF = 0;
+	// KBIE = 1; // 使能键盘中断
+	TC0EN = 0; // 关闭定时器和PWM输出
+	TC1EN = 0;
+	TC2EN = 0;
+	PWM0OE = 0;
+	PWM1OE = 0;
+	PWM2OE = 0;
+	ADON = 0; // 不使能ad
+	// IO全部变为输出模式，输出低电平，LED脚全部输出高电平，不点亮LED ：
+	IOP0 = 0x18;   // io口数据位
+	OEP0 = 0xFF;   // io口方向 1:out  0:in
+	PUP0 = 0x00;   // io口上拉电阻   1:enable  0:disable
+	PDP0 = 0x00;   // io口下拉电阻   1:enable  0:disable
+	ANSEL0 = 0x00; // io类型选择  1:模拟输入  0:通用io
+	IOP1 = 0x10;   // io口数据位
+	OEP1 = 0xFF;   // io口方向 1:out  0:in
+	PUP1 = 0x00;   // io口上拉电阻   1:enable  0:disable
+	PDP1 = 0x00;   // io口下拉电阻   1:enable  0:disable
+	ANSEL1 = 0x00; // io类型选择  1:模拟输入  0:通用io
+
+	// 开机/关机按键的配置，一定要中断触发：
+	MINT00 = 1; // MINT00、MINT01，组合配置INT0为下降沿中断
+	MINT01 = 0;
+	P11PU = 1;
+	P11OE = 0;
+	INT0IF = 0; // 清除中断标志
+	INT0IE = 1; // 外部中断使能
+
+	HFEN = 0;
+	LFEN = 1;
+
 	// 休眠前关闭外设 AD等 使能唤醒条件键盘中断
 	Nop();
 	Nop();
 	Stop();
 	Nop();
 	Nop();
-	KBIE = 0;
-	KBIF = 0;
+	// KBIE = 0; // 不使能键盘中断
+	// KBIF = 0;
+	// 唤醒后，重新初始化
+	CLR_RAM();
+	// adc_config();
+
+	P00PU = 0; // 关闭上下拉
+	P00PD = 0;
+	P00OE = 0;	  // 输入模式
+	P00ANS = 1;	  // 模拟输入
+	ADCR1 = 0xE1; // 125K采样（最高精度）  内部3V参考电压
+	ADCR2 = 0xFF; // ADC采样时间为15个ADC时钟
+	ADON = 1;	  // 使能ADC
+
+	adc_sel_pin(ADC_PIN_P00_AN0);
+	adc_val = adc_get_val();
+	if (adc_val < ADCDETECT_CHARING_THRESHOLD && P11D)
+	{
+		// 如果没有按下开机按键、没有插入充电器
+		// 关闭ADC，继续进入休眠：
+		// ADEN = 0; //
+		goto label;
+	}
+
+	adc_sel_pin(ADC_PIN_P02_AN1);
+	adc_val = adc_get_val();
+	if (adc_val < ADCVAL_REF_BAT_6_4_V)
+	{
+		// 如果电池电量过低，不开机，但是可以充电
+		FLAG_IS_NOT_OPEN_DEVICE = 1; // 不允许开机，但是可以充电
+	}
+
+	HFEN = 1;
+
+	IOP0 = 0x18;   // io口数据位
+	OEP0 = 0xFF;   // io口方向 1:out  0:in
+	PUP0 = 0x00;   // io口上拉电阻   1:enable  0:disable
+	PDP0 = 0x00;   // io口下拉电阻   1:enable  0:disable
+	ANSEL0 = 0x00; // io类型选择  1:模拟输入  0:通用io
+	IOP1 = 0x10;   // io口数据位
+	OEP1 = 0xFF;   // io口方向 1:out  0:in
+	PUP1 = 0x00;   // io口上拉电阻   1:enable  0:disable
+	PDP1 = 0x00;   // io口下拉电阻   1:enable  0:disable
+	ANSEL1 = 0x00; // io类型选择  1:模拟输入  0:通用io
+	DRVCR = 0x80;  // 普通驱动
+	timer0_pwm_config();
+	timer1_pwm_config();
+	timer2_pwm_config();
+	key_config();
+	adc_config();
+	LED_WORKING_OFF();
+	LED_FULL_CHARGE_OFF();
+	LED_CHARGING_OFF();
 	GIE = 1;
 	// 唤醒后使能外设关闭键盘中断，实际应用用户按需配置
 }
@@ -782,19 +864,25 @@ void main(void)
 
 	// adc_sel_pin(ADC_PIN_P02_AN1); // 测试用，测量电池降压后的电压
 
+	// 不能在7311的仿真板上调节控制充电的PWM来控制充电电流，与7351的没有规律，不能实现类比
+	// T2LOAD = 256 - 1;
+	// // T2DATA = 89; // 测试充电 0.9A，电池电压
+	// T2DATA = 117; // 测试充电 A，电池电压
+	// PWM2OE = 1;
+
 	while (1)
 	{
 #if USE_MY_DEBUG
 		// P10D = 1; // 测试一次循环所需的时间
 #endif
 
-		key_scan();
-		key_handle();
-		adc_scan_handle(); // 充电扫描和处理函数
+		// key_scan();
+		// key_handle();
+		// adc_scan_handle(); // 充电扫描和处理函数
 
-		turn_dir_scan_handle();
-		shutdown_scan_handle(); // 自动关机检测和处理函数
-		low_power_scan_handle();
+		// turn_dir_scan_handle();
+		// shutdown_scan_handle(); // 自动关机检测和处理函数
+		// low_power_scan_handle();
 
 		// adc_val = adc_get_val();
 		// send_32bits_data_by_irsir(adc_val);

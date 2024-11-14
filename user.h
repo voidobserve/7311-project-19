@@ -55,7 +55,9 @@
 #define ADCDETECT_BAT_EMPTY 1147	 // 电池为空，那么充电时只有充电的电压，如果没有输出PWM控制升压的话，实际测得只有 0.84V
 // #define ADCDETECT_BAT_EMPTY 833	 //（填这项数据，在充电时插拔电池，指示灯会来回闪烁） 电池为空，那么充电时只有充电的电压，如果没有输出PWM控制升压的话，实际测得只有 0.84V
 
-#define ONE_CYCLE_TIME_MS 80 // 一次主循环的耗时，单位：ms
+#define ADCVAL_REF_BAT_6_4_V 1573 // 电池电压6.4V对应的ad值
+
+#define ONE_CYCLE_TIME_MS 74 // 一次主循环的耗时，单位：ms
 
 #define UNUSED_PIN P10D // P10是14脚芯片上没有的引脚
 
@@ -222,6 +224,7 @@ volatile bit_flag flag1;
 
 #define FLAG_BAT_IS_NEED_CHARGE flag1.bits.bit4 // 电池是否需要充电的标志位, 0--不需要充电，1--需要充电
 #define FLAG_BAT_IS_FULL flag1.bits.bit5 // 电池是否满电的标志位，0--未满电，1--满电
+#define FLAG_IS_NOT_OPEN_DEVICE flag1.bits.bit6 // 是否允许开机的标志位，0--允许开机，1--不允许开机（但是可以充电）
 
 #endif // end __USER_H
 
